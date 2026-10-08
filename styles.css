@@ -139,21 +139,46 @@ body {
   border: 1px solid rgba(245, 158, 11, 0.2);
 }
 
-.wiki-modes-list {
+.wiki-modes-block {
   background-color: var(--panel-bg);
-  padding: 10px;
-  border-radius: 6px;
+  padding: 12px;
+  border-radius: 8px;
   border: 1px solid var(--border-color);
-  font-size: 0.85rem;
-  line-height: 1.5;
-  color: #d1d5db;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
 }
 
-.wiki-list {
-  padding-left: 18px;
+.wiki-modes-title {
+  font-size: 0.85rem;
+  font-weight: 700;
+  color: #a5b4fc;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.wiki-mode-rows {
+  list-style: none;
   display: flex;
   flex-direction: column;
   gap: 6px;
+  padding: 0;
+}
+
+.wiki-mode-rows li {
+  font-size: 0.85rem;
+  color: #d1d5db;
+  padding: 4px 0;
+  border-bottom: 1px dashed rgba(255, 255, 255, 0.08);
+  line-height: 1.4;
+}
+
+.wiki-mode-rows li:last-child {
+  border-bottom: none;
+}
+
+.wiki-mode-rows li strong {
+  color: #60a5fa;
 }
 
 /* TRANSFORMATION 3-STEP VERTICAL */
@@ -408,7 +433,7 @@ body {
   text-transform: uppercase;
 }
 
-/* FORMULA DIRECT TEXT DISPLAY (2 LINES) */
+/* FORMULA DIRECT TEXT DISPLAY (2 LINES WITHOUT SPACES IN HYPHENS) */
 .formula-text-container {
   display: flex;
   flex-direction: column;
@@ -424,7 +449,7 @@ body {
   font-size: 1.05rem;
   font-weight: 700;
   color: #60a5fa;
-  letter-spacing: 1px;
+  letter-spacing: 0.5px;
 }
 
 .formula-line-numbers {
@@ -432,7 +457,7 @@ body {
   font-size: 0.95rem;
   font-weight: 600;
   color: #f59e0b;
-  letter-spacing: 1px;
+  letter-spacing: 0.5px;
 }
 
 .formula-chips, .notes-chips {

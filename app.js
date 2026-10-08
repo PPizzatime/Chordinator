@@ -375,14 +375,14 @@ function updateUI() {
   scaleDisplayTitle.textContent = `${scaleData.rootNote} - ${scaleData.mode.name}`;
   scaleFamilyBadge.textContent = scaleData.family.name;
 
-  // Render de fórmula directa en texto (Renglo 1: T/S, Renglón 2: Números)
+  // Render de fórmula directa en texto SIN ESPACIOS en guiones (ej. T-T-S-T-T-T-S y 2-2-1-2-2-2-1)
   const stepsText = scaleData.mode.steps.map(step => {
     if (step === 1) return 'S';
     if (step === 2) return 'T';
     return `${step}S`;
-  }).join(' - ');
+  }).join('-');
 
-  const stepsNumbers = scaleData.mode.steps.join(' - ');
+  const stepsNumbers = scaleData.mode.steps.join('-');
 
   scaleStepFormulaText.textContent = stepsText;
   scaleStepFormulaNumbers.textContent = stepsNumbers;
