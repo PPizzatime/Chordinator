@@ -1,0 +1,193 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Explorador Teórico de Escalas, Modos y Mástil de Guitarra (6-9 Cuerdas)</title>
+  <link rel="stylesheet" href="styles.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700;900&family=JetBrains+Mono:wght@400;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+  <header class="app-header">
+    <div class="logo-container">
+      <span class="logo-icon">🎸</span>
+      <div>
+        <h1>Explorador de Escalas, Modos y Mástil</h1>
+        <p class="subtitle">Guía teórica interactiva y visualizador multitono para guitarra de 6 a 9 cuerdas</p>
+      </div>
+    </div>
+    <div class="header-actions">
+      <button id="btn-toggle-guide" class="btn btn-outline">📖 Ver Guía Teórica</button>
+    </div>
+  </header>
+
+  <main class="app-container">
+    <!-- Panel de Control Principal -->
+    <section class="control-panel">
+      <div class="control-group">
+        <label for="select-root">Nota Raíz (Tónica):</label>
+        <select id="select-root" class="select-input"></select>
+      </div>
+
+      <div class="control-group">
+        <label for="select-family">Familia de Escalas:</label>
+        <select id="select-family" class="select-input"></select>
+      </div>
+
+      <div class="control-group">
+        <label for="select-mode">Modo / Escala Específica:</label>
+        <select id="select-mode" class="select-input"></select>
+      </div>
+
+      <div class="control-group">
+        <label for="select-strings">Nº de Cuerdas:</label>
+        <select id="select-strings" class="select-input">
+          <option value="6">6 Cuerdas</option>
+          <option value="7">7 Cuerdas</option>
+          <option value="8">8 Cuerdas</option>
+          <option value="9">9 Cuerdas</option>
+        </select>
+      </div>
+
+      <div class="control-group">
+        <label for="select-display-mode">Mostrar en Trastes:</label>
+        <select id="select-display-mode" class="select-input">
+          <option value="interval">Grados de Intervalo (1, ♭3, 5...)</option>
+          <option value="note">Nombres de Notas (C, D, E...)</option>
+          <option value="both">Ambos (Nota + Grado)</option>
+        </select>
+      </div>
+    </section>
+
+    <!-- Configuración de Afinación -->
+    <section class="tuning-panel card">
+      <div class="tuning-header">
+        <h3>⚙️ Configuración de Afinación</h3>
+        <div class="tuning-presets">
+          <span>Afinación Estándar:</span>
+          <button class="btn btn-sm" id="btn-preset-std">Estándar</button>
+          <button class="btn btn-sm" id="btn-preset-dropd">Drop D / Drop A</button>
+        </div>
+      </div>
+      <div id="tuning-inputs-container" class="tuning-inputs"></div>
+    </section>
+
+    <!-- Información de la Escala Seleccionada -->
+    <section class="scale-info-panel card">
+      <div class="scale-title-row">
+        <div>
+          <h2 id="scale-display-title">C - Jónico (Escala Mayor)</h2>
+          <span id="scale-family-badge" class="badge">Familia Diatónica</span>
+        </div>
+        <div class="playback-controls">
+          <button id="btn-play-scale" class="btn btn-primary">▶ Reproducir Escala</button>
+          <label class="speed-label">
+            Velocidad:
+            <input type="range" id="input-speed" min="100" max="600" value="280" step="20">
+          </label>
+        </div>
+      </div>
+
+      <div class="scale-details-grid">
+        <div class="detail-card">
+          <span class="detail-label">Fórmula por Pasos (Semitonos):</span>
+          <div id="scale-step-formula" class="formula-chips"></div>
+        </div>
+
+        <div class="detail-card">
+          <span class="detail-label">Fórmula por Grados:</span>
+          <div id="scale-degree-formula" class="formula-chips"></div>
+        </div>
+
+        <div class="detail-card">
+          <span class="detail-label">Notas en esta Tonalidad:</span>
+          <div id="scale-notes-list" class="notes-chips"></div>
+        </div>
+
+        <div class="detail-card detail-full">
+          <span class="detail-label">Sonoridad y Carácter Tímbrico:</span>
+          <p id="scale-description" class="description-text"></p>
+        </div>
+      </div>
+    </section>
+
+    <!-- Mástil de Guitarra Interactivo -->
+    <section class="fretboard-section card">
+      <div class="fretboard-header">
+        <h3>🎸 Mástil de Guitarra (24 Trastes)</h3>
+        <div class="fretboard-legend">
+          <span class="legend-item"><span class="legend-color root-color"></span> Tónica (1)</span>
+          <span class="legend-item"><span class="legend-color scale-color"></span> Notas de la Escala</span>
+        </div>
+      </div>
+
+      <div class="fretboard-scroll-wrapper">
+        <div id="fretboard" class="fretboard"></div>
+      </div>
+    </section>
+
+    <!-- Guía de Transformaciones entre Escalas -->
+    <section class="transformation-section card">
+      <h3>🔄 Guía de Transformación Paso a Paso entre Escalas</h3>
+      <p>Aprende cómo convertir la escala diatónica en las demás familias modificando grados clave:</p>
+      <div class="transformation-steps">
+        <div class="trans-step">
+          <div class="trans-title">Diatónica Mayor ➔ Menor Natural</div>
+          <div class="trans-desc">Baja un semitono el 3º, 6º y 7º grado.</div>
+          <div class="trans-code">1 - 2 - 3 - 4 - 5 - 6 - 7  ➔  1 - 2 - ♭3 - 4 - 5 - ♭6 - ♭7</div>
+        </div>
+        <div class="trans-step">
+          <div class="trans-title">Menor Natural ➔ Menor Armónica</div>
+          <div class="trans-desc">Eleva un semitono el 7º grado (crea nota sensible y salto de 3 semitonos).</div>
+          <div class="trans-code">1 - 2 - ♭3 - 4 - 5 - ♭6 - ♭7  ➔  1 - 2 - ♭3 - 4 - 5 - ♭6 - 7</div>
+        </div>
+        <div class="trans-step">
+          <div class="trans-title">Menor Armónica ➔ Menor Melódica</div>
+          <div class="trans-desc">Eleva un semitono el 6º grado (suaviza el salto de 3 semitonos).</div>
+          <div class="trans-code">1 - 2 - ♭3 - 4 - 5 - ♭6 - 7  ➔  1 - 2 - ♭3 - 4 - 5 - 6 - 7</div>
+        </div>
+        <div class="trans-step">
+          <div class="trans-title">Diatónica Mayor ➔ Armónica Mayor</div>
+          <div class="trans-desc">Reduce un semitono únicamente el 6º grado.</div>
+          <div class="trans-code">1 - 2 - 3 - 4 - 5 - 6 - 7  ➔  1 - 2 - 3 - 4 - 5 - ♭6 - 7</div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Matriz de Relatividad Modal -->
+    <section class="matrix-section card">
+      <h3>🗺️ Matriz de Relatividad Modal de la Familia Seleccionada</h3>
+      <p class="matrix-subtitle">Todas las notas en una misma fila horizontal comparten exactamente las mismas notas reales.</p>
+      <div class="table-scroll-wrapper">
+        <table id="relativity-table" class="relativity-table">
+          <thead>
+            <tr id="matrix-header-row"></tr>
+          </thead>
+          <tbody id="matrix-body-rows"></tbody>
+        </table>
+      </div>
+    </section>
+
+    <!-- Modal para la Guía Teórica Completa (Markdown) -->
+    <div id="guide-modal" class="modal">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h2>📖 Guía Teórica Completa de Escalas y Modos</h2>
+          <button id="btn-close-guide" class="btn-close">&times;</button>
+        </div>
+        <div id="guide-markdown-body" class="modal-body markdown-body"></div>
+      </div>
+    </div>
+  </main>
+
+  <footer class="app-footer">
+    <p>Desarrollado como guía de teoría musical e instrumento interactivo para músicos y compositores.</p>
+  </footer>
+
+  <!-- Inclusion de marked.js para renderizar Markdown si se desea o parsear directamente -->
+  <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
+  <script src="app.js"></script>
+</body>
+</html>
