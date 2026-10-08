@@ -219,7 +219,7 @@ body {
 /* PENTATONIC FITS GRID */
 .pentatonic-fits-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
   gap: 16px;
   margin-top: 8px;
 }
@@ -395,7 +395,7 @@ body {
 /* HARMONIZED CHORDS GRID (INTERACTIVE TOOL) */
 .chords-grid-container {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+  grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
   gap: 12px;
   width: 100%;
 }
@@ -465,7 +465,7 @@ body {
 
 .transformation-3step-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
   gap: 18px;
 }
 
@@ -530,7 +530,7 @@ body {
 /* Control Panel */
 .control-panel {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
   gap: 18px;
   background-color: var(--panel-bg);
   border: 1px solid var(--border-color);
@@ -676,7 +676,7 @@ body {
 
 .scale-details-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
   gap: 15px;
 }
 
@@ -1066,21 +1066,75 @@ body {
   color: #a5b4fc;
 }
 
-/* MOBILE ADAPTATION & RESPONSIVENESS */
+/* MOBILE ADAPTATION & RESPONSIVENESS (MAX-WIDTH 768px & 480px) */
 @media (max-width: 768px) {
   .app-header {
-    padding: 15px 20px;
+    padding: 12px 15px;
+  }
+  .app-container {
+    padding: 0 8px;
+    margin: 10px auto;
+    gap: 20px;
+  }
+  .adsense-container {
+    padding: 8px 10px;
+    margin: 10px auto;
   }
   .card {
-    padding: 16px;
+    padding: 14px;
+    border-radius: 10px;
   }
   .wiki-card {
-    padding: 16px;
+    padding: 14px;
+    border-radius: 10px;
+  }
+  .wiki-chords-box {
+    padding: 12px;
   }
   .chord-slab {
-    min-width: 140px;
+    min-width: 145px;
+    padding: 10px;
   }
   .chord-slabwide {
-    min-width: 240px;
+    min-width: 230px;
+    padding: 12px;
+  }
+  .chords-grid-container {
+    grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+    gap: 8px;
+  }
+  .chord-degree-card {
+    padding: 8px;
+  }
+  .pentatonic-fits-grid {
+    grid-template-columns: 1fr;
+  }
+  .transformation-3step-grid {
+    grid-template-columns: 1fr;
+  }
+  .control-panel {
+    grid-template-columns: 1fr;
+    padding: 14px;
+  }
+}
+
+@media (max-width: 480px) {
+  .app-container {
+    padding: 0 4px;
+  }
+  .card {
+    padding: 12px 10px;
+  }
+  .wiki-card {
+    padding: 12px 10px;
+  }
+  .wiki-header h2 {
+    font-size: 1.3rem;
+  }
+  .wiki-card h3 {
+    font-size: 1.15rem;
+  }
+  .chords-grid-container {
+    grid-template-columns: repeat(2, 1fr);
   }
 }
