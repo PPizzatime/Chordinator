@@ -37,12 +37,13 @@ body {
 .app-header {
   background-color: var(--panel-bg);
   border-bottom: 1px solid var(--border-color);
-  padding: 20px 30px;
+  padding: 20px 40px;
   display: flex;
   justify-content: space-between;
   align-items: center;
   flex-wrap: wrap;
   gap: 15px;
+  width: 100%;
 }
 
 .logo-container {
@@ -66,13 +67,57 @@ body {
   font-size: 0.875rem;
 }
 
-.app-container {
+.header-nav {
+  display: flex;
+  gap: 20px;
+}
+
+.header-nav a {
+  color: #a5b4fc;
+  text-decoration: none;
+  font-size: 0.9rem;
+  font-weight: 600;
+  transition: color 0.2s;
+}
+
+.header-nav a:hover {
+  color: #fff;
+}
+
+/* ADSENSE CONTAINERS */
+.adsense-container {
+  width: 100%;
   max-width: 1400px;
-  margin: 25px auto;
+  margin: 15px auto;
+  padding: 10px 20px;
+  background-color: rgba(31, 35, 48, 0.4);
+  border: 1px dashed var(--border-color);
+  border-radius: 8px;
+  text-align: center;
+  min-height: 90px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  position: relative;
+}
+
+.adsense-placeholder-label {
+  font-size: 0.72rem;
+  color: var(--text-dim);
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  margin-bottom: 4px;
+}
+
+.app-container {
+  width: 100%;
+  max-width: 1400px;
+  margin: 15px auto;
   padding: 0 20px;
   display: flex;
   flex-direction: column;
-  gap: 30px;
+  gap: 35px;
 }
 
 /* Cards & Containers */
@@ -80,61 +125,70 @@ body {
   background-color: var(--panel-bg);
   border: 1px solid var(--border-color);
   border-radius: 12px;
-  padding: 20px;
+  padding: 24px;
   box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
 }
 
-/* WIKI / ENCICLOPEDIA SECTION */
+/* FULL-WIDTH ENCICLOPEDIA (UPPER PORTION OF THE PAGE) */
 .wiki-section {
   display: flex;
   flex-direction: column;
-  gap: 20px;
+  gap: 25px;
+  width: 100%;
 }
 
 .wiki-header {
   display: flex;
   justify-content: space-between;
-  align-items: center;
+  align-items: flex-start;
   flex-wrap: wrap;
   border-bottom: 1px solid var(--border-color);
-  padding-bottom: 12px;
+  padding-bottom: 16px;
+  gap: 15px;
 }
 
 .wiki-header h2 {
-  font-size: 1.4rem;
+  font-size: 1.6rem;
   color: #fff;
+}
+
+.wiki-header-desc {
+  color: var(--text-muted);
+  font-size: 0.95rem;
+  margin-top: 4px;
 }
 
 .wiki-grid {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(310px, 1fr));
-  gap: 18px;
+  gap: 22px;
+  width: 100%;
 }
 
 .wiki-card {
   background-color: var(--card-bg);
   border: 1px solid var(--border-color);
   border-radius: 10px;
-  padding: 18px;
+  padding: 20px;
   display: flex;
   flex-direction: column;
-  gap: 10px;
-  font-size: 0.9rem;
+  gap: 12px;
+  font-size: 0.92rem;
 }
 
 .wiki-card h3 {
-  font-size: 1.15rem;
+  font-size: 1.2rem;
   color: #a5b4fc;
   border-bottom: 1px solid var(--border-color);
-  padding-bottom: 6px;
+  padding-bottom: 8px;
 }
 
 .wiki-meta {
   font-family: var(--font-mono);
-  font-size: 0.82rem;
+  font-size: 0.85rem;
   color: #fbbf24;
   background-color: rgba(245, 158, 11, 0.1);
-  padding: 6px 10px;
+  padding: 6px 12px;
   border-radius: 6px;
   border: 1px solid rgba(245, 158, 11, 0.2);
 }
@@ -142,19 +196,19 @@ body {
 .wiki-chords-box {
   background-color: rgba(99, 102, 241, 0.12);
   border: 1px solid rgba(99, 102, 241, 0.3);
-  padding: 8px 12px;
+  padding: 10px 14px;
   border-radius: 6px;
-  font-size: 0.82rem;
+  font-size: 0.84rem;
   font-family: var(--font-mono);
   color: #c7d2fe;
   display: flex;
   flex-direction: column;
-  gap: 4px;
+  gap: 5px;
 }
 
 .wiki-modes-block {
   background-color: var(--panel-bg);
-  padding: 12px;
+  padding: 14px;
   border-radius: 8px;
   border: 1px solid var(--border-color);
   display: flex;
@@ -179,11 +233,11 @@ body {
 }
 
 .wiki-mode-rows li {
-  font-size: 0.85rem;
+  font-size: 0.88rem;
   color: #d1d5db;
-  padding: 4px 0;
+  padding: 5px 0;
   border-bottom: 1px dashed rgba(255, 255, 255, 0.08);
-  line-height: 1.4;
+  line-height: 1.45;
 }
 
 .wiki-mode-rows li:last-child {
@@ -235,39 +289,39 @@ body {
 
 /* TRANSFORMATION 3-STEP VERTICAL */
 .transformation-block {
-  margin-top: 10px;
+  margin-top: 15px;
   display: flex;
   flex-direction: column;
-  gap: 15px;
+  gap: 18px;
   border-top: 1px solid var(--border-color);
-  padding-top: 18px;
+  padding-top: 22px;
 }
 
 .transformation-block h3 {
-  font-size: 1.2rem;
+  font-size: 1.25rem;
   color: #fff;
 }
 
 .transformation-3step-grid {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-  gap: 16px;
+  gap: 18px;
 }
 
 .trans-3step-card {
   background-color: var(--card-bg);
   border: 1px solid var(--border-color);
   border-radius: 10px;
-  padding: 16px;
+  padding: 18px;
   display: flex;
   flex-direction: column;
-  gap: 8px;
+  gap: 10px;
   text-align: center;
 }
 
 .trans-line-base {
   font-family: var(--font-mono);
-  font-size: 0.9rem;
+  font-size: 0.92rem;
   font-weight: 600;
   color: #93c5fd;
   background-color: rgba(59, 130, 246, 0.15);
@@ -276,7 +330,7 @@ body {
 }
 
 .trans-line-arrow {
-  font-size: 0.85rem;
+  font-size: 0.88rem;
   font-weight: 700;
   color: #f59e0b;
   padding: 4px 0;
@@ -284,7 +338,7 @@ body {
 
 .trans-line-result {
   font-family: var(--font-mono);
-  font-size: 0.9rem;
+  font-size: 0.92rem;
   font-weight: 700;
   color: #34d399;
   background-color: rgba(16, 185, 129, 0.15);
@@ -292,33 +346,34 @@ body {
   border-radius: 6px;
 }
 
-/* INTERACTIVE TOOL SECTION */
+/* INTERACTIVE TOOL SECTION (LOWER PORTION OF THE PAGE) */
 .interactive-tool-section {
   display: flex;
   flex-direction: column;
-  gap: 20px;
+  gap: 25px;
   border-top: 2px solid var(--accent-color);
-  padding-top: 25px;
+  padding-top: 30px;
+  width: 100%;
 }
 
 .tool-section-header h2 {
-  font-size: 1.5rem;
+  font-size: 1.6rem;
   color: #fff;
 }
 
 .tool-section-header p {
   color: var(--text-muted);
-  font-size: 0.9rem;
+  font-size: 0.92rem;
 }
 
 /* Control Panel */
 .control-panel {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
-  gap: 15px;
+  gap: 18px;
   background-color: var(--panel-bg);
   border: 1px solid var(--border-color);
-  padding: 20px;
+  padding: 22px;
   border-radius: 12px;
 }
 
@@ -822,7 +877,30 @@ body {
 
 .app-footer {
   text-align: center;
-  padding: 20px;
+  padding: 25px 20px;
   color: var(--text-dim);
   font-size: 0.85rem;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  background-color: var(--panel-bg);
+  border-top: 1px solid var(--border-color);
+  margin-top: 30px;
+}
+
+.footer-links {
+  display: flex;
+  justify-content: center;
+  gap: 15px;
+  flex-wrap: wrap;
+}
+
+.footer-links a {
+  color: #9ca3af;
+  text-decoration: none;
+  transition: color 0.2s;
+}
+
+.footer-links a:hover {
+  color: #a5b4fc;
 }
