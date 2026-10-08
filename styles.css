@@ -69,7 +69,8 @@ body {
 
 .header-nav {
   display: flex;
-  gap: 20px;
+  align-items: center;
+  gap: 18px;
 }
 
 .header-nav a {
@@ -127,6 +128,39 @@ body {
   border-radius: 12px;
   padding: 26px;
   box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
+}
+
+/* THEORY FORMULA GUIDE BOX (FOR ADSENSE & PEDAGOGY) */
+.theory-guide-box {
+  border-left: 4px solid var(--accent-color);
+}
+
+.theory-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 16px;
+  margin-top: 10px;
+}
+
+.th-col {
+  background-color: var(--panel-bg);
+  border: 1px solid var(--border-color);
+  border-radius: 8px;
+  padding: 14px;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.th-col h5 {
+  color: #a5b4fc;
+  font-size: 0.95rem;
+}
+
+.th-col p {
+  font-size: 0.88rem;
+  color: #d1d5db;
+  line-height: 1.5;
 }
 
 /* FULL-WIDTH ENCICLOPEDIA & WIDE SLABS */
@@ -247,6 +281,65 @@ body {
   font-size: 0.9rem;
 }
 
+/* TRANSPOSED ALIGNED MODE TABLES FOR WIKI CARDS */
+.wiki-modes-table-container {
+  overflow-x: auto;
+  background-color: var(--panel-bg);
+  border: 1px solid var(--border-color);
+  border-radius: 10px;
+  padding: 14px;
+}
+
+.wiki-modes-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 0.88rem;
+  text-align: left;
+  min-width: 800px;
+}
+
+.wiki-modes-table th {
+  background-color: var(--card-bg);
+  color: #a5b4fc;
+  padding: 10px 12px;
+  border: 1px solid var(--border-color);
+  font-weight: 700;
+  text-transform: uppercase;
+  font-size: 0.8rem;
+}
+
+.wiki-modes-table td {
+  padding: 8px 12px;
+  border: 1px solid var(--border-color);
+  color: #d1d5db;
+}
+
+.wiki-modes-table .col-mode-name {
+  font-weight: 700;
+  color: #60a5fa;
+  min-width: 180px;
+}
+
+.wiki-modes-table .col-code {
+  font-family: var(--font-mono);
+  font-size: 0.82rem;
+  color: #fbbf24;
+  white-space: nowrap;
+}
+
+.wiki-modes-table .col-steps {
+  font-family: var(--font-mono);
+  font-size: 0.82rem;
+  color: #34d399;
+  white-space: nowrap;
+}
+
+.wiki-modes-table .col-desc {
+  font-size: 0.85rem;
+  color: #9ca3af;
+  min-width: 250px;
+}
+
 /* WIDE SCROLLABLE CHORD SLABS IN WIKI CARDS */
 .wiki-chords-box {
   background-color: rgba(15, 23, 42, 0.6);
@@ -347,49 +440,6 @@ body {
   font-family: var(--font-mono);
   font-size: 0.78rem;
   color: #34d399;
-}
-
-/* WIKI MODES LIST BLOCK */
-.wiki-modes-block {
-  background-color: var(--panel-bg);
-  padding: 18px;
-  border-radius: 10px;
-  border: 1px solid var(--border-color);
-  display: flex;
-  flex-direction: column;
-  gap: 10px;
-}
-
-.wiki-modes-title {
-  font-size: 0.9rem;
-  font-weight: 700;
-  color: #a5b4fc;
-  text-transform: uppercase;
-  letter-spacing: 0.5px;
-}
-
-.wiki-mode-rows {
-  list-style: none;
-  display: flex;
-  flex-direction: column;
-  gap: 8px;
-  padding: 0;
-}
-
-.wiki-mode-rows li {
-  font-size: 0.92rem;
-  color: #d1d5db;
-  padding: 6px 0;
-  border-bottom: 1px dashed rgba(255, 255, 255, 0.08);
-  line-height: 1.5;
-}
-
-.wiki-mode-rows li:last-child {
-  border-bottom: none;
-}
-
-.wiki-mode-rows li strong {
-  color: #60a5fa;
 }
 
 /* HARMONIZED CHORDS GRID (INTERACTIVE TOOL) */
@@ -507,7 +557,7 @@ body {
   border-radius: 6px;
 }
 
-/* INTERACTIVE TOOL SECTION (LOWER PORTION OF THE PAGE) */
+/* INTERACTIVE TOOL SECTION (REORDERED: FRETBOARD & TUNING TOP, DETAILS BOTTOM) */
 .interactive-tool-section {
   display: flex;
   flex-direction: column;
@@ -569,11 +619,19 @@ body {
   border-color: var(--accent-color);
 }
 
-/* Tuning Panel */
-.tuning-panel {
+/* UNIFIED FRETBOARD & TUNING CARD */
+.fretboard-unified-card {
   display: flex;
   flex-direction: column;
-  gap: 15px;
+  gap: 20px;
+}
+
+.tuning-integrated-block {
+  border-top: 1px solid var(--border-color);
+  padding-top: 16px;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
 }
 
 .tuning-header {
@@ -584,8 +642,8 @@ body {
   gap: 10px;
 }
 
-.tuning-header h3 {
-  font-size: 1.1rem;
+.tuning-header h4 {
+  font-size: 1.05rem;
   color: #fff;
 }
 
@@ -676,7 +734,7 @@ body {
 
 .scale-details-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
   gap: 15px;
 }
 
@@ -757,12 +815,6 @@ body {
 }
 
 /* Fretboard Section */
-.fretboard-section {
-  display: flex;
-  flex-direction: column;
-  gap: 15px;
-}
-
 .fretboard-header {
   display: flex;
   justify-content: space-between;

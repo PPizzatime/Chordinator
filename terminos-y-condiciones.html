@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Términos y Condiciones - Wiki & Explorador de Escalas</title>
+  <title>Términos y Condiciones - Terms of Service | Wiki & Explorador de Escalas</title>
   <link rel="stylesheet" href="styles.css">
 </head>
 <body>
@@ -11,33 +11,83 @@
     <div class="logo-container">
       <span class="logo-icon">🎸</span>
       <div>
-        <h1>Términos y Condiciones de Uso</h1>
-        <p class="subtitle"><a href="index.html" style="color:#a5b4fc; text-decoration:none;">← Volver a la Guía Principal de Escalas</a></p>
+        <h1 id="page-title">Términos y Condiciones / Terms of Service</h1>
+        <p class="subtitle"><a href="index.html" style="color:#a5b4fc; text-decoration:none;">← <span id="back-link">Volver a la Guía Principal de Escalas</span></a></p>
       </div>
+    </div>
+    <div class="header-nav">
+      <button id="btn-lang-toggle" class="btn btn-sm btn-primary">🌐 English / Español</button>
     </div>
   </header>
 
   <main class="app-container">
     <section class="card" style="display:flex; flex-direction:column; gap:15px; color:#d1d5db; line-height:1.7;">
-      <h2>Términos y Condiciones</h2>
-      <p>Bienvenido a <strong>Wiki & Explorador de Escalas y Modos</strong>. Al acceder y utilizar este sitio web, usted acepta cumplir y estar sujeto a los siguientes términos y condiciones de uso.</p>
+      <article id="content-es">
+        <h2>Términos y Condiciones de Uso</h2>
+        <p>Bienvenido a <strong>Wiki & Explorador de Escalas y Modos</strong>. Este proyecto es una herramienta educativa gratuita desarrollada por un <strong>desarrollador e ingeniero musical independiente</strong> para músicos, compositores y estudiantes.</p>
 
-      <h3>1. Uso del Contenido</h3>
-      <p>Todo el contenido educativo, fórmulas de escalas, diagramas de acordes e interactividad visual del mástil se proporcionan únicamente con fines informativos y de aprendizaje musical personal. Queda prohibida la reproducción masiva no autorizada del material con fines comerciales.</p>
+        <h3>1. Uso Educativo y Personal</h3>
+        <p>Todo el contenido teórico, fórmulas de intervalos, mapas de mástil e interacciones sonoras son de libre acceso para fines de práctica personal, composición y aprendizaje musical.</p>
 
-      <h3>2. Propiedad Intelectual</h3>
-      <p>Los textos explicativos, herramientas interactivas, código fuente de simulación de audio y diseños pertenecen a la plataforma Wiki & Explorador de Escalas, protegidos por leyes de propiedad intelectual.</p>
+        <h3>2. Propiedad Intelectual e Independencia</h3>
+        <p>Este sitio es operado de forma individual por una sola persona. El código, diseño e explicaciones modales pertenecen al creador original del proyecto.</p>
 
-      <h3>3. Limitación de Responsabilidad</h3>
-      <p>La plataforma no garantiza que el servicio esté libre de interrupciones o errores técnicos menores en navegadores específicos, aunque se trabaja continuamente para garantizar el 100% de operatividad.</p>
+        <h3>3. Publicidad y Transparencia</h3>
+        <p>Para mantener los servidores y el desarrollo activo, el sitio muestra anuncios no intrusivos gestionados por Google AdSense.</p>
+      </article>
 
-      <h3>4. Modificaciones</h3>
-      <p>Nos reservamos el derecho de modificar estos términos en cualquier momento. Se recomienda revisar esta página periódicamente.</p>
+      <article id="content-en" style="display:none;">
+        <h2>Terms of Service</h2>
+        <p>Welcome to <strong>Scale & Mode Wiki & Explorer</strong>. This project is a free educational tool developed by an <strong>independent musician and software engineer</strong> for artists, guitarists, and music students.</p>
+
+        <h3>1. Educational & Personal Use</h3>
+        <p>All music theory content, interval formulas, fretboard visualizers, and synthesized audio features are freely accessible for practice, songwriting, and learning.</p>
+
+        <h3>2. Intellectual Property & Independence</h3>
+        <p>This platform is owned and maintained by a single independent creator. The codebase, visual layouts, and theoretical descriptions belong to the author.</p>
+
+        <h3>3. Advertising & Transparency</h3>
+        <p>To support hosting and ongoing development, non-intrusive ad units managed by Google AdSense are displayed.</p>
+      </article>
     </section>
   </main>
 
   <footer class="app-footer">
-    <p><a href="index.html" style="color:#9ca3af;">Inicio</a> | <a href="politica-de-privacidad.html" style="color:#9ca3af;">Política de Privacidad</a> | <a href="terminos-y-condiciones.html" style="color:#9ca3af;">Términos y Condiciones</a> | <a href="contacto.html" style="color:#9ca3af;">Contacto</a></p>
+    <p>Wiki & Explorador de Escalas — Proyecto educativo independiente creado por un músico e ingeniero de software.</p>
+    <p class="footer-links">
+      <a href="index.html">Inicio / Home</a> |
+      <a href="politica-de-privacidad.html">Privacidad / Privacy</a> |
+      <a href="terminos-y-condiciones.html">Términos / Terms</a> |
+      <a href="contacto.html">Contacto / Contact</a>
+    </p>
   </footer>
+
+  <script>
+    const btnLang = document.getElementById('btn-lang-toggle');
+    const es = document.getElementById('content-es');
+    const en = document.getElementById('content-en');
+    let lang = localStorage.getItem('scale_wiki_lang') || 'en';
+
+    function applyLang() {
+      if (lang === 'en') {
+        es.style.display = 'none';
+        en.style.display = 'block';
+        document.getElementById('page-title').textContent = 'Terms of Service';
+        document.getElementById('back-link').textContent = 'Back to Scale Guide';
+      } else {
+        es.style.display = 'block';
+        en.style.display = 'none';
+        document.getElementById('page-title').textContent = 'Términos y Condiciones';
+        document.getElementById('back-link').textContent = 'Volver a la Guía Principal de Escalas';
+      }
+      localStorage.setItem('scale_wiki_lang', lang);
+    }
+
+    btnLang.addEventListener('click', () => {
+      lang = (lang === 'en') ? 'es' : 'en';
+      applyLang();
+    });
+    applyLang();
+  </script>
 </body>
 </html>

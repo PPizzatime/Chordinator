@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Contacto - Wiki & Explorador de Escalas</title>
+  <title>Contacto - Contact & Support | Wiki & Explorador de Escalas</title>
   <link rel="stylesheet" href="styles.css">
 </head>
 <body>
@@ -11,28 +11,77 @@
     <div class="logo-container">
       <span class="logo-icon">🎸</span>
       <div>
-        <h1>Contacto y Soporte</h1>
-        <p class="subtitle"><a href="index.html" style="color:#a5b4fc; text-decoration:none;">← Volver a la Guía Principal de Escalas</a></p>
+        <h1 id="page-title">Contacto y Soporte / Contact & Support</h1>
+        <p class="subtitle"><a href="index.html" style="color:#a5b4fc; text-decoration:none;">← <span id="back-link">Volver a la Guía Principal de Escalas</span></a></p>
       </div>
+    </div>
+    <div class="header-nav">
+      <button id="btn-lang-toggle" class="btn btn-sm btn-primary">🌐 English / Español</button>
     </div>
   </header>
 
   <main class="app-container">
     <section class="card" style="display:flex; flex-direction:column; gap:15px; color:#d1d5db; line-height:1.7; max-width:800px; margin:0 auto; width:100%;">
-      <h2>Contáctanos</h2>
-      <p>¿Tienes dudas sobre la teoría de escalas, alguna sugerencia para la herramienta interactiva de guitarra o consultas de colaboración?</p>
+      <article id="content-es">
+        <h2>Contáctame</h2>
+        <p>Hola, soy un <strong>músico e ingeniero independiente</strong> que construyó esta guía interactiva de teoría musical y mástil para guitarra. Si tienes comentarios, encuentras algún detalle técnico o quieres sugerir nuevas escalas o funciones, me encantaría leerte.</p>
 
-      <div style="background-color:var(--panel-bg); border:1px solid var(--border-color); padding:15px; border-radius:8px;">
-        <p><strong>Correo Electrónico de Contacto:</strong> <span style="color:#60a5fa;">contacto@tudominio.com</span></p>
-        <p><strong>Ubicación / Sitio Web:</strong> Wiki & Explorador de Escalas y Modos</p>
-      </div>
+        <div style="background-color:var(--panel-bg); border:1px solid var(--border-color); padding:18px; border-radius:8px; display:flex; flex-direction:column; gap:8px;">
+          <p><strong>Desarrollador:</strong> Músico e Ingeniero Independiente</p>
+          <p><strong>Correo de Contacto:</strong> <span style="color:#60a5fa;">contacto@tudominio.com</span></p>
+          <p><strong>Proyecto:</strong> Wiki & Explorador de Escalas, Modos y Guitarra (6 a 9 Cuerdas)</p>
+        </div>
+      </article>
 
-      <p>Respondemos habitualmente en un plazo de 24 a 48 horas laborables.</p>
+      <article id="content-en" style="display:none;">
+        <h2>Get in Touch</h2>
+        <p>Hi! I am an <strong>independent musician and software engineer</strong> who built this interactive music theory and guitar fretboard explorer. If you have feedback, technical suggestions, or ideas for new scale families, feel free to reach out.</p>
+
+        <div style="background-color:var(--panel-bg); border:1px solid var(--border-color); padding:18px; border-radius:8px; display:flex; flex-direction:column; gap:8px;">
+          <p><strong>Creator:</strong> Independent Musician & Software Engineer</p>
+          <p><strong>Email Contact:</strong> <span style="color:#60a5fa;">contact@yourdomain.com</span></p>
+          <p><strong>Project:</strong> Guitar Scale, Mode & Fretboard Explorer (6 to 9 Strings)</p>
+        </div>
+      </article>
     </section>
   </main>
 
   <footer class="app-footer">
-    <p><a href="index.html" style="color:#9ca3af;">Inicio</a> | <a href="politica-de-privacidad.html" style="color:#9ca3af;">Política de Privacidad</a> | <a href="terminos-y-condiciones.html" style="color:#9ca3af;">Términos y Condiciones</a> | <a href="contacto.html" style="color:#9ca3af;">Contacto</a></p>
+    <p>Wiki & Explorador de Escalas — Proyecto educativo independiente creado por un músico e ingeniero de software.</p>
+    <p class="footer-links">
+      <a href="index.html">Inicio / Home</a> |
+      <a href="politica-de-privacidad.html">Privacidad / Privacy</a> |
+      <a href="terminos-y-condiciones.html">Términos / Terms</a> |
+      <a href="contacto.html">Contacto / Contact</a>
+    </p>
   </footer>
+
+  <script>
+    const btnLang = document.getElementById('btn-lang-toggle');
+    const es = document.getElementById('content-es');
+    const en = document.getElementById('content-en');
+    let lang = localStorage.getItem('scale_wiki_lang') || 'en';
+
+    function applyLang() {
+      if (lang === 'en') {
+        es.style.display = 'none';
+        en.style.display = 'block';
+        document.getElementById('page-title').textContent = 'Contact & Support';
+        document.getElementById('back-link').textContent = 'Back to Scale Guide';
+      } else {
+        es.style.display = 'block';
+        en.style.display = 'none';
+        document.getElementById('page-title').textContent = 'Contacto y Soporte';
+        document.getElementById('back-link').textContent = 'Volver a la Guía Principal de Escalas';
+      }
+      localStorage.setItem('scale_wiki_lang', lang);
+    }
+
+    btnLang.addEventListener('click', () => {
+      lang = (lang === 'en') ? 'es' : 'en';
+      applyLang();
+    });
+    applyLang();
+  </script>
 </body>
 </html>

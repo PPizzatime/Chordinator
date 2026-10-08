@@ -1,446 +1,198 @@
 <!DOCTYPE html>
-<html lang="es">
+<html lang="en">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Wiki & Explorador de Escalas, Modos y Mástil de Guitarra (6-9 Cuerdas)</title>
-  <meta name="description" content="Enciclopedia profesional de teoría musical, familias de escalas, modos armónicos y melódicos, acoples pentatónicos, acordes harmonizados y herramienta interactiva de mástil para guitarra de 6, 7, 8 y 9 cuerdas.">
+  <title>Guitar Scale & Mode Explorer - Interactive Fretboard & Music Theory Wiki (6-9 Strings)</title>
+  <meta name="description" content="Comprehensive music theory guide and interactive 6, 7, 8, 9 string guitar fretboard visualizer. Explore diatonic, harmonic minor, melodic minor, harmonic major, pentatonic, and symmetric scale modes, formulas, and harmonized degree chords.">
+
+  <!-- SEO / SEM / Open Graph Meta Tags -->
+  <meta property="og:title" content="Guitar Scale & Mode Explorer - Interactive Fretboard & Theory Wiki">
+  <meta property="og:description" content="Master guitar scale modes, formulas, degrees, and harmonized chords across 6, 7, 8, and 9 string fretboards with audio playback.">
+  <meta property="og:type" content="website">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Guitar Scale & Mode Explorer">
+  <meta name="twitter:description" content="Interactive guitar fretboard and scale mode reference guide for 6-9 string guitars.">
+
   <link rel="stylesheet" href="styles.css">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700;900&family=JetBrains+Mono:wght@400;600;700&display=swap" rel="stylesheet">
 
-  <!-- GOOGLE ADSENSE AUTOMATIC ADS SCRIPT (REEMPLAZAR ca-pub-XXXXXXXXXXXXXXXX CON TU ID REAL DE ADSENSE) -->
-  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-XXXXXXXXXXXXXXXX"
-       crossorigin="anonymous"></script>
+  <!-- GOOGLE ADSENSE AUTOMATIC ADS SCRIPT (Replace ca-pub-XXXXXXXXXXXXXXXX with your real AdSense Publisher ID) -->
+  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-XXXXXXXXXXXXXXXX" crossorigin="anonymous"></script>
 </head>
 <body>
   <header class="app-header">
     <div class="logo-container">
       <span class="logo-icon">🎸</span>
       <div>
-        <h1>Wiki & Explorador de Escalas, Modos y Mástil</h1>
-        <p class="subtitle">Enciclopedia de teoría musical y herramienta interactiva multitono (6 a 9 cuerdas)</p>
+        <h1 id="ui-header-title">Guitar Scale & Mode Explorer</h1>
+        <p class="subtitle" id="ui-header-subtitle">Music theory reference & 6-9 string interactive fretboard guide</p>
       </div>
     </div>
     <nav class="header-nav">
-      <a href="#enciclopedia">Enciclopedia</a>
-      <a href="#herramienta-interactiva">Mástil Interactivo</a>
-      <a href="politica-de-privacidad.html">Privacidad</a>
-      <a href="contacto.html">Contacto</a>
+      <button id="btn-lang-toggle" class="btn btn-sm btn-primary">🌐 Language: <span id="current-lang-label">English</span></button>
+      <a href="#enciclopedia" id="nav-wiki-link">Wiki & Theory</a>
+      <a href="#herramienta-interactiva" id="nav-tool-link">Fretboard Tool</a>
+      <a href="politica-de-privacidad.html" id="nav-privacy-link">Privacy</a>
+      <a href="contacto.html" id="nav-contact-link">Contact</a>
     </nav>
   </header>
 
   <!-- BANNER PUBLICITARIO ADSENSE SUPERIOR -->
-  <div class="adsense-container adsense-top-banner" aria-label="Publicidad">
-    <div class="adsense-placeholder-label">Anuncio Publicitario</div>
-    <!-- Google AdSense Code Unit -->
+  <div class="adsense-container adsense-top-banner" aria-label="Publicidad / Advertisement">
+    <div class="adsense-placeholder-label" id="ui-ad-label-1">Advertisement</div>
     <ins class="adsbygoogle"
          style="display:block"
          data-ad-client="ca-pub-XXXXXXXXXXXXXXXX"
          data-ad-slot="1111111111"
          data-ad-format="auto"
          data-full-width-responsive="true"></ins>
-    <script>
-         (adsbygoogle = window.adsbygoogle || []).push({});
-    </script>
+    <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
   </div>
 
   <main class="app-container">
 
-    <!-- SECCIÓN ENCICLOPEDIA COMPLETA (OCUPA TODA LA PARTE SUPERIOR DE LA PÁGINA) -->
+    <!-- SECCIÓN ENCICLOPEDIA COMPLETA (OCUPA LA PARTE SUPERIOR) -->
     <section id="enciclopedia" class="wiki-section card">
       <div class="wiki-header">
         <div>
-          <h2>📚 Enciclopedia Definitiva de Escalas, Modos y Armonización</h2>
-          <p class="wiki-header-desc">Manual de consulta profesional con análisis detallado de uso práctico, acoples modales, acoples pentatónicos y harmonización grado por grado.</p>
+          <h2 id="wiki-main-title">📚 Comprehensive Scale, Mode & Harmonization Encyclopedia</h2>
+          <p class="wiki-header-desc" id="wiki-main-desc">Complete musical theory reference with step-by-step transformations, scale degree formulas, mode comparisons, and modal fit rules.</p>
         </div>
-        <span class="badge">Guía Maestra para Músicos</span>
+        <span class="badge" id="wiki-badge-label">Master Music Theory Guide</span>
       </div>
 
-      <div class="wiki-grid">
+      <!-- SECCIÓN EXPLICATIVA DE FÓRMULAS E INTERVALOS (PARA ADSENSE Y CLARIDAD PEDAGÓGICA) -->
+      <article class="wiki-card theory-guide-box">
+        <h3 id="th-guide-title">📖 Understanding Scale Formulas, Step Codes & Degree Intervals</h3>
+        <p id="th-guide-intro" class="wiki-section-detail">In music theory, every scale is built upon an exact mathematical sequence of distances (intervals) between notes within the 12-tone chromatic system. This guide uses three standard notations so you can read and apply scale formulas effortlessly:</p>
 
-        <!-- 1. FAMILIA DIATÓNICA -->
-        <article class="wiki-card">
-          <div class="wiki-card-title-row">
-            <h3>🏛️ 1. La Familia Diatónica (Escala Mayor y sus 7 Modos)</h3>
-            <span class="wiki-meta"><strong>Fórmula:</strong> T-T-S-T-T-T-S | <strong>Pasos:</strong> 2-2-1-2-2-2-1</span>
+        <div class="theory-grid">
+          <div class="th-col">
+            <h5 id="th-col1-title">1. Tone & Semitone Code (T / S)</h5>
+            <p id="th-col1-desc">Represents distances in step names where <strong>T = Tone (2 semitones / 2 frets)</strong> and <strong>S = Semitone (1 semitone / 1 fret)</strong>. For example, <code>T-T-S-T-T-T-S</code> is the standard Major Scale formula.</p>
           </div>
-
-          <div class="wiki-section-detail">
-            <h4>💡 ¿Cuándo y Cómo usarla en la práctica musical?</h4>
-            <p>Es el fundamento absoluto del sistema tonal occidental. Se utiliza para componer la inmensa mayoría de la música comercial, clásica, pop, rock, country y baladas. La escala mayor organiza el centro tonal alrededor del acorde de tónica (I). Al ser asimétrica y contener exactamente dos semitonos separados estratégicamente (3º-4º y 7º-8º), genera tensiones y resoluciones perfectas gracias a la nota sensible (7º grado elevado a solo medio tono de la tónica).</p>
-            <p><strong>Estrategia de Improvisación e Intercambio Modal:</strong> Puedes navegar a través de sus 7 modos según la progresión del tema. Si estás sobre un acorde Dominante V7 (ej. G7), aplica el modo Mixolidio de esa tónica; sobre un acorde m7 (ej. Dm7), aplica el modo Dórico para darle un color más moderno y brillante que el menor natural.</p>
+          <div class="th-col">
+            <h5 id="th-col2-title">2. Step Number Sequence (Numeric)</h5>
+            <p id="th-col2-desc">Displays the exact number of frets or semitones between consecutive notes. For instance, <code>2-2-1-2-2-2-1</code> is identical to <code>T-T-S-T-T-T-S</code>. A value of <code>3</code> represents a minor third jump (3 semitones).</p>
           </div>
-
-          <div class="wiki-chords-box">
-            <div class="wiki-chords-header">
-              <span>🎼 Acordes Harmonizados Grado por Grado (Desliza horizontalmente ➔)</span>
-              <span class="scroll-hint">↔ Desliza</span>
-            </div>
-            <div class="wiki-chords-scroll">
-              <div class="chord-slab"><span class="c-deg">Grado I</span><span class="c-triad">I (Mayor)</span><span class="c-tetrad">Imaj7</span><span class="c-formula">1 - 3 - 5 - 7</span></div>
-              <div class="chord-slab"><span class="c-deg">Grado ii</span><span class="c-triad">ii (Menor)</span><span class="c-tetrad">ii7</span><span class="c-formula">1 - ♭3 - 5 - ♭7</span></div>
-              <div class="chord-slab"><span class="c-deg">Grado iii</span><span class="c-triad">iii (Menor)</span><span class="c-tetrad">iii7</span><span class="c-formula">1 - ♭3 - 5 - ♭7</span></div>
-              <div class="chord-slab"><span class="c-deg">Grado IV</span><span class="c-triad">IV (Mayor)</span><span class="c-tetrad">IVmaj7</span><span class="c-formula">1 - 3 - 5 - 7</span></div>
-              <div class="chord-slab"><span class="c-deg">Grado V</span><span class="c-triad">V (Mayor)</span><span class="c-tetrad">V7 (Dominante)</span><span class="c-formula">1 - 3 - 5 - ♭7</span></div>
-              <div class="chord-slab"><span class="c-deg">Grado vi</span><span class="c-triad">vi (Menor Relativo)</span><span class="c-tetrad">vi7</span><span class="c-formula">1 - ♭3 - 5 - ♭7</span></div>
-              <div class="chord-slab"><span class="c-deg">Grado vii°</span><span class="c-triad">vii° (Disminuido)</span><span class="c-tetrad">m7(♭5)</span><span class="c-formula">1 - ♭3 - ♭5 - ♭7</span></div>
-            </div>
+          <div class="th-col">
+            <h5 id="th-col3-title">3. Scale Degree Interval Notation</h5>
+            <p id="th-col3-desc">Measures each note relative to the Root note (1). Symbols like <code>♭3</code> indicate a flat 3rd (minor third), <code>♯4</code> indicates an augmented 4th, and <code>♭7</code> indicates a minor 7th degree.</p>
           </div>
+        </div>
+      </article>
 
-          <div class="wiki-modes-block">
-            <span class="wiki-modes-title">Los 7 Modos Diatónicos y sus Colores Tímbricos:</span>
-            <ul class="wiki-mode-rows">
-              <li><strong>Jónico (Mayor):</strong> T-T-S-T-T-T-S [1, 2, 3, 4, 5, 6, 7] — Alegre, claro, estable y resuelto. Base del pop y música clásica.</li>
-              <li><strong>Dórico:</strong> T-S-T-T-T-S-T [1, 2, ♭3, 4, 5, 6, ♭7] — Menor sofisticado y brillante por su 6ª mayor. Usado en Funk, Jazz, Rock (<em>Billie Jean</em>, Santana).</li>
-              <li><strong>Frigio:</strong> S-T-T-T-S-T-T [1, ♭2, ♭3, 4, 5, ♭6, ♭7] — Oscuro, tenso, místico. Tensión hispana/flamenca y metal pesado por la ♭2 (<em>Metallica</em>).</li>
-              <li><strong>Lidio:</strong> T-T-T-S-T-T-S [1, 2, 3, ♯4, 5, 6, 7] — Mágico, flotante, espacial. Sonido épico de bandas sonoras de ciencia ficción y Disney por la ♯4.</li>
-              <li><strong>Mixolidio:</strong> T-T-S-T-T-S-T [1, 2, 3, 4, 5, 6, ♭7] — Festivo, desenfadado y blusero. Columna vertebral del Rock Clásico y Blues (<em>AC/DC</em>, <em>Sweet Home Alabama</em>).</li>
-              <li><strong>Eólico (Menor Natural):</strong> T-S-T-T-S-T-T [1, 2, ♭3, 4, 5, ♭6, ♭7] — Triste, dramático, emotivo y melancólico. Tonalidad menor por excelencia.</li>
-              <li><strong>Locrio:</strong> S-T-T-S-T-T-T [1, ♭2, ♭3, 4, ♭5, ♭6, ♭7] — Extremadamente inestable y disonante. Carece de 5ª justa (Heavy Metal Extremo, Jazz de vanguardia).</li>
-            </ul>
-          </div>
-        </article>
-
-        <!-- 2. FAMILIA MENOR ARMÓNICA -->
-        <article class="wiki-card">
-          <div class="wiki-card-title-row">
-            <h3>🕌 2. La Familia Menor Armónica</h3>
-            <span class="wiki-meta"><strong>Fórmula:</strong> T-S-T-T-S-3S-S | <strong>Pasos:</strong> 2-1-2-2-1-3-1</span>
-          </div>
-
-          <div class="wiki-section-detail">
-            <h4>💡 ¿Cuándo y Cómo usarla en la práctica musical?</h4>
-            <p>Se creó para resolver una limitación técnica de la escala menor natural (eólica): la falta de una nota sensible a medio tono de la tónica que le permitiera construir un acorde dominante mayor (V7) fuerte para resolver a la tónica menor (i). Al eleva el 7º grado un semitono, aparece un intervalo drástico de 3 semitonos (segunda aumentada / 3S) entre el 6º y el 7º grado, otorgándole un sonido inconfundible, dramático, misterioso y altamente apasionado.</p>
-            <p><strong>Uso Práctico Favorito de los Guitarristas:</strong> Su quinto modo, el <strong>Frigio Dominante</strong>, es el rey de la música Flamenca, el Metal Neoclásico (Yngwie Malmsteen, Randy Rhoads), la música Árabe y el Klezmer. Toca el modo Frigio Dominante sobre un acorde Dominante V7 que resuelve a un acorde menor (ej. E7 ➔ Am) para obtener un impacto armónico inmediato.</p>
-          </div>
-
-          <div class="wiki-chords-box">
-            <div class="wiki-chords-header">
-              <span>🎼 Acordes Harmonizados Grado por Grado (Desliza horizontalmente ➔)</span>
-              <span class="scroll-hint">↔ Desliza</span>
-            </div>
-            <div class="wiki-chords-scroll">
-              <div class="chord-slab"><span class="c-deg">Grado i</span><span class="c-triad">i (Menor)</span><span class="c-tetrad">im(maj7)</span><span class="c-formula">1 - ♭3 - 5 - 7</span></div>
-              <div class="chord-slab"><span class="c-deg">Grado ii°</span><span class="c-triad">ii° (Disminuido)</span><span class="c-tetrad">m7(♭5)</span><span class="c-formula">1 - ♭3 - ♭5 - ♭7</span></div>
-              <div class="chord-slab"><span class="c-deg">Grado ♭III+</span><span class="c-triad">♭III+ (Aumentado)</span><span class="c-tetrad">♭IIImaj7(♯5)</span><span class="c-formula">1 - 3 - ♯5 - 7</span></div>
-              <div class="chord-slab"><span class="c-deg">Grado iv</span><span class="c-triad">iv (Menor)</span><span class="c-tetrad">iv7</span><span class="c-formula">1 - ♭3 - 5 - ♭7</span></div>
-              <div class="chord-slab"><span class="c-deg">Grado V</span><span class="c-triad">V (Mayor)</span><span class="c-tetrad">V7 (Dominante)</span><span class="c-formula">1 - 3 - 5 - ♭7</span></div>
-              <div class="chord-slab"><span class="c-deg">Grado ♭VI</span><span class="c-triad">♭VI (Mayor)</span><span class="c-tetrad">♭VImaj7</span><span class="c-formula">1 - 3 - 5 - 7</span></div>
-              <div class="chord-slab"><span class="c-deg">Grado vii°</span><span class="c-triad">vii° (Disminuido)</span><span class="c-tetrad">vii°7 (Disminuido 7)</span><span class="c-formula">1 - ♭3 - ♭5 - ♭♭7</span></div>
-            </div>
-          </div>
-
-          <div class="wiki-modes-block">
-            <span class="wiki-modes-title">Modos Destacados de la Menor Armónica:</span>
-            <ul class="wiki-mode-rows">
-              <li><strong>1. Menor Armónica:</strong> T-S-T-T-S-3S-S [1, 2, ♭3, 4, 5, ♭6, 7] — Dramática, exótica, neoclásica y profunda.</li>
-              <li><strong>2. Locrio ♮6:</strong> S-T-T-S-3S-S-T [1, ♭2, ♭3, 4, ♭5, 6, ♭7] — Disminuido e inestable con tensión oriental.</li>
-              <li><strong>3. Jónico ♯5:</strong> T-T-S-3S-S-T-S [1, 2, 3, 4, ♯5, 6, 7] — Majestuoso pero suspendido, idóneo para acordes aumentados maj7.</li>
-              <li><strong>4. Dórico ♯4 (Klezmer / Gitano):</strong> T-S-3S-S-T-S-T [1, 2, ♭3, ♯4, 5, 6, ♭7] — Trágico y melancólico con cuarta aumentada.</li>
-              <li><strong>5. Frigio Dominante:</strong> S-3S-S-T-S-T-T [1, ♭2, 3, 4, 5, ♭6, ♭7] — El rey del flamenco, sonido egipcio y metal neoclásico.</li>
-              <li><strong>6. Lidio ♯2:</strong> 3S-S-T-S-T-T-S [1, ♯2, 3, ♯4, 5, 6, 7] — Mágico, espacial y exótico con salto inicial de 3 semitonos.</li>
-              <li><strong>7. Ultra Locrio (Superlocrio ♭♭7):</strong> S-T-S-T-T-S-3S [1, ♭2, ♭3, ♭4, ♭5, ♭6, ♭♭7] — Máxima tensión sobre acorde disminuido 7.</li>
-            </ul>
-          </div>
-        </article>
-
-        <!-- 3. FAMILIA MENOR MELÓDICA -->
-        <article class="wiki-card">
-          <div class="wiki-card-title-row">
-            <h3>🎷 3. La Familia Menor Melódica (Jazz Minor)</h3>
-            <span class="wiki-meta"><strong>Fórmula:</strong> T-S-T-T-T-T-S | <strong>Pasos:</strong> 2-1-2-2-2-2-1</span>
-          </div>
-
-          <div class="wiki-section-detail">
-            <h4>💡 ¿Cuándo y Cómo usarla en la práctica musical?</h4>
-            <p>Surgió históricamente en la música vocal clásica para eliminar el salto "tosco" o difícil de cantar de 3 semitonos que tenía la escala menor armónica. En la música moderna y el Jazz, se utiliza exclusivamente en su versión ascendente (que mantiene el 6º y 7º grados elevados). Es considerada la "escala secreta del Jazz Moderno" porque produce sonoridades refinadas e híbridas: su primera mitad es trágica y menor (1, 2, ♭3), pero su segunda mitad es brillante y mayor (4, 5, 6, 7).</p>
-
-            <p><strong>Uso Avanzado en Reordenamiento Modal y Solos:</strong>
-            Sus modos generan colores indispensables para el Jazz Fusion. Su 4º modo (<strong>Lidio Dominante</strong>) se usa sobre acordes 7(♯11); su 7º modo (<strong>Escala Alterada / Superlocrio</strong>) es el recurso número 1 de los jazzistas para tocar sobre acordes Dominantes Alterados (7alt, 7♭9, 7♯9, 7♭5, 7♯5) antes de resolver a la tónica.</p>
-          </div>
-
-          <div class="wiki-chords-box">
-            <div class="wiki-chords-header">
-              <span>🎼 Acordes Harmonizados Grado por Grado (Desliza horizontalmente ➔)</span>
-              <span class="scroll-hint">↔ Desliza</span>
-            </div>
-            <div class="wiki-chords-scroll">
-              <div class="chord-slab"><span class="c-deg">Grado i</span><span class="c-triad">i (Menor)</span><span class="c-tetrad">im(maj7)</span><span class="c-formula">1 - ♭3 - 5 - 7</span></div>
-              <div class="chord-slab"><span class="c-deg">Grado ii</span><span class="c-triad">ii (Menor)</span><span class="c-tetrad">ii7(♭9)</span><span class="c-formula">1 - ♭3 - 5 - ♭7</span></div>
-              <div class="chord-slab"><span class="c-deg">Grado ♭III+</span><span class="c-triad">♭III+ (Aumentado)</span><span class="c-tetrad">♭IIImaj7(♯5)</span><span class="c-formula">1 - 3 - ♯5 - 7</span></div>
-              <div class="chord-slab"><span class="c-deg">Grado IV</span><span class="c-triad">IV (Mayor)</span><span class="c-tetrad">IV7 (Lidio Dom)</span><span class="c-formula">1 - 3 - 5 - ♭7</span></div>
-              <div class="chord-slab"><span class="c-deg">Grado V</span><span class="c-triad">V (Mayor)</span><span class="c-tetrad">V7(♭13)</span><span class="c-formula">1 - 3 - 5 - ♭7</span></div>
-              <div class="chord-slab"><span class="c-deg">Grado vi°</span><span class="c-triad">vi° (Disminuido)</span><span class="c-tetrad">m7(♭5)</span><span class="c-formula">1 - ♭3 - ♭5 - ♭7</span></div>
-              <div class="chord-slab"><span class="c-deg">Grado vii°</span><span class="c-triad">vii° (Disminuido)</span><span class="c-tetrad">m7(♭5)alt</span><span class="c-formula">1 - ♭3 - ♭5 - ♭7</span></div>
-            </div>
-          </div>
-
-          <div class="wiki-modes-block">
-            <span class="wiki-modes-title">Los 7 Modos de la Menor Melódica y su Aplicación en Jazz:</span>
-            <ul class="wiki-mode-rows">
-              <li><strong>1. Menor Melódica:</strong> T-S-T-T-T-T-S [1, 2, ♭3, 4, 5, 6, 7] — Elegante, melancólica pero sin dramatismo. Clave en m(maj7).</li>
-              <li><strong>2. Dórico ♭2:</strong> S-T-T-T-T-S-T [1, ♭2, ♭3, 4, 5, 6, ♭7] — Frigio sofisticado con sexta mayor. Sonido Jazz Fusión moderno.</li>
-              <li><strong>3. Lidio Aumentado:</strong> T-T-T-T-S-T-S [1, 2, 3, ♯4, ♯5, 6, 7] — Flotante, cósmico y expansivo para acordes maj7(♯5).</li>
-              <li><strong>4. Lidio Dominante:</strong> T-T-T-S-T-S-T [1, 2, 3, ♯4, 5, 6, 2♭7] — Animado, espacial. Perfecto para acordes 7(♯11) (The Simpsons, Debussy).</li>
-              <li><strong>5. Mixolidio ♭6 (Hindú):</strong> T-T-S-T-S-T-T [1, 2, 3, 4, 5, ♭6, ♭7] — Melancólico pero de raíz mayor. Tensión cálida sobre acordes V7(♭13).</li>
-              <li><strong>6. Locrio ♮2:</strong> T-S-T-S-T-T-T [1, 2, ♭3, 4, ♭5, ♭6, ♭7] — La mejor escala para improvisar sobre acordes semidisminuidos m7(♭5).</li>
-              <li><strong>7. Alterado (Superlocrio):</strong> S-T-S-T-T-T-T [1, ♭2, ♭3, ♭4, ♭5, ♭6, ♭7] — Tensión máxima para acordes dominantes alterados (7alt).</li>
-            </ul>
-          </div>
-        </article>
-
-        <!-- 4. FAMILIA ARMÓNICA MAYOR (SECCIÓN DEDICADA COMPLETA) -->
-        <article class="wiki-card">
-          <div class="wiki-card-title-row">
-            <h3>🎻 4. La Familia Armónica Mayor</h3>
-            <span class="wiki-meta"><strong>Fórmula:</strong> T-T-S-T-S-3S-S | <strong>Pasos:</strong> 2-2-1-2-1-3-1</span>
-          </div>
-
-          <div class="wiki-section-detail">
-            <h4>💡 ¿Cuándo y Cómo usarla en la práctica musical?</h4>
-            <p>La Escala Armónica Mayor es la hermana simétrica de la menor armónica: se construye tomando una escala mayor estándar e infligiendo una alteración en el 6º grado (rebajándolo a ♭6). Esta simple modificación introduce el exótico intervalo de 3 semitonos (segunda aumentada) entre el ♭6 y la 7ª mayor, fusionando el brillo brillante del modo Mayor con la melancolía trágica y oriental de las escalas armónicas.</p>
-
-            <p><strong>Uso en Composición y Progresiones:</strong>
-            Permite utilizar acordes menores de subdominante en tonalidad mayor (ej. la famosa progresión I - iv - I en C Mayor: C ➔ Fm ➔ C) con un soporte melódico perfecto. Otorga un sonido profundamente romántico, sombrío y cinematográfico.</p>
-          </div>
-
-          <div class="wiki-chords-box">
-            <div class="wiki-chords-header">
-              <span>🎼 Acordes Harmonizados Grado por Grado (Desliza horizontalmente ➔)</span>
-              <span class="scroll-hint">↔ Desliza</span>
-            </div>
-            <div class="wiki-chords-scroll">
-              <div class="chord-slab"><span class="c-deg">Grado I</span><span class="c-triad">I (Mayor)</span><span class="c-tetrad">Imaj7</span><span class="c-formula">1 - 3 - 5 - 7</span></div>
-              <div class="chord-slab"><span class="c-deg">Grado ii°</span><span class="c-triad">ii° (Disminuido)</span><span class="c-tetrad">m7(♭5)</span><span class="c-formula">1 - ♭3 - ♭5 - ♭7</span></div>
-              <div class="chord-slab"><span class="c-deg">Grado iii</span><span class="c-triad">iii (Menor)</span><span class="c-tetrad">iii7(♭9)</span><span class="c-formula">1 - ♭3 - 5 - ♭7</span></div>
-              <div class="chord-slab"><span class="c-deg">Grado iv</span><span class="c-triad">iv (Menor)</span><span class="c-tetrad">ivm(maj7)</span><span class="c-formula">1 - ♭3 - 5 - 7</span></div>
-              <div class="chord-slab"><span class="c-deg">Grado V</span><span class="c-triad">V (Mayor)</span><span class="c-tetrad">V7(♭9)</span><span class="c-formula">1 - 3 - 5 - ♭7</span></div>
-              <div class="chord-slab"><span class="c-deg">Grado ♭VI+</span><span class="c-triad">♭VI+ (Aumentado)</span><span class="c-tetrad">♭VImaj7(♯5)</span><span class="c-formula">1 - 3 - ♯5 - 7</span></div>
-              <div class="chord-slab"><span class="c-deg">Grado vii°</span><span class="c-triad">vii° (Disminuido)</span><span class="c-tetrad">vii°7</span><span class="c-formula">1 - ♭3 - ♭5 - ♭♭7</span></div>
-            </div>
-          </div>
-
-          <div class="wiki-modes-block">
-            <span class="wiki-modes-title">Los Modos de la Armónica Mayor:</span>
-            <ul class="wiki-mode-rows">
-              <li><strong>1. Armónica Mayor:</strong> T-T-S-T-S-3S-S [1, 2, 3, 4, 5, ♭6, 7] — Exótica, romántica, apasionada.</li>
-              <li><strong>2. Dórico ♭5:</strong> T-S-T-S-3S-S-T [1, 2, ♭3, 4, ♭5, 6, ♭7] — Sonido jazzero melancólico con tensión disminuida.</li>
-              <li><strong>3. Frigio ♭4:</strong> S-T-S-3S-S-T-T [1, ♭2, ♭3, ♭4, 5, ♭6, ♭7] — Misterioso, con cuarta disminuida.</li>
-              <li><strong>4. Lidio ♭3 (Lidio Menor):</strong> T-S-3S-S-T-T-S [1, 2, ♭3, ♯4, 5, 6, 7] — Tensión brillante pero trágica.</li>
-              <li><strong>5. Mixolidio ♭2:</strong> S-3S-S-T-T-S-T [1, ♭2, 3, 4, 5, 6,  controversy ♭7] — Dominante exótico de origen oriental.</li>
-              <li><strong>6. Lidio ♯5 ♯2:</strong> 3S-S-T-T-S-T-S [1, ♯2, 3, ♯4, ♯5, 6, 7] — Totalmente galáctico e inestable.</li>
-              <li><strong>7. Locrio ♭♭7:</strong> S-T-T-S-T-S-3S [1, ♭2, ♭3, 4, ♭5, ♭6, ♭♭7] — Base para arpegios disminuidos extremos.</li>
-            </ul>
-          </div>
-        </article>
-
-        <!-- 5. ESCALAS PENTATÓNICAS Y BLUES (SECCIÓN DEDICADA COMPLETA Y ACOPLAMIENTOS) -->
-        <article class="wiki-card">
-          <div class="wiki-card-title-row">
-            <h3>⚡ 5. Pentatónicas y Escala de Blues: Acoples y Compatibilidad Modal</h3>
-            <span class="wiki-meta"><strong>Pent. Menor:</strong> 3S-T-T-3S-T | <strong>Pent. Mayor:</strong> T-T-3S-T-3S</span>
-          </div>
-
-          <div class="wiki-section-detail">
-            <h4>💡 ¿Cuándo y Cómo usarlas? La Regla del Acople Modal</h4>
-            <p>Las escalas pentatónicas (5 notas) son las más antiguas y populares de la historia porque eliminan los intervalos de semitono (evitan choques o disonancias duras). Sin embargo, el verdadero secreto de los grandes guitarristas radica en **saber sobre qué escalas y modos cuadra cada pentatónica**:</p>
-
-            <div class="pentatonic-fits-grid">
-              <div class="fit-box">
-                <h5>🔥 Acoples de la Pentatónica Menor (1 - ♭3 - 4 - 5 - ♭7)</h5>
-                <ul>
-                  <li><strong>Sobre Modo Eólico (Menor Natural):</strong> Acople exacto 100%. La pentatónica menor es el esqueleto del modo eólico.</li>
-                  <li><strong>Sobre Modo Dórico:</strong> Cuadra a la perfección. Aporta el sonido característico del Blues-Rock y Funk (ej. Jimi Hendrix, David Gilmour).</li>
-                  <li><strong>Sobre Modo Frigio:</strong> Encaja limpiamente sobre la estructura menor subyacente.</li>
-                  <li><strong>Sobre la Escala de Blues:</strong> Al añadir la <em>Blue Note (♭5)</em>, crea la máxima tensión expresiva del Rock y Blues.</li>
-                </ul>
-              </div>
-
-              <div class="fit-box">
-                <h5>☀️ Acoples de la Pentatónica Mayor (1 - 2 - 3 - 5 - 6)</h5>
-                <ul>
-                  <li><strong>Sobre Modo Jónico (Escala Mayor):</strong> Acople perfecto, dulce y melódico para Country, Pop y Baladas.</li>
-                  <li><strong>Sobre Modo Mixolidio:</strong> Funciona increíblemente bien. Es la base del solista de Classic Rock y Southern Rock (ej. B.B. King mezclar Pentatónica Mayor y Menor sobre acordes dominantes).</li>
-                  <li><strong>Sobre Modo Lidio:</strong> Encaja sin chocar con la cuarta aumentada (♯4).</li>
-                </ul>
-              </div>
-            </div>
-          </div>
-
-          <div class="wiki-chords-box">
-            <div class="wiki-chords-header">
-              <span>🎼 Fórmulas de Pasos y Contenido de Notas</span>
-              <span class="scroll-hint">↔ Desliza</span>
-            </div>
-            <div class="wiki-chords-scroll">
-              <div class="chord-slab"><span class="c-deg">Pentatónica Menor</span><span class="c-triad">1 - ♭3 - 4 - 5 - ♭7</span><span class="c-formula">Pasos: 3 - 2 - 2 - 3 - 2</span></div>
-              <div class="chord-slab"><span class="c-deg">Escala de Blues</span><span class="c-triad">1 - ♭3 - 4 - ♭5 - 5 - ♭7</span><span class="c-formula">Pasos: 3 - 2 - 1 - 1 - 3 - 2</span></div>
-              <div class="chord-slab"><span class="c-deg">Pentatónica Mayor</span><span class="c-triad">1 - 2 - 3 - 5 - 6</span><span class="c-formula">Pasos: 2 - 2 - 3 - 2 - 3</span></div>
-              <div class="chord-slab"><span class="c-deg">Pentatónica Dórica</span><span class="c-triad">1 - 2 - ♭3 - 5 - 6</span><span class="c-formula">Pasos: 2 - 1 - 4 - 2 - 3</span></div>
-            </div>
-          </div>
-        </article>
-
-        <!-- 6. ESCALAS SIMÉTRICAS Y SINTÉTICAS (CONTEXTO Y GUÍA DE REFERENCIA) -->
-        <article class="wiki-card">
-          <div class="wiki-card-title-row">
-            <h3>🌀 6. Escalas Simétricas y Sintéticas Avanzadas</h3>
-            <span class="wiki-meta"><strong>Tonos Completos, Octatónicas, Arpegio °7 y Doble Armónica</strong></span>
-          </div>
-
-          <div class="wiki-section-detail">
-            <h4>💡 Guía de Referencia y Contexto para Compositores</h4>
-            <p>Estas escalas rompen el patrón asimétrico habitual de 7 notas por octava. Son herramientas de **color puro, tensión y suspensión atmosférica** en el cine, el Jazz de vanguardia y el Metal Progresivo:</p>
-          </div>
-
-          <div class="wiki-chords-box">
-            <div class="wiki-chords-header">
-              <span>🎼 Modelos de Escalas Simétricas y Uso Tímbrico</span>
-              <span class="scroll-hint">↔ Desliza</span>
-            </div>
-            <div class="wiki-chords-scroll">
-              <div class="chord-slabwide">
-                <span class="c-deg">Tonos Completos (Whole Tone)</span>
-                <span class="c-triad">Fórmula: 2-2-2-2-2-2 (6 notas)</span>
-                <span class="c-formula">Sensación de ingravidez, magia o un sueño. Usada por Debussy y Thelonious Monk sobre acordes 7♯5.</span>
-              </div>
-              <div class="chord-slabwide">
-                <span class="c-deg">Fórmula 3-3-3-3 (Arpegio Disminuido °7)</span>
-                <span class="c-triad">Fórmula: 3-3-3-3 (4 notas)</span>
-                <span class="c-formula">Divide la octava en 4 partes exactas. Columna vertebral del acorde disminuido 7ª y la tensión dramática del cine.</span>
-              </div>
-              <div class="chord-slabwide">
-                <span class="c-deg">Octatónica Disminuida (Tono-Semitono / Semitono-Tono)</span>
-                <span class="c-triad">Fórmula: 2-1-2-1-2-1-2-1 (8 notas)</span>
-                <span class="c-formula">Alterna simétricamente tonos y semitonos. Muy usada en Jazz sobre acordes dominantes y en bandas sonoras de terror.</span>
-              </div>
-              <div class="chord-slabwide">
-                <span class="c-deg">Doble Armónica (Bizantina / Flamenca Mayor)</span>
-                <span class="c-triad">Fórmula: 1-3-1-2-1-3-1 (7 notas)</span>
-                <span class="c-formula">Posee dos saltos de 3 semitonos. Sonido profundamente exótico, árabe, místico y tradicional (<em>Misirlou</em>).</span>
-              </div>
-            </div>
-          </div>
-        </article>
-
+      <div class="wiki-grid" id="wiki-grid-container">
+        <!-- Generado dinámicamente según idioma en app.js -->
       </div>
 
       <!-- Guía de Transformación Vertical en 3 Renglones -->
       <div class="transformation-block">
-        <h3>🔄 Guía de Transformación Paso a Paso entre Escalas</h3>
-        <div class="transformation-3step-grid">
-          <div class="trans-3step-card">
-            <div class="trans-line-base">Escala Diatónica Mayor (Base)</div>
-            <div class="trans-line-arrow">⬇ (Baja un semitono el 3º, 6º y 7º grado)</div>
-            <div class="trans-line-result">Escala Menor Natural (Eólica)</div>
-          </div>
-
-          <div class="trans-3step-card">
-            <div class="trans-line-base">Escala Menor Natural</div>
-            <div class="trans-line-arrow">⬇ (Eleva un semitono el 7º grado para crear la sensible)</div>
-            <div class="trans-line-result">Escala Menor Armónica</div>
-          </div>
-
-          <div class="trans-3step-card">
-            <div class="trans-line-base">Escala Menor Armónica</div>
-            <div class="trans-line-arrow">⬇ (Eleva un semitono el 6º grado para suavizar el salto)</div>
-            <div class="trans-line-result">Escala Menor Melódica (Jazz Minor)</div>
-          </div>
-
-          <div class="trans-3step-card">
-            <div class="trans-line-base">Escala Diatónica Mayor (Base)</div>
-            <div class="trans-line-arrow">⬇ (Baja un semitono únicamente el 6º grado)</div>
-            <div class="trans-line-result">Escala Armónica Mayor</div>
-          </div>
+        <h3 id="trans-title">🔄 Step-by-Step Scale Transformation Guide</h3>
+        <div class="transformation-3step-grid" id="trans-grid">
+          <!-- Renderizado dinámicamente según idioma -->
         </div>
       </div>
     </section>
 
     <!-- BANNER PUBLICITARIO ADSENSE INTERMEDIO -->
-    <div class="adsense-container adsense-mid-banner" aria-label="Publicidad">
-      <div class="adsense-placeholder-label">Anuncio Publicitario</div>
-      <!-- Google AdSense Code Unit -->
+    <div class="adsense-container adsense-mid-banner" aria-label="Publicidad / Advertisement">
+      <div class="adsense-placeholder-label" id="ui-ad-label-2">Advertisement</div>
       <ins class="adsbygoogle"
            style="display:block"
            data-ad-client="ca-pub-XXXXXXXXXXXXXXXX"
            data-ad-slot="2222222222"
            data-ad-format="auto"
            data-full-width-responsive="true"></ins>
-      <script>
-           (adsbygoogle = window.adsbygoogle || []).push({});
-      </script>
+      <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
     </div>
 
-    <!-- SECCIÓN INTERACTIVA (HERRAMIENTA Y CONFIGURACIÓN EN LA PARTE INFERIOR) -->
+    <!-- SECCIÓN INTERACTIVA (MÁSTIL Y CONFIGURACIÓN ARRIBA DE LAS DESCRIPCIONES) -->
     <section id="herramienta-interactiva" class="interactive-tool-section">
       <div class="tool-section-header">
-        <h2>🎸 Herramienta Interactiva: Visualizador de Escalas, Acordes y Mástil</h2>
-        <p>Configura la nota raíz, la familia, el modo, el número de cuerdas y la afinación para ver y escuchar las notas y los acordes en el mástil.</p>
+        <h2 id="tool-main-title">🎸 Interactive Tool: Scale, Chord & Fretboard Visualizer</h2>
+        <p id="tool-main-subtitle">Configure root note, scale family, mode, string count, and custom tuning to visualize and listen to scales and harmonized degree chords on the fretboard.</p>
       </div>
 
-      <!-- Panel de Control Principal -->
+      <!-- Panel de Control Principal (Selectores) -->
       <section class="control-panel">
         <div class="control-group">
-          <label for="select-root">Nota Raíz (Tónica):</label>
+          <label for="select-root" id="lbl-root">Root Note (Tonal Center):</label>
           <select id="select-root" class="select-input"></select>
         </div>
 
         <div class="control-group">
-          <label for="select-family">Familia de Escalas:</label>
+          <label for="select-family" id="lbl-family">Scale Family:</label>
           <select id="select-family" class="select-input"></select>
         </div>
 
         <div class="control-group">
-          <label for="select-mode">Modo / Escala Específica:</label>
+          <label for="select-mode" id="lbl-mode">Mode / Specific Scale:</label>
           <select id="select-mode" class="select-input"></select>
         </div>
 
         <div class="control-group">
-          <label for="select-strings">Nº de Cuerdas:</label>
+          <label for="select-strings" id="lbl-strings">Number of Strings:</label>
           <select id="select-strings" class="select-input">
-            <option value="6">6 Cuerdas</option>
-            <option value="7">7 Cuerdas</option>
-            <option value="8">8 Cuerdas</option>
-            <option value="9">9 Cuerdas</option>
+            <option value="6">6 Strings</option>
+            <option value="7">7 Strings</option>
+            <option value="8">8 Strings</option>
+            <option value="9">9 Strings</option>
           </select>
         </div>
 
         <div class="control-group">
-          <label for="select-display-mode">Mostrar en Trastes:</label>
+          <label for="select-display-mode" id="lbl-display">Fret Labels:</label>
           <select id="select-display-mode" class="select-input">
-            <option value="interval">Grados de Intervalo (1, ♭3, 5...)</option>
-            <option value="note">Nombres de Notas (C, D, E...)</option>
-            <option value="both">Ambos (Nota + Grado)</option>
+            <option value="interval" id="opt-disp-interval">Interval Degrees (1, ♭3, 5...)</option>
+            <option value="note" id="opt-disp-note">Note Names (C, D, E...)</option>
+            <option value="both" id="opt-disp-both">Both (Note + Degree)</option>
           </select>
         </div>
       </section>
 
-      <!-- Configuración de Afinación -->
-      <section class="tuning-panel card">
-        <div class="tuning-header">
-          <h3>⚙️ Configuración de Afinación Cuerda por Cuerda</h3>
-          <div class="tuning-presets">
-            <span>Afinación Estándar:</span>
-            <button class="btn btn-sm" id="btn-preset-std">Estándar</button>
-            <button class="btn btn-sm" id="btn-preset-dropd">Drop D / Drop A</button>
+      <!-- PANEL UNIFICADO DEL MÁSTIL DE GUITARRA Y CONFIGURACIÓN DE AFINACIÓN (ARRIBA DE LAS DESCRIPCIONES) -->
+      <section class="fretboard-unified-card card">
+        <div class="fretboard-header">
+          <h3 id="ui-fretboard-title">🎸 Guitar Fretboard (24 Frets)</h3>
+          <div class="fretboard-legend">
+            <span class="legend-item"><span class="legend-color root-color"></span> <span id="lbl-leg-root">Root (1)</span></span>
+            <span class="legend-item"><span class="legend-color scale-color"></span> <span id="lbl-leg-scale">Scale Notes</span></span>
           </div>
         </div>
-        <div id="tuning-inputs-container" class="tuning-inputs"></div>
+
+        <div class="fretboard-scroll-wrapper">
+          <div id="fretboard" class="fretboard"></div>
+        </div>
+
+        <!-- CONFIGURACIÓN DE AFINACIÓN INTEGRADAS ABAJO DEL MÁSTIL EN EL MISMO PANEL -->
+        <div class="tuning-integrated-block">
+          <div class="tuning-header">
+            <h4 id="ui-tuning-title">⚙️ String-by-String Tuning Configuration</h4>
+            <div class="tuning-presets">
+              <span id="lbl-presets">Standard Presets:</span>
+              <button class="btn btn-sm" id="btn-preset-std">Standard</button>
+              <button class="btn btn-sm" id="btn-preset-dropd">Drop D / Drop A</button>
+            </div>
+          </div>
+          <div id="tuning-inputs-container" class="tuning-inputs"></div>
+        </div>
       </section>
 
-      <!-- Información de la Escala Seleccionada -->
+      <!-- DESCRIPCIÓN Y DETALLES DE LA ESCALA (SE MUEVE DEBAJO DEL MÁSTIL Y CONFIGURACIÓN) -->
       <section class="scale-info-panel card">
         <div class="scale-title-row">
           <div>
-            <h2 id="scale-display-title">C - Jónico (Escala Mayor)</h2>
-            <span id="scale-family-badge" class="badge">Familia Diatónica</span>
+            <h2 id="scale-display-title">C - Ionian (Major Scale)</h2>
+            <span id="scale-family-badge" class="badge">Diatonic Family</span>
           </div>
           <div class="playback-controls">
-            <button id="btn-play-scale" class="btn btn-primary">▶ Reproducir Escala</button>
+            <button id="btn-play-scale" class="btn btn-primary">▶ Play Scale Audio</button>
             <label class="speed-label">
-              Velocidad:
+              <span id="lbl-speed-title">Speed:</span>
               <input type="range" id="input-speed" min="100" max="600" value="280" step="20">
             </label>
           </div>
@@ -449,7 +201,7 @@
         <div class="scale-details-grid">
           <!-- PANEL DE FÓRMULA DIRECTA EN TEXTO (2 RENGLONES SIN ESPACIOS EN GUIONES) -->
           <div class="detail-card">
-            <span class="detail-label">Fórmula de Pasos e Intervalos:</span>
+            <span class="detail-label" id="lbl-step-formula-title">Step & Interval Formula:</span>
             <div class="formula-text-container">
               <div id="scale-step-formula-text" class="formula-line-text">T-T-S-T-T-T-S</div>
               <div id="scale-step-formula-numbers" class="formula-line-numbers">2-2-1-2-2-2-1</div>
@@ -457,47 +209,32 @@
           </div>
 
           <div class="detail-card">
-            <span class="detail-label">Fórmula por Grados:</span>
+            <span class="detail-label" id="lbl-degree-formula-title">Scale Degree Formula:</span>
             <div id="scale-degree-formula" class="formula-chips"></div>
           </div>
 
           <div class="detail-card">
-            <span class="detail-label">Notas en esta Tonalidad:</span>
+            <span class="detail-label" id="lbl-notes-list-title">Notes in this Key:</span>
             <div id="scale-notes-list" class="notes-chips"></div>
           </div>
 
           <!-- PANEL DE ESCALA HARMONIZADA (ACORDES) DE LA NOTA SELECCIONADA -->
           <div class="detail-card detail-full">
-            <span class="detail-label">🎼 Escala Harmonizada (Acordes Tríadas, Tétradas e Intervalos):</span>
+            <span class="detail-label" id="lbl-chords-title">🎼 Harmonized Scale Chords (Triads, Tetrads & Semitone Formulas):</span>
             <div id="scale-chords-container" class="chords-grid-container"></div>
           </div>
 
           <div class="detail-card detail-full">
-            <span class="detail-label">Sonoridad y Carácter Tímbrico:</span>
+            <span class="detail-label" id="lbl-desc-title">Sonorial Timbre & Character:</span>
             <p id="scale-description" class="description-text"></p>
           </div>
         </div>
       </section>
 
-      <!-- Mástil de Guitarra Interactivo -->
-      <section class="fretboard-section card">
-        <div class="fretboard-header">
-          <h3>🎸 Mástil de Guitarra (24 Trastes)</h3>
-          <div class="fretboard-legend">
-            <span class="legend-item"><span class="legend-color root-color"></span> Tónica (1)</span>
-            <span class="legend-item"><span class="legend-color scale-color"></span> Notas de la Escala</span>
-          </div>
-        </div>
-
-        <div class="fretboard-scroll-wrapper">
-          <div id="fretboard" class="fretboard"></div>
-        </div>
-      </section>
-
-      <!-- Matriz de Relatividad Modal -->
+      <!-- MATRIZ DE RELATIVIDAD MODAL -->
       <section class="matrix-section card">
-        <h3>🗺️ Matriz de Relatividad Modal de la Familia Seleccionada</h3>
-        <p class="matrix-subtitle">Todas las notas en una misma fila horizontal comparten exactamente las mismas notas reales.</p>
+        <h3 id="ui-matrix-title">🗺️ Modal Relativity Matrix of Selected Scale Family</h3>
+        <p class="matrix-subtitle" id="ui-matrix-subtitle">All notes across a horizontal row share the exact same pitch set, changing only the root note.</p>
         <div class="table-scroll-wrapper">
           <table id="relativity-table" class="relativity-table">
             <thead>
@@ -511,27 +248,24 @@
   </main>
 
   <!-- BANNER PUBLICITARIO ADSENSE INFERIOR -->
-  <div class="adsense-container adsense-bottom-banner" aria-label="Publicidad">
-    <div class="adsense-placeholder-label">Anuncio Publicitario</div>
-    <!-- Google AdSense Code Unit -->
+  <div class="adsense-container adsense-bottom-banner" aria-label="Publicidad / Advertisement">
+    <div class="adsense-placeholder-label" id="ui-ad-label-3">Advertisement</div>
     <ins class="adsbygoogle"
          style="display:block"
          data-ad-client="ca-pub-XXXXXXXXXXXXXXXX"
          data-ad-slot="3333333333"
          data-ad-format="auto"
          data-full-width-responsive="true"></ins>
-    <script>
-         (adsbygoogle = window.adsbygoogle || []).push({});
-    </script>
+    <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
   </div>
 
   <footer class="app-footer">
-    <p>Wiki & Explorador de Escalas, Modos y Mástil — Manual completo de teoría musical de guitarra.</p>
+    <p id="ui-footer-copy">Guitar Scale & Mode Explorer — Educational tool created by an independent musician & software engineer.</p>
     <p class="footer-links">
-      <a href="index.html">Inicio</a> |
-      <a href="politica-de-privacidad.html">Política de Privacidad</a> |
-      <a href="terminos-y-condiciones.html">Términos y Condiciones</a> |
-      <a href="contacto.html">Contacto y Soporte</a>
+      <a href="index.html" id="fl-home">Home</a> |
+      <a href="politica-de-privacidad.html" id="fl-privacy">Privacy Policy</a> |
+      <a href="terminos-y-condiciones.html" id="fl-terms">Terms of Service</a> |
+      <a href="contacto.html" id="fl-contact">Contact & Support</a>
     </p>
   </footer>
 
