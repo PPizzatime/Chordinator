@@ -64,7 +64,7 @@
         <span class="badge" id="wiki-badge-label">Master Music Theory Guide</span>
       </div>
 
-      <!-- SECCIÓN EXPLICATIVA DE FÓRMULAS E INTERVALOS (PARA ADSENSE Y CLARIDAD PEDAGÓGICA) -->
+      <!-- SECCIÓN EXPLICATIVA DE FÓRMULAS E INTERVALOS -->
       <article class="wiki-card theory-guide-box">
         <h3 id="th-guide-title">📖 Understanding Scale Formulas, Step Codes & Degree Intervals</h3>
         <p id="th-guide-intro" class="wiki-section-detail">In music theory, every scale is built upon an exact mathematical sequence of distances (intervals) between notes within the 12-tone chromatic system. This guide uses three standard notations so you can read and apply scale formulas effortlessly:</p>
@@ -87,14 +87,6 @@
 
       <div class="wiki-grid" id="wiki-grid-container">
         <!-- Generado dinámicamente según idioma en app.js -->
-      </div>
-
-      <!-- Guía de Transformación Vertical en 3 Renglones -->
-      <div class="transformation-block">
-        <h3 id="trans-title">🔄 Step-by-Step Scale Transformation Guide</h3>
-        <div class="transformation-3step-grid" id="trans-grid">
-          <!-- Renderizado dinámicamente según idioma -->
-        </div>
       </div>
     </section>
 
@@ -154,10 +146,13 @@
         </div>
       </section>
 
-      <!-- PANEL UNIFICADO DEL MÁSTIL DE GUITARRA Y CONFIGURACIÓN DE AFINACIÓN (ARRIBA DE LAS DESCRIPCIONES) -->
+      <!-- PANEL UNIFICADO DEL MÁSTIL DE GUITARRA Y CONFIGURACIÓN DE AFINACIÓN CON BOTÓN DE PLAY DUPLICADO -->
       <section class="fretboard-unified-card card">
         <div class="fretboard-header">
-          <h3 id="ui-fretboard-title">🎸 Guitar Fretboard (24 Frets)</h3>
+          <div style="display:flex; align-items:center; gap:15px; flex-wrap:wrap;">
+            <h3 id="ui-fretboard-title">🎸 Guitar Fretboard (24 Frets)</h3>
+            <button id="btn-play-scale-top" class="btn btn-sm btn-primary">▶ Play Scale Audio</button>
+          </div>
           <div class="fretboard-legend">
             <span class="legend-item"><span class="legend-color root-color"></span> <span id="lbl-leg-root">Root (1)</span></span>
             <span class="legend-item"><span class="legend-color scale-color"></span> <span id="lbl-leg-scale">Scale Notes</span></span>
@@ -199,7 +194,7 @@
         </div>
 
         <div class="scale-details-grid">
-          <!-- PANEL DE FÓRMULA DIRECTA EN TEXTO (2 RENGLONES SIN ESPACIOS EN GUIONES) -->
+          <!-- PANEL DE FÓRMULA DIRECTA EN TEXTO -->
           <div class="detail-card">
             <span class="detail-label" id="lbl-step-formula-title">Step & Interval Formula:</span>
             <div class="formula-text-container">
@@ -231,7 +226,7 @@
         </div>
       </section>
 
-      <!-- MATRIZ DE RELATIVIDAD MODAL -->
+      <!-- MATRIZ DE RELATIVIDAD MODAL TRANSPUESTA -->
       <section class="matrix-section card">
         <h3 id="ui-matrix-title">🗺️ Modal Relativity Matrix of Selected Scale Family</h3>
         <p class="matrix-subtitle" id="ui-matrix-subtitle">All notes across a horizontal row share the exact same pitch set, changing only the root note.</p>
