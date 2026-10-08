@@ -150,7 +150,7 @@ const state = {
   currentModeIndex: 0,
   stringCount: 6,
   displayMode: 'interval',
-  playbackSpeed: 280,
+  playbackSpeed: 280, // Se invierte para que a la derecha sea MÁS RÁPIDO (menor delay ms)
   currentTuning: JSON.parse(JSON.stringify(DEFAULT_TUNINGS[6]))
 };
 
@@ -263,8 +263,11 @@ function initApp() {
     renderFretboard();
   });
 
+  // A LA DERECHA MÁS RÁPIDO: Invertimos el cálculo del delay (ms)
+  // Slider min=100 (lento) max=600 (rápido) -> delayMs = 700 - sliderVal
   inputSpeed.addEventListener('input', (e) => {
-    state.playbackSpeed = parseInt(e.target.value, 10);
+    const sliderVal = parseInt(e.target.value, 10);
+    state.playbackSpeed = 700 - sliderVal;
   });
 
   btnPresetStd.addEventListener('click', () => {
@@ -343,7 +346,7 @@ function renderTuningControls() {
   });
 }
 
-// --- CÁLCULO DE LA ESCALA SELECCIONADA Y HARMONIZACIÓN (ACORDES TRÍADICOS Y TÉTRADAS) ---
+// --- CÁLCULO DE LA ESCALA SELECCIONADA Y HARMONIZACIÓN (ACORDES E INTERVALOS) ---
 
 function getSelectedScaleData() {
   const family = SCALE_FAMILIES[state.currentFamilyKey];
@@ -378,9 +381,18 @@ function getSelectedScaleData() {
     const semitonesTo5 = (idx5 - idx1 + 12) % 12;
     const semitonesTo7 = (idx7 - idx1 + 12) % 12;
 
+    // Distancias consecutivas en semitonos para la tríada:
+    // a = semitonos de Raíz a 3ª
+    // b = semitonos de 3ª a 5ª
+    const semitonesA = semitonesTo3;
+    const semitonesB = (semitonesTo5 - semitonesTo3 + 12) % 12;
+
     // Determinar nombre y tipo del acorde tríada
     let typeName = '';
     let symbol = '';
+    let deg3Text = semitonesTo3 === 4 ? '3' : (semitonesTo3 === 3 ? '♭3' : (semitonesTo3 === 2 ? '2' : '4'));
+    let deg5Text = semitonesTo5 === 7 ? '5' : (semitonesTo5 === 6 ? '♭5' : (semitonesTo5 === 8 ? '♯5' : '5'));
+    let deg7Text = semitonesTo7 === 11 ? '7' : (semitonesTo7 === 10 ? '♭7' : (semitonesTo7 === 9 ? '♭♭7' : '7'));
 
     if (semitonesTo3 === 4 && semitonesTo5 === 7) {
       typeName = 'Mayor';
@@ -424,6 +436,9 @@ function getSelectedScaleData() {
       tetradName: `${rootNote}${symbol}${seventhSuffix}`,
       triadNotes: `${note1} - ${note3} - ${note5}`,
       tetradNotes: `${note1} - ${note3} - ${note5} - ${note7}`,
+      triadIntervals: `1 - ${deg3Text} - ${deg5Text}`,
+      tetradIntervals: `1 - ${deg3Text} - ${deg5Text} - ${deg7Text}`,
+      semitoneFormula: `Raíz + ${semitonesA} + ${semitonesB}`,
       typeName
     };
   });
@@ -469,13 +484,15 @@ function updateUI() {
     return `<span class="chip ${isRoot ? 'chip-root' : ''}">${note}</span>`;
   }).join('');
 
-  // RENDER DE ESCALA HARMONIZADA EN TARJETAS
+  // RENDER DE ESCALA HARMONIZADA EN TARJETAS CON FÓRMULA DE SEMITONOS
   scaleChordsContainer.innerHTML = scaleData.harmonizedChords.map(ch => {
     return `
       <div class="chord-degree-card">
         <div class="chord-degree-num">${ch.degreeLabel}</div>
         <div class="chord-name-main">${ch.triadName}</div>
         <div class="chord-notes-span">${ch.triadNotes}</div>
+        <div class="chord-intervals-span">(${ch.triadIntervals})</div>
+        <div class="chord-semitones-span">${ch.semitoneFormula}</div>
       </div>
     `;
   }).join('');
@@ -586,7 +603,7 @@ function renderFretboard() {
   });
 }
 
-// --- REPRODUCCIÓN AUDIO DE LA ESCALA ---
+// --- REPRODUCCIÓN AUDIO DE LA ESCALA (CORREGIDO ERROR DE OCTAVA) ---
 
 function playScaleAudio() {
   const scaleData = getSelectedScaleData();
@@ -597,7 +614,8 @@ function playScaleAudio() {
   btnPlayScale.textContent = '🔊 Reproduciendo...';
 
   const rootIndex = NOTES.indexOf(normalizeNote(state.currentRoot));
-  let currentOctave = 3;
+  const startOctave = 3;
+  let currentOctave = startOctave;
 
   const notesSequence = [];
   let prevNoteIndex = rootIndex;
@@ -611,7 +629,9 @@ function playScaleAudio() {
     notesSequence.push({ note, freq: getNoteFrequency(note, currentOctave) });
   });
 
-  notesSequence.push({ note: scaleData.scaleNotes[0], freq: getNoteFrequency(scaleData.scaleNotes[0], currentOctave + 1) });
+  // La última nota octavada de la raíz debe sonar a exactamente startOctave + 1
+  const finalRootNote = scaleData.scaleNotes[0];
+  notesSequence.push({ note: finalRootNote, freq: getNoteFrequency(finalRootNote, startOctave + 1) });
 
   const intervalMs = state.playbackSpeed;
 

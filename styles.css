@@ -87,7 +87,7 @@ body {
 /* ADSENSE CONTAINERS */
 .adsense-container {
   width: 100%;
-  max-width: 1400px;
+  max-width: 1500px;
   margin: 15px auto;
   padding: 10px 20px;
   background-color: rgba(31, 35, 48, 0.4);
@@ -112,7 +112,7 @@ body {
 
 .app-container {
   width: 100%;
-  max-width: 1400px;
+  max-width: 1500px;
   margin: 15px auto;
   padding: 0 20px;
   display: flex;
@@ -125,11 +125,11 @@ body {
   background-color: var(--panel-bg);
   border: 1px solid var(--border-color);
   border-radius: 12px;
-  padding: 24px;
+  padding: 26px;
   box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
 }
 
-/* FULL-WIDTH ENCICLOPEDIA (UPPER PORTION OF THE PAGE) */
+/* FULL-WIDTH ENCICLOPEDIA & WIDE SLABS */
 .wiki-section {
   display: flex;
   flex-direction: column;
@@ -148,76 +148,220 @@ body {
 }
 
 .wiki-header h2 {
-  font-size: 1.6rem;
+  font-size: 1.7rem;
   color: #fff;
 }
 
 .wiki-header-desc {
   color: var(--text-muted);
-  font-size: 0.95rem;
+  font-size: 0.98rem;
   margin-top: 4px;
 }
 
 .wiki-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(310px, 1fr));
-  gap: 22px;
+  display: flex;
+  flex-direction: column;
+  gap: 28px;
   width: 100%;
 }
 
 .wiki-card {
   background-color: var(--card-bg);
   border: 1px solid var(--border-color);
-  border-radius: 10px;
-  padding: 20px;
+  border-radius: 12px;
+  padding: 24px;
   display: flex;
   flex-direction: column;
+  gap: 18px;
+  width: 100%;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.25);
+}
+
+.wiki-card-title-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
   gap: 12px;
-  font-size: 0.92rem;
+  border-bottom: 2px solid var(--border-color);
+  padding-bottom: 12px;
 }
 
 .wiki-card h3 {
-  font-size: 1.2rem;
+  font-size: 1.35rem;
   color: #a5b4fc;
-  border-bottom: 1px solid var(--border-color);
-  padding-bottom: 8px;
 }
 
 .wiki-meta {
   font-family: var(--font-mono);
-  font-size: 0.85rem;
+  font-size: 0.88rem;
   color: #fbbf24;
-  background-color: rgba(245, 158, 11, 0.1);
-  padding: 6px 12px;
-  border-radius: 6px;
-  border: 1px solid rgba(245, 158, 11, 0.2);
+  background-color: rgba(245, 158, 11, 0.12);
+  padding: 8px 14px;
+  border-radius: 8px;
+  border: 1px solid rgba(245, 158, 11, 0.25);
 }
 
-.wiki-chords-box {
-  background-color: rgba(99, 102, 241, 0.12);
-  border: 1px solid rgba(99, 102, 241, 0.3);
-  padding: 10px 14px;
-  border-radius: 6px;
-  font-size: 0.84rem;
-  font-family: var(--font-mono);
-  color: #c7d2fe;
+.wiki-section-detail {
   display: flex;
   flex-direction: column;
-  gap: 5px;
+  gap: 10px;
+  line-height: 1.65;
+  color: #d1d5db;
+  font-size: 0.96rem;
 }
 
-.wiki-modes-block {
+.wiki-section-detail h4 {
+  font-size: 1.05rem;
+  color: #60a5fa;
+}
+
+/* PENTATONIC FITS GRID */
+.pentatonic-fits-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+  gap: 16px;
+  margin-top: 8px;
+}
+
+.fit-box {
   background-color: var(--panel-bg);
-  padding: 14px;
-  border-radius: 8px;
   border: 1px solid var(--border-color);
+  border-radius: 8px;
+  padding: 14px;
   display: flex;
   flex-direction: column;
   gap: 8px;
 }
 
+.fit-box h5 {
+  color: #f59e0b;
+  font-size: 0.95rem;
+}
+
+.fit-box ul {
+  padding-left: 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  font-size: 0.9rem;
+}
+
+/* WIDE SCROLLABLE CHORD SLABS IN WIKI CARDS */
+.wiki-chords-box {
+  background-color: rgba(15, 23, 42, 0.6);
+  border: 1px solid rgba(99, 102, 241, 0.35);
+  border-radius: 10px;
+  padding: 16px;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  width: 100%;
+}
+
+.wiki-chords-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 0.92rem;
+  font-weight: 700;
+  color: #c7d2fe;
+}
+
+.scroll-hint {
+  font-size: 0.78rem;
+  color: #f59e0b;
+  background-color: rgba(245, 158, 11, 0.15);
+  padding: 3px 8px;
+  border-radius: 4px;
+}
+
+.wiki-chords-scroll {
+  display: flex;
+  gap: 14px;
+  overflow-x: auto;
+  padding-bottom: 10px;
+  scrollbar-width: thin;
+  scrollbar-color: var(--accent-color) var(--card-bg);
+}
+
+.wiki-chords-scroll::-webkit-scrollbar {
+  height: 8px;
+}
+
+.wiki-chords-scroll::-webkit-scrollbar-thumb {
+  background-color: var(--accent-color);
+  border-radius: 4px;
+}
+
+.chord-slab {
+  flex: 0 0 auto;
+  min-width: 170px;
+  background-color: var(--card-bg);
+  border: 1px solid var(--border-color);
+  border-radius: 8px;
+  padding: 12px 14px;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  text-align: center;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.3);
+}
+
+.chord-slabwide {
+  flex: 0 0 auto;
+  min-width: 280px;
+  max-width: 320px;
+  background-color: var(--card-bg);
+  border: 1px solid var(--border-color);
+  border-radius: 8px;
+  padding: 14px;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  text-align: left;
+}
+
+.c-deg {
+  font-size: 0.75rem;
+  font-weight: 700;
+  color: #9ca3af;
+  text-transform: uppercase;
+}
+
+.c-triad {
+  font-family: var(--font-mono);
+  font-size: 1.1rem;
+  font-weight: 700;
+  color: #f3f4f6;
+}
+
+.c-tetrad {
+  font-family: var(--font-mono);
+  font-size: 0.9rem;
+  font-weight: 600;
+  color: #818cf8;
+}
+
+.c-formula {
+  font-family: var(--font-mono);
+  font-size: 0.78rem;
+  color: #34d399;
+}
+
+/* WIKI MODES LIST BLOCK */
+.wiki-modes-block {
+  background-color: var(--panel-bg);
+  padding: 18px;
+  border-radius: 10px;
+  border: 1px solid var(--border-color);
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
 .wiki-modes-title {
-  font-size: 0.85rem;
+  font-size: 0.9rem;
   font-weight: 700;
   color: #a5b4fc;
   text-transform: uppercase;
@@ -228,16 +372,16 @@ body {
   list-style: none;
   display: flex;
   flex-direction: column;
-  gap: 6px;
+  gap: 8px;
   padding: 0;
 }
 
 .wiki-mode-rows li {
-  font-size: 0.88rem;
+  font-size: 0.92rem;
   color: #d1d5db;
-  padding: 5px 0;
+  padding: 6px 0;
   border-bottom: 1px dashed rgba(255, 255, 255, 0.08);
-  line-height: 1.45;
+  line-height: 1.5;
 }
 
 .wiki-mode-rows li:last-child {
@@ -251,8 +395,8 @@ body {
 /* HARMONIZED CHORDS GRID (INTERACTIVE TOOL) */
 .chords-grid-container {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(130px, 1fr));
-  gap: 10px;
+  grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+  gap: 12px;
   width: 100%;
 }
 
@@ -260,7 +404,7 @@ body {
   background-color: var(--panel-bg);
   border: 1px solid var(--border-color);
   border-radius: 8px;
-  padding: 10px;
+  padding: 12px;
   display: flex;
   flex-direction: column;
   gap: 4px;
@@ -276,15 +420,32 @@ body {
 
 .chord-name-main {
   font-family: var(--font-mono);
-  font-size: 1.1rem;
+  font-size: 1.15rem;
   font-weight: 700;
   color: #f3f4f6;
 }
 
 .chord-notes-span {
   font-family: var(--font-mono);
-  font-size: 0.75rem;
+  font-size: 0.78rem;
   color: #93c5fd;
+}
+
+.chord-intervals-span {
+  font-family: var(--font-mono);
+  font-size: 0.75rem;
+  color: #34d399;
+}
+
+.chord-semitones-span {
+  font-family: var(--font-mono);
+  font-size: 0.75rem;
+  font-weight: 600;
+  color: #fbbf24;
+  background-color: rgba(245, 158, 11, 0.12);
+  padding: 2px 6px;
+  border-radius: 4px;
+  margin-top: 2px;
 }
 
 /* TRANSFORMATION 3-STEP VERTICAL */
@@ -298,7 +459,7 @@ body {
 }
 
 .transformation-block h3 {
-  font-size: 1.25rem;
+  font-size: 1.3rem;
   color: #fff;
 }
 
@@ -903,4 +1064,23 @@ body {
 
 .footer-links a:hover {
   color: #a5b4fc;
+}
+
+/* MOBILE ADAPTATION & RESPONSIVENESS */
+@media (max-width: 768px) {
+  .app-header {
+    padding: 15px 20px;
+  }
+  .card {
+    padding: 16px;
+  }
+  .wiki-card {
+    padding: 16px;
+  }
+  .chord-slab {
+    min-width: 140px;
+  }
+  .chord-slabwide {
+    min-width: 240px;
+  }
 }

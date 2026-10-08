@@ -4,7 +4,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Wiki & Explorador de Escalas, Modos y Mástil de Guitarra (6-9 Cuerdas)</title>
-  <meta name="description" content="Enciclopedia completa de teoría musical, familias de escalas, modos armónicos y melódicos, acordes harmonizados y herramienta interactiva de mástil para guitarra de 6, 7, 8 y 9 cuerdas.">
+  <meta name="description" content="Enciclopedia profesional de teoría musical, familias de escalas, modos armónicos y melódicos, acoples pentatónicos, acordes harmonizados y herramienta interactiva de mástil para guitarra de 6, 7, 8 y 9 cuerdas.">
   <link rel="stylesheet" href="styles.css">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -48,112 +48,283 @@
 
   <main class="app-container">
 
-    <!-- SECCIÓN ENCICLOPEDIA COMPLETA (OCUPA TODA LA PARTE SUPERIOR DE LA PÁGINA DE BORDE A BORDE) -->
+    <!-- SECCIÓN ENCICLOPEDIA COMPLETA (OCUPA TODA LA PARTE SUPERIOR DE LA PÁGINA) -->
     <section id="enciclopedia" class="wiki-section card">
       <div class="wiki-header">
         <div>
-          <h2>📚 Enciclopedia de Familias de Escalas, Modos, Acordes y Uso Práctico</h2>
-          <p class="wiki-header-desc">Manual completo de teoría musical de familias de escalas raíz, paso a paso de trasformación y relaciones modales.</p>
+          <h2>📚 Enciclopedia Definitiva de Escalas, Modos y Armonización</h2>
+          <p class="wiki-header-desc">Manual de consulta profesional con análisis detallado de uso práctico, acoples modales, acoples pentatónicos y harmonización grado por grado.</p>
         </div>
-        <span class="badge">Saber Musical Directo</span>
+        <span class="badge">Guía Maestra para Músicos</span>
       </div>
 
       <div class="wiki-grid">
-        <article class="wiki-card">
-          <h3>🏛️ 1. Familia Diatónica (Escala Mayor)</h3>
-          <p class="wiki-meta"><strong>Fórmula Tonos:</strong> T-T-S-T-T-T-S | <strong>Números:</strong> 2-2-1-2-2-2-1</p>
-          <p><strong>¿Cuándo/Cómo usarla?</strong> Piedra angular de la música tonal. Usada para crear melodías claras, consonantes y progresiones resolutivas.</p>
 
-          <div class="wiki-chords-box">
-            <strong>🎼 Acordes Harmonizados (Grados):</strong>
-            <div><strong>Tríadas:</strong> I (Maj) - ii (m) - iii (m) - IV (Maj) - V (Maj) - vi (m) - vii° (dim)</div>
-            <div><strong>Tétradas (7ª):</strong> Imaj7 - ii7 - iii7 - IVmaj7 - V7 - vi7 - m7(♭5)</div>
+        <!-- 1. FAMILIA DIATÓNICA -->
+        <article class="wiki-card">
+          <div class="wiki-card-title-row">
+            <h3>🏛️ 1. La Familia Diatónica (Escala Mayor y sus 7 Modos)</h3>
+            <span class="wiki-meta"><strong>Fórmula:</strong> T-T-S-T-T-T-S | <strong>Pasos:</strong> 2-2-1-2-2-2-1</span>
           </div>
 
-          <p><strong>Artistas / Géneros:</strong> Bach, Mozart, Beatles, Michael Jackson, John Mayer. Pop, Rock, Clásico, Funk.</p>
+          <div class="wiki-section-detail">
+            <h4>💡 ¿Cuándo y Cómo usarla en la práctica musical?</h4>
+            <p>Es el fundamento absoluto del sistema tonal occidental. Se utiliza para componer la inmensa mayoría de la música comercial, clásica, pop, rock, country y baladas. La escala mayor organiza el centro tonal alrededor del acorde de tónica (I). Al ser asimétrica y contener exactamente dos semitonos separados estratégicamente (3º-4º y 7º-8º), genera tensiones y resoluciones perfectas gracias a la nota sensible (7º grado elevado a solo medio tono de la tónica).</p>
+            <p><strong>Estrategia de Improvisación e Intercambio Modal:</strong> Puedes navegar a través de sus 7 modos según la progresión del tema. Si estás sobre un acorde Dominante V7 (ej. G7), aplica el modo Mixolidio de esa tónica; sobre un acorde m7 (ej. Dm7), aplica el modo Dórico para darle un color más moderno y brillante que el menor natural.</p>
+          </div>
+
+          <div class="wiki-chords-box">
+            <div class="wiki-chords-header">
+              <span>🎼 Acordes Harmonizados Grado por Grado (Desliza horizontalmente ➔)</span>
+              <span class="scroll-hint">↔ Desliza</span>
+            </div>
+            <div class="wiki-chords-scroll">
+              <div class="chord-slab"><span class="c-deg">Grado I</span><span class="c-triad">I (Mayor)</span><span class="c-tetrad">Imaj7</span><span class="c-formula">1 - 3 - 5 - 7</span></div>
+              <div class="chord-slab"><span class="c-deg">Grado ii</span><span class="c-triad">ii (Menor)</span><span class="c-tetrad">ii7</span><span class="c-formula">1 - ♭3 - 5 - ♭7</span></div>
+              <div class="chord-slab"><span class="c-deg">Grado iii</span><span class="c-triad">iii (Menor)</span><span class="c-tetrad">iii7</span><span class="c-formula">1 - ♭3 - 5 - ♭7</span></div>
+              <div class="chord-slab"><span class="c-deg">Grado IV</span><span class="c-triad">IV (Mayor)</span><span class="c-tetrad">IVmaj7</span><span class="c-formula">1 - 3 - 5 - 7</span></div>
+              <div class="chord-slab"><span class="c-deg">Grado V</span><span class="c-triad">V (Mayor)</span><span class="c-tetrad">V7 (Dominante)</span><span class="c-formula">1 - 3 - 5 - ♭7</span></div>
+              <div class="chord-slab"><span class="c-deg">Grado vi</span><span class="c-triad">vi (Menor Relativo)</span><span class="c-tetrad">vi7</span><span class="c-formula">1 - ♭3 - 5 - ♭7</span></div>
+              <div class="chord-slab"><span class="c-deg">Grado vii°</span><span class="c-triad">vii° (Disminuido)</span><span class="c-tetrad">m7(♭5)</span><span class="c-formula">1 - ♭3 - ♭5 - ♭7</span></div>
+            </div>
+          </div>
 
           <div class="wiki-modes-block">
-            <span class="wiki-modes-title">Modos y Características:</span>
+            <span class="wiki-modes-title">Los 7 Modos Diatónicos y sus Colores Tímbricos:</span>
             <ul class="wiki-mode-rows">
-              <li><strong>Jónico (Mayor):</strong> Alegre, claro, resolutivo.</li>
-              <li><strong>Dórico:</strong> Menor elegante, brillante por 6ª mayor (<em>Billie Jean</em>).</li>
-              <li><strong>Frigio:</strong> Oscuro, tenso, místico, flamenco (<em>Metallica</em>).</li>
-              <li><strong>Lidio:</strong> Mágico, espacial, de ensueño por ♯4 (<em>Disney</em>).</li>
-              <li><strong>Mixolidio:</strong> Festivo, blusero, rockero (<em>AC/DC</em>).</li>
-              <li><strong>Eólico:</strong> Triste, dramático, emotivo (Menor Natural / Baladas).</li>
-              <li><strong>Locrio:</strong> Extremadamente inestable, disonante, sin 5ª justa.</li>
+              <li><strong>Jónico (Mayor):</strong> T-T-S-T-T-T-S [1, 2, 3, 4, 5, 6, 7] — Alegre, claro, estable y resuelto. Base del pop y música clásica.</li>
+              <li><strong>Dórico:</strong> T-S-T-T-T-S-T [1, 2, ♭3, 4, 5, 6, ♭7] — Menor sofisticado y brillante por su 6ª mayor. Usado en Funk, Jazz, Rock (<em>Billie Jean</em>, Santana).</li>
+              <li><strong>Frigio:</strong> S-T-T-T-S-T-T [1, ♭2, ♭3, 4, 5, ♭6, ♭7] — Oscuro, tenso, místico. Tensión hispana/flamenca y metal pesado por la ♭2 (<em>Metallica</em>).</li>
+              <li><strong>Lidio:</strong> T-T-T-S-T-T-S [1, 2, 3, ♯4, 5, 6, 7] — Mágico, flotante, espacial. Sonido épico de bandas sonoras de ciencia ficción y Disney por la ♯4.</li>
+              <li><strong>Mixolidio:</strong> T-T-S-T-T-S-T [1, 2, 3, 4, 5, 6, ♭7] — Festivo, desenfadado y blusero. Columna vertebral del Rock Clásico y Blues (<em>AC/DC</em>, <em>Sweet Home Alabama</em>).</li>
+              <li><strong>Eólico (Menor Natural):</strong> T-S-T-T-S-T-T [1, 2, ♭3, 4, 5, ♭6, ♭7] — Triste, dramático, emotivo y melancólico. Tonalidad menor por excelencia.</li>
+              <li><strong>Locrio:</strong> S-T-T-S-T-T-T [1, ♭2, ♭3, 4, ♭5, ♭6, ♭7] — Extremadamente inestable y disonante. Carece de 5ª justa (Heavy Metal Extremo, Jazz de vanguardia).</li>
             </ul>
           </div>
         </article>
 
+        <!-- 2. FAMILIA MENOR ARMÓNICA -->
         <article class="wiki-card">
-          <h3>🕌 2. Familia Menor Armónica</h3>
-          <p class="wiki-meta"><strong>Fórmula Tonos:</strong> T-S-T-T-S-3S-S | <strong>Números:</strong> 2-1-2-2-1-3-1</p>
-          <p><strong>¿Cuándo/Cómo usarla?</strong> Nace al subir el 7º grado a la menor natural para crear la nota sensible. Sonido dramático y exótico.</p>
-
-          <div class="wiki-chords-box">
-            <strong>🎼 Acordes Harmonizados (Grados):</strong>
-            <div><strong>Tríadas:</strong> i (m) - ii° (dim) - ♭III+ (aug) - iv (m) - V (Maj) - ♭VI (Maj) - vii° (dim)</div>
-            <div><strong>Tétradas (7ª):</strong> im(maj7) - m7(♭5) - ♭IIImaj7(#5) - iv7 - V7 - ♭VImaj7 - vii°7</div>
+          <div class="wiki-card-title-row">
+            <h3>🕌 2. La Familia Menor Armónica</h3>
+            <span class="wiki-meta"><strong>Fórmula:</strong> T-S-T-T-S-3S-S | <strong>Pasos:</strong> 2-1-2-2-1-3-1</span>
           </div>
 
-          <p><strong>Artistas / Géneros:</strong> Yngwie Malmsteen, Randy Rhoads, Paco de Lucía. Neoclásico, Flamenco, Heavy Metal, Música Árabe.</p>
+          <div class="wiki-section-detail">
+            <h4>💡 ¿Cuándo y Cómo usarla en la práctica musical?</h4>
+            <p>Se creó para resolver una limitación técnica de la escala menor natural (eólica): la falta de una nota sensible a medio tono de la tónica que le permitiera construir un acorde dominante mayor (V7) fuerte para resolver a la tónica menor (i). Al eleva el 7º grado un semitono, aparece un intervalo drástico de 3 semitonos (segunda aumentada / 3S) entre el 6º y el 7º grado, otorgándole un sonido inconfundible, dramático, misterioso y altamente apasionado.</p>
+            <p><strong>Uso Práctico Favorito de los Guitarristas:</strong> Su quinto modo, el <strong>Frigio Dominante</strong>, es el rey de la música Flamenca, el Metal Neoclásico (Yngwie Malmsteen, Randy Rhoads), la música Árabe y el Klezmer. Toca el modo Frigio Dominante sobre un acorde Dominante V7 que resuelve a un acorde menor (ej. E7 ➔ Am) para obtener un impacto armónico inmediato.</p>
+          </div>
+
+          <div class="wiki-chords-box">
+            <div class="wiki-chords-header">
+              <span>🎼 Acordes Harmonizados Grado por Grado (Desliza horizontalmente ➔)</span>
+              <span class="scroll-hint">↔ Desliza</span>
+            </div>
+            <div class="wiki-chords-scroll">
+              <div class="chord-slab"><span class="c-deg">Grado i</span><span class="c-triad">i (Menor)</span><span class="c-tetrad">im(maj7)</span><span class="c-formula">1 - ♭3 - 5 - 7</span></div>
+              <div class="chord-slab"><span class="c-deg">Grado ii°</span><span class="c-triad">ii° (Disminuido)</span><span class="c-tetrad">m7(♭5)</span><span class="c-formula">1 - ♭3 - ♭5 - ♭7</span></div>
+              <div class="chord-slab"><span class="c-deg">Grado ♭III+</span><span class="c-triad">♭III+ (Aumentado)</span><span class="c-tetrad">♭IIImaj7(♯5)</span><span class="c-formula">1 - 3 - ♯5 - 7</span></div>
+              <div class="chord-slab"><span class="c-deg">Grado iv</span><span class="c-triad">iv (Menor)</span><span class="c-tetrad">iv7</span><span class="c-formula">1 - ♭3 - 5 - ♭7</span></div>
+              <div class="chord-slab"><span class="c-deg">Grado V</span><span class="c-triad">V (Mayor)</span><span class="c-tetrad">V7 (Dominante)</span><span class="c-formula">1 - 3 - 5 - ♭7</span></div>
+              <div class="chord-slab"><span class="c-deg">Grado ♭VI</span><span class="c-triad">♭VI (Mayor)</span><span class="c-tetrad">♭VImaj7</span><span class="c-formula">1 - 3 - 5 - 7</span></div>
+              <div class="chord-slab"><span class="c-deg">Grado vii°</span><span class="c-triad">vii° (Disminuido)</span><span class="c-tetrad">vii°7 (Disminuido 7)</span><span class="c-formula">1 - ♭3 - ♭5 - ♭♭7</span></div>
+            </div>
+          </div>
 
           <div class="wiki-modes-block">
-            <span class="wiki-modes-title">Modos y Características:</span>
+            <span class="wiki-modes-title">Modos Destacados de la Menor Armónica:</span>
             <ul class="wiki-mode-rows">
-              <li><strong>Menor Armónica:</strong> Dramática, exótica, neoclásica y oscura.</li>
-              <li><strong>Locrio ♮6:</strong> Disminuido e inestable con tensión oriental.</li>
-              <li><strong>Jónico ♯5:</strong> Majestuoso pero suspendido y misterioso.</li>
-              <li><strong>Dórico ♯4:</strong> Sonido trágico, gitano, klezmer.</li>
-              <li><strong>Frigio Dominante:</strong> Flamenco, árabe, egipcio, metal neoclásico.</li>
-              <li><strong>Lidio ♯2:</strong> Mágico, brillante con salto inicial de 3 semitonos.</li>
-              <li><strong>Ultra Locrio (Superlocrio ♭♭7):</strong> Máxima tensión disminuida sobre acorde °7.</li>
+              <li><strong>1. Menor Armónica:</strong> T-S-T-T-S-3S-S [1, 2, ♭3, 4, 5, ♭6, 7] — Dramática, exótica, neoclásica y profunda.</li>
+              <li><strong>2. Locrio ♮6:</strong> S-T-T-S-3S-S-T [1, ♭2, ♭3, 4, ♭5, 6, ♭7] — Disminuido e inestable con tensión oriental.</li>
+              <li><strong>3. Jónico ♯5:</strong> T-T-S-3S-S-T-S [1, 2, 3, 4, ♯5, 6, 7] — Majestuoso pero suspendido, idóneo para acordes aumentados maj7.</li>
+              <li><strong>4. Dórico ♯4 (Klezmer / Gitano):</strong> T-S-3S-S-T-S-T [1, 2, ♭3, ♯4, 5, 6, ♭7] — Trágico y melancólico con cuarta aumentada.</li>
+              <li><strong>5. Frigio Dominante:</strong> S-3S-S-T-S-T-T [1, ♭2, 3, 4, 5, ♭6, ♭7] — El rey del flamenco, sonido egipcio y metal neoclásico.</li>
+              <li><strong>6. Lidio ♯2:</strong> 3S-S-T-S-T-T-S [1, ♯2, 3, ♯4, 5, 6, 7] — Mágico, espacial y exótico con salto inicial de 3 semitonos.</li>
+              <li><strong>7. Ultra Locrio (Superlocrio ♭♭7):</strong> S-T-S-T-T-S-3S [1, ♭2, ♭3, ♭4, ♭5, ♭6, ♭♭7] — Máxima tensión sobre acorde disminuido 7.</li>
             </ul>
           </div>
         </article>
 
+        <!-- 3. FAMILIA MENOR MELÓDICA -->
         <article class="wiki-card">
-          <h3>🎷 3. Familia Menor Melódica (Jazz Minor)</h3>
-          <p class="wiki-meta"><strong>Fórmula Tonos:</strong> T-S-T-T-T-T-S | <strong>Números:</strong> 2-1-2-2-2-2-1</p>
-          <p><strong>¿Cuándo/Cómo usarla?</strong> Inicio menor y final mayor. Suprime el salto brusco de 3 semitonos de la armónica. Columna vertebral del Jazz Moderno.</p>
-
-          <div class="wiki-chords-box">
-            <strong>🎼 Acordes Harmonizados (Grados):</strong>
-            <div><strong>Tríadas:</strong> i (m) - ii (m) - ♭III+ (aug) - IV (Maj) - V (Maj) - vi° (dim) - vii° (dim)</div>
-            <div><strong>Tétradas (7ª):</strong> im(maj7) - ii7 - ♭IIImaj7(#5) - IV7 - V7 - m7(♭5) - m7(♭5)alt</div>
+          <div class="wiki-card-title-row">
+            <h3>🎷 3. La Familia Menor Melódica (Jazz Minor)</h3>
+            <span class="wiki-meta"><strong>Fórmula:</strong> T-S-T-T-T-T-S | <strong>Pasos:</strong> 2-1-2-2-2-2-1</span>
           </div>
 
-          <p><strong>Artistas / Géneros:</strong> Allan Holdsworth, Pat Metheny, Guthrie Govan, Miles Davis, Debussy. Jazz, Fusión, Cine.</p>
+          <div class="wiki-section-detail">
+            <h4>💡 ¿Cuándo y Cómo usarla en la práctica musical?</h4>
+            <p>Surgió históricamente en la música vocal clásica para eliminar el salto "tosco" o difícil de cantar de 3 semitonos que tenía la escala menor armónica. En la música moderna y el Jazz, se utiliza exclusivamente en su versión ascendente (que mantiene el 6º y 7º grados elevados). Es considerada la "escala secreta del Jazz Moderno" porque produce sonoridades refinadas e híbridas: su primera mitad es trágica y menor (1, 2, ♭3), pero su segunda mitad es brillante y mayor (4, 5, 6, 7).</p>
+
+            <p><strong>Uso Avanzado en Reordenamiento Modal y Solos:</strong>
+            Sus modos generan colores indispensables para el Jazz Fusion. Su 4º modo (<strong>Lidio Dominante</strong>) se usa sobre acordes 7(♯11); su 7º modo (<strong>Escala Alterada / Superlocrio</strong>) es el recurso número 1 de los jazzistas para tocar sobre acordes Dominantes Alterados (7alt, 7♭9, 7♯9, 7♭5, 7♯5) antes de resolver a la tónica.</p>
+          </div>
+
+          <div class="wiki-chords-box">
+            <div class="wiki-chords-header">
+              <span>🎼 Acordes Harmonizados Grado por Grado (Desliza horizontalmente ➔)</span>
+              <span class="scroll-hint">↔ Desliza</span>
+            </div>
+            <div class="wiki-chords-scroll">
+              <div class="chord-slab"><span class="c-deg">Grado i</span><span class="c-triad">i (Menor)</span><span class="c-tetrad">im(maj7)</span><span class="c-formula">1 - ♭3 - 5 - 7</span></div>
+              <div class="chord-slab"><span class="c-deg">Grado ii</span><span class="c-triad">ii (Menor)</span><span class="c-tetrad">ii7(♭9)</span><span class="c-formula">1 - ♭3 - 5 - ♭7</span></div>
+              <div class="chord-slab"><span class="c-deg">Grado ♭III+</span><span class="c-triad">♭III+ (Aumentado)</span><span class="c-tetrad">♭IIImaj7(♯5)</span><span class="c-formula">1 - 3 - ♯5 - 7</span></div>
+              <div class="chord-slab"><span class="c-deg">Grado IV</span><span class="c-triad">IV (Mayor)</span><span class="c-tetrad">IV7 (Lidio Dom)</span><span class="c-formula">1 - 3 - 5 - ♭7</span></div>
+              <div class="chord-slab"><span class="c-deg">Grado V</span><span class="c-triad">V (Mayor)</span><span class="c-tetrad">V7(♭13)</span><span class="c-formula">1 - 3 - 5 - ♭7</span></div>
+              <div class="chord-slab"><span class="c-deg">Grado vi°</span><span class="c-triad">vi° (Disminuido)</span><span class="c-tetrad">m7(♭5)</span><span class="c-formula">1 - ♭3 - ♭5 - ♭7</span></div>
+              <div class="chord-slab"><span class="c-deg">Grado vii°</span><span class="c-triad">vii° (Disminuido)</span><span class="c-tetrad">m7(♭5)alt</span><span class="c-formula">1 - ♭3 - ♭5 - ♭7</span></div>
+            </div>
+          </div>
 
           <div class="wiki-modes-block">
-            <span class="wiki-modes-title">Modos y Características:</span>
+            <span class="wiki-modes-title">Los 7 Modos de la Menor Melódica y su Aplicación en Jazz:</span>
             <ul class="wiki-mode-rows">
-              <li><strong>Menor Melódica:</strong> Híbrida, elegante, sofisticada, clave en Jazz.</li>
-              <li><strong>Dórico ♭2:</strong> Frigio brillante con 6ª mayor (Jazz Fusion).</li>
-              <li><strong>Lidio Aumentado:</strong> Flotante, espacial sobre acordes 7♯5.</li>
-              <li><strong>Lidio Dominante:</strong> Animado y moderno para acordes 7(♯11).</li>
-              <li><strong>Mixolidio ♭6 (Hindú):</strong> Nostálgico pero mayor.</li>
-              <li><strong>Locrio ♮2:</strong> Ideal para acordes m7(♭5) semidisminuidos.</li>
-              <li><strong>Alterado (Superlocrio):</strong> Máxima tensión sobre dominantes alterados.</li>
+              <li><strong>1. Menor Melódica:</strong> T-S-T-T-T-T-S [1, 2, ♭3, 4, 5, 6, 7] — Elegante, melancólica pero sin dramatismo. Clave en m(maj7).</li>
+              <li><strong>2. Dórico ♭2:</strong> S-T-T-T-T-S-T [1, ♭2, ♭3, 4, 5, 6, ♭7] — Frigio sofisticado con sexta mayor. Sonido Jazz Fusión moderno.</li>
+              <li><strong>3. Lidio Aumentado:</strong> T-T-T-T-S-T-S [1, 2, 3, ♯4, ♯5, 6, 7] — Flotante, cósmico y expansivo para acordes maj7(♯5).</li>
+              <li><strong>4. Lidio Dominante:</strong> T-T-T-S-T-S-T [1, 2, 3, ♯4, 5, 6, 2♭7] — Animado, espacial. Perfecto para acordes 7(♯11) (The Simpsons, Debussy).</li>
+              <li><strong>5. Mixolidio ♭6 (Hindú):</strong> T-T-S-T-S-T-T [1, 2, 3, 4, 5, ♭6, ♭7] — Melancólico pero de raíz mayor. Tensión cálida sobre acordes V7(♭13).</li>
+              <li><strong>6. Locrio ♮2:</strong> T-S-T-S-T-T-T [1, 2, ♭3, 4, ♭5, ♭6, ♭7] — La mejor escala para improvisar sobre acordes semidisminuidos m7(♭5).</li>
+              <li><strong>7. Alterado (Superlocrio):</strong> S-T-S-T-T-T-T [1, ♭2, ♭3, ♭4, ♭5, ♭6, ♭7] — Tensión máxima para acordes dominantes alterados (7alt).</li>
             </ul>
           </div>
         </article>
 
+        <!-- 4. FAMILIA ARMÓNICA MAYOR (SECCIÓN DEDICADA COMPLETA) -->
         <article class="wiki-card">
-          <h3>🎼 4. Familia Armónica Mayor y Escalas Simétricas</h3>
-          <p class="wiki-meta"><strong>Armónica Mayor:</strong> T-T-S-T-S-3S-S (2-2-1-2-1-3-1)</p>
-          <div class="wiki-chords-box">
-            <strong>🎼 Acordes Armónica Mayor:</strong> I (Maj) - ii° (dim) - iii (m) - iv (m) - V (Maj) - ♭VI+ (aug) - vii° (dim)
+          <div class="wiki-card-title-row">
+            <h3>🎻 4. La Familia Armónica Mayor</h3>
+            <span class="wiki-meta"><strong>Fórmula:</strong> T-T-S-T-S-3S-S | <strong>Pasos:</strong> 2-2-1-2-1-3-1</span>
           </div>
-          <p><strong>Simétricas / Sintéticas Famosas:</strong></p>
-          <ul class="wiki-mode-rows">
-            <li><strong>Pentatónica Menor / Blues:</strong> B.B. King, Jimi Hendrix (Agrega Blue Note ♭5).</li>
-            <li><strong>Tonos Completos (Whole Tone 2-2-2-2-2-2):</strong> Debussy, Monk. Flotante.</li>
-            <li><strong>Fórmula 3-3-3-3 (Arpegio °7):</strong> 4 terceras menores idénticas. Mística.</li>
-            <li><strong>Doble Armónica (Bizantina 1-3-1-2-1-3-1):</strong> Dick Dale (<em>Misirlou</em>). Oriental.</li>
-          </ul>
+
+          <div class="wiki-section-detail">
+            <h4>💡 ¿Cuándo y Cómo usarla en la práctica musical?</h4>
+            <p>La Escala Armónica Mayor es la hermana simétrica de la menor armónica: se construye tomando una escala mayor estándar e infligiendo una alteración en el 6º grado (rebajándolo a ♭6). Esta simple modificación introduce el exótico intervalo de 3 semitonos (segunda aumentada) entre el ♭6 y la 7ª mayor, fusionando el brillo brillante del modo Mayor con la melancolía trágica y oriental de las escalas armónicas.</p>
+
+            <p><strong>Uso en Composición y Progresiones:</strong>
+            Permite utilizar acordes menores de subdominante en tonalidad mayor (ej. la famosa progresión I - iv - I en C Mayor: C ➔ Fm ➔ C) con un soporte melódico perfecto. Otorga un sonido profundamente romántico, sombrío y cinematográfico.</p>
+          </div>
+
+          <div class="wiki-chords-box">
+            <div class="wiki-chords-header">
+              <span>🎼 Acordes Harmonizados Grado por Grado (Desliza horizontalmente ➔)</span>
+              <span class="scroll-hint">↔ Desliza</span>
+            </div>
+            <div class="wiki-chords-scroll">
+              <div class="chord-slab"><span class="c-deg">Grado I</span><span class="c-triad">I (Mayor)</span><span class="c-tetrad">Imaj7</span><span class="c-formula">1 - 3 - 5 - 7</span></div>
+              <div class="chord-slab"><span class="c-deg">Grado ii°</span><span class="c-triad">ii° (Disminuido)</span><span class="c-tetrad">m7(♭5)</span><span class="c-formula">1 - ♭3 - ♭5 - ♭7</span></div>
+              <div class="chord-slab"><span class="c-deg">Grado iii</span><span class="c-triad">iii (Menor)</span><span class="c-tetrad">iii7(♭9)</span><span class="c-formula">1 - ♭3 - 5 - ♭7</span></div>
+              <div class="chord-slab"><span class="c-deg">Grado iv</span><span class="c-triad">iv (Menor)</span><span class="c-tetrad">ivm(maj7)</span><span class="c-formula">1 - ♭3 - 5 - 7</span></div>
+              <div class="chord-slab"><span class="c-deg">Grado V</span><span class="c-triad">V (Mayor)</span><span class="c-tetrad">V7(♭9)</span><span class="c-formula">1 - 3 - 5 - ♭7</span></div>
+              <div class="chord-slab"><span class="c-deg">Grado ♭VI+</span><span class="c-triad">♭VI+ (Aumentado)</span><span class="c-tetrad">♭VImaj7(♯5)</span><span class="c-formula">1 - 3 - ♯5 - 7</span></div>
+              <div class="chord-slab"><span class="c-deg">Grado vii°</span><span class="c-triad">vii° (Disminuido)</span><span class="c-tetrad">vii°7</span><span class="c-formula">1 - ♭3 - ♭5 - ♭♭7</span></div>
+            </div>
+          </div>
+
+          <div class="wiki-modes-block">
+            <span class="wiki-modes-title">Los Modos de la Armónica Mayor:</span>
+            <ul class="wiki-mode-rows">
+              <li><strong>1. Armónica Mayor:</strong> T-T-S-T-S-3S-S [1, 2, 3, 4, 5, ♭6, 7] — Exótica, romántica, apasionada.</li>
+              <li><strong>2. Dórico ♭5:</strong> T-S-T-S-3S-S-T [1, 2, ♭3, 4, ♭5, 6, ♭7] — Sonido jazzero melancólico con tensión disminuida.</li>
+              <li><strong>3. Frigio ♭4:</strong> S-T-S-3S-S-T-T [1, ♭2, ♭3, ♭4, 5, ♭6, ♭7] — Misterioso, con cuarta disminuida.</li>
+              <li><strong>4. Lidio ♭3 (Lidio Menor):</strong> T-S-3S-S-T-T-S [1, 2, ♭3, ♯4, 5, 6, 7] — Tensión brillante pero trágica.</li>
+              <li><strong>5. Mixolidio ♭2:</strong> S-3S-S-T-T-S-T [1, ♭2, 3, 4, 5, 6,  controversy ♭7] — Dominante exótico de origen oriental.</li>
+              <li><strong>6. Lidio ♯5 ♯2:</strong> 3S-S-T-T-S-T-S [1, ♯2, 3, ♯4, ♯5, 6, 7] — Totalmente galáctico e inestable.</li>
+              <li><strong>7. Locrio ♭♭7:</strong> S-T-T-S-T-S-3S [1, ♭2, ♭3, 4, ♭5, ♭6, ♭♭7] — Base para arpegios disminuidos extremos.</li>
+            </ul>
+          </div>
         </article>
+
+        <!-- 5. ESCALAS PENTATÓNICAS Y BLUES (SECCIÓN DEDICADA COMPLETA Y ACOPLAMIENTOS) -->
+        <article class="wiki-card">
+          <div class="wiki-card-title-row">
+            <h3>⚡ 5. Pentatónicas y Escala de Blues: Acoples y Compatibilidad Modal</h3>
+            <span class="wiki-meta"><strong>Pent. Menor:</strong> 3S-T-T-3S-T | <strong>Pent. Mayor:</strong> T-T-3S-T-3S</span>
+          </div>
+
+          <div class="wiki-section-detail">
+            <h4>💡 ¿Cuándo y Cómo usarlas? La Regla del Acople Modal</h4>
+            <p>Las escalas pentatónicas (5 notas) son las más antiguas y populares de la historia porque eliminan los intervalos de semitono (evitan choques o disonancias duras). Sin embargo, el verdadero secreto de los grandes guitarristas radica en **saber sobre qué escalas y modos cuadra cada pentatónica**:</p>
+
+            <div class="pentatonic-fits-grid">
+              <div class="fit-box">
+                <h5>🔥 Acoples de la Pentatónica Menor (1 - ♭3 - 4 - 5 - ♭7)</h5>
+                <ul>
+                  <li><strong>Sobre Modo Eólico (Menor Natural):</strong> Acople exacto 100%. La pentatónica menor es el esqueleto del modo eólico.</li>
+                  <li><strong>Sobre Modo Dórico:</strong> Cuadra a la perfección. Aporta el sonido característico del Blues-Rock y Funk (ej. Jimi Hendrix, David Gilmour).</li>
+                  <li><strong>Sobre Modo Frigio:</strong> Encaja limpiamente sobre la estructura menor subyacente.</li>
+                  <li><strong>Sobre la Escala de Blues:</strong> Al añadir la <em>Blue Note (♭5)</em>, crea la máxima tensión expresiva del Rock y Blues.</li>
+                </ul>
+              </div>
+
+              <div class="fit-box">
+                <h5>☀️ Acoples de la Pentatónica Mayor (1 - 2 - 3 - 5 - 6)</h5>
+                <ul>
+                  <li><strong>Sobre Modo Jónico (Escala Mayor):</strong> Acople perfecto, dulce y melódico para Country, Pop y Baladas.</li>
+                  <li><strong>Sobre Modo Mixolidio:</strong> Funciona increíblemente bien. Es la base del solista de Classic Rock y Southern Rock (ej. B.B. King mezclar Pentatónica Mayor y Menor sobre acordes dominantes).</li>
+                  <li><strong>Sobre Modo Lidio:</strong> Encaja sin chocar con la cuarta aumentada (♯4).</li>
+                </ul>
+              </div>
+            </div>
+          </div>
+
+          <div class="wiki-chords-box">
+            <div class="wiki-chords-header">
+              <span>🎼 Fórmulas de Pasos y Contenido de Notas</span>
+              <span class="scroll-hint">↔ Desliza</span>
+            </div>
+            <div class="wiki-chords-scroll">
+              <div class="chord-slab"><span class="c-deg">Pentatónica Menor</span><span class="c-triad">1 - ♭3 - 4 - 5 - ♭7</span><span class="c-formula">Pasos: 3 - 2 - 2 - 3 - 2</span></div>
+              <div class="chord-slab"><span class="c-deg">Escala de Blues</span><span class="c-triad">1 - ♭3 - 4 - ♭5 - 5 - ♭7</span><span class="c-formula">Pasos: 3 - 2 - 1 - 1 - 3 - 2</span></div>
+              <div class="chord-slab"><span class="c-deg">Pentatónica Mayor</span><span class="c-triad">1 - 2 - 3 - 5 - 6</span><span class="c-formula">Pasos: 2 - 2 - 3 - 2 - 3</span></div>
+              <div class="chord-slab"><span class="c-deg">Pentatónica Dórica</span><span class="c-triad">1 - 2 - ♭3 - 5 - 6</span><span class="c-formula">Pasos: 2 - 1 - 4 - 2 - 3</span></div>
+            </div>
+          </div>
+        </article>
+
+        <!-- 6. ESCALAS SIMÉTRICAS Y SINTÉTICAS (CONTEXTO Y GUÍA DE REFERENCIA) -->
+        <article class="wiki-card">
+          <div class="wiki-card-title-row">
+            <h3>🌀 6. Escalas Simétricas y Sintéticas Avanzadas</h3>
+            <span class="wiki-meta"><strong>Tonos Completos, Octatónicas, Arpegio °7 y Doble Armónica</strong></span>
+          </div>
+
+          <div class="wiki-section-detail">
+            <h4>💡 Guía de Referencia y Contexto para Compositores</h4>
+            <p>Estas escalas rompen el patrón asimétrico habitual de 7 notas por octava. Son herramientas de **color puro, tensión y suspensión atmosférica** en el cine, el Jazz de vanguardia y el Metal Progresivo:</p>
+          </div>
+
+          <div class="wiki-chords-box">
+            <div class="wiki-chords-header">
+              <span>🎼 Modelos de Escalas Simétricas y Uso Tímbrico</span>
+              <span class="scroll-hint">↔ Desliza</span>
+            </div>
+            <div class="wiki-chords-scroll">
+              <div class="chord-slabwide">
+                <span class="c-deg">Tonos Completos (Whole Tone)</span>
+                <span class="c-triad">Fórmula: 2-2-2-2-2-2 (6 notas)</span>
+                <span class="c-formula">Sensación de ingravidez, magia o un sueño. Usada por Debussy y Thelonious Monk sobre acordes 7♯5.</span>
+              </div>
+              <div class="chord-slabwide">
+                <span class="c-deg">Fórmula 3-3-3-3 (Arpegio Disminuido °7)</span>
+                <span class="c-triad">Fórmula: 3-3-3-3 (4 notas)</span>
+                <span class="c-formula">Divide la octava en 4 partes exactas. Columna vertebral del acorde disminuido 7ª y la tensión dramática del cine.</span>
+              </div>
+              <div class="chord-slabwide">
+                <span class="c-deg">Octatónica Disminuida (Tono-Semitono / Semitono-Tono)</span>
+                <span class="c-triad">Fórmula: 2-1-2-1-2-1-2-1 (8 notas)</span>
+                <span class="c-formula">Alterna simétricamente tonos y semitonos. Muy usada en Jazz sobre acordes dominantes y en bandas sonoras de terror.</span>
+              </div>
+              <div class="chord-slabwide">
+                <span class="c-deg">Doble Armónica (Bizantina / Flamenca Mayor)</span>
+                <span class="c-triad">Fórmula: 1-3-1-2-1-3-1 (7 notas)</span>
+                <span class="c-formula">Posee dos saltos de 3 semitonos. Sonido profundamente exótico, árabe, místico y tradicional (<em>Misirlou</em>).</span>
+              </div>
+            </div>
+          </div>
+        </article>
+
       </div>
 
       <!-- Guía de Transformación Vertical en 3 Renglones -->
@@ -297,7 +468,7 @@
 
           <!-- PANEL DE ESCALA HARMONIZADA (ACORDES) DE LA NOTA SELECCIONADA -->
           <div class="detail-card detail-full">
-            <span class="detail-label">🎼 Escala Harmonizada (Acordes Tríadas y Tétradas):</span>
+            <span class="detail-label">🎼 Escala Harmonizada (Acordes Tríadas, Tétradas e Intervalos):</span>
             <div id="scale-chords-container" class="chords-grid-container"></div>
           </div>
 
