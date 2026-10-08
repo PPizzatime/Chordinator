@@ -139,6 +139,19 @@ body {
   border: 1px solid rgba(245, 158, 11, 0.2);
 }
 
+.wiki-chords-box {
+  background-color: rgba(99, 102, 241, 0.12);
+  border: 1px solid rgba(99, 102, 241, 0.3);
+  padding: 8px 12px;
+  border-radius: 6px;
+  font-size: 0.82rem;
+  font-family: var(--font-mono);
+  color: #c7d2fe;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
 .wiki-modes-block {
   background-color: var(--panel-bg);
   padding: 12px;
@@ -179,6 +192,45 @@ body {
 
 .wiki-mode-rows li strong {
   color: #60a5fa;
+}
+
+/* HARMONIZED CHORDS GRID (INTERACTIVE TOOL) */
+.chords-grid-container {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(130px, 1fr));
+  gap: 10px;
+  width: 100%;
+}
+
+.chord-degree-card {
+  background-color: var(--panel-bg);
+  border: 1px solid var(--border-color);
+  border-radius: 8px;
+  padding: 10px;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  text-align: center;
+}
+
+.chord-degree-num {
+  font-size: 0.75rem;
+  font-weight: 700;
+  color: var(--text-muted);
+  text-transform: uppercase;
+}
+
+.chord-name-main {
+  font-family: var(--font-mono);
+  font-size: 1.1rem;
+  font-weight: 700;
+  color: #f3f4f6;
+}
+
+.chord-notes-span {
+  font-family: var(--font-mono);
+  font-size: 0.75rem;
+  color: #93c5fd;
 }
 
 /* TRANSFORMATION 3-STEP VERTICAL */

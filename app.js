@@ -1,5 +1,5 @@
 /**
- * App.js - Wiki & Explorador de Escalas, Modos y Mástil
+ * App.js - Wiki & Explorador de Escalas, Modos, Acordes y Mástil
  */
 
 // --- BASE DE DATOS TEÓRICA Y DE ESCALAS ---
@@ -178,10 +178,9 @@ function playTone(freq, duration = 0.6) {
   const osc = ctx.createOscillator();
   const gain = ctx.createGain();
 
-  osc.type = 'triangle'; // Onda triangular rica en armónicos impares
+  osc.type = 'triangle';
   osc.frequency.setValueAtTime(freq, ctx.currentTime);
 
-  // Envolvente de volumen clara y audible
   gain.gain.setValueAtTime(0, ctx.currentTime);
   gain.gain.linearRampToValueAtTime(0.4, ctx.currentTime + 0.02);
   gain.gain.exponentialRampToValueAtTime(0.001, ctx.currentTime + duration);
@@ -210,6 +209,7 @@ const scaleStepFormulaText = document.getElementById('scale-step-formula-text');
 const scaleStepFormulaNumbers = document.getElementById('scale-step-formula-numbers');
 const scaleDegreeFormula = document.getElementById('scale-degree-formula');
 const scaleNotesList = document.getElementById('scale-notes-list');
+const scaleChordsContainer = document.getElementById('scale-chords-container');
 const scaleDescription = document.getElementById('scale-description');
 
 const btnPlayScale = document.getElementById('btn-play-scale');
@@ -343,7 +343,7 @@ function renderTuningControls() {
   });
 }
 
-// --- CÁLCULO DE LA ESCALA SELECCIONADA ---
+// --- CÁLCULO DE LA ESCALA SELECCIONADA Y HARMONIZACIÓN (ACORDES TRÍADICOS Y TÉTRADAS) ---
 
 function getSelectedScaleData() {
   const family = SCALE_FAMILIES[state.currentFamilyKey];
@@ -359,11 +359,81 @@ function getSelectedScaleData() {
     scaleNotes.push(NOTES[currIndex]);
   }
 
+  // CÁLCULO DE HARMONIZACIÓN POR CADA GRADO DE LA ESCALA
+  const harmonizedChords = scaleNotes.map((rootNote, idx) => {
+    const len = scaleNotes.length;
+
+    // Tríadas: Grados 1, 3, 5 dentro de la escala
+    const note1 = rootNote;
+    const note3 = scaleNotes[(idx + 2) % len];
+    const note5 = scaleNotes[(idx + 4) % len];
+    const note7 = scaleNotes[(idx + 6) % len];
+
+    const idx1 = NOTES.indexOf(normalizeNote(note1));
+    const idx3 = NOTES.indexOf(normalizeNote(note3));
+    const idx5 = NOTES.indexOf(normalizeNote(note5));
+    const idx7 = NOTES.indexOf(normalizeNote(note7));
+
+    const semitonesTo3 = (idx3 - idx1 + 12) % 12;
+    const semitonesTo5 = (idx5 - idx1 + 12) % 12;
+    const semitonesTo7 = (idx7 - idx1 + 12) % 12;
+
+    // Determinar nombre y tipo del acorde tríada
+    let typeName = '';
+    let symbol = '';
+
+    if (semitonesTo3 === 4 && semitonesTo5 === 7) {
+      typeName = 'Mayor';
+      symbol = '';
+    } else if (semitonesTo3 === 3 && semitonesTo5 === 7) {
+      typeName = 'Menor';
+      symbol = 'm';
+    } else if (semitonesTo3 === 3 && semitonesTo5 === 6) {
+      typeName = 'Disminuido';
+      symbol = 'dim (°)';
+    } else if (semitonesTo3 === 4 && semitonesTo5 === 8) {
+      typeName = 'Aumentado';
+      symbol = 'aug (+)';
+    } else if (semitonesTo3 === 3 && semitonesTo5 === 8) {
+      typeName = 'm(#5)';
+      symbol = 'm(#5)';
+    } else if (semitonesTo3 === 4 && semitonesTo5 === 6) {
+      typeName = 'Maj(♭5)';
+      symbol = '(♭5)';
+    } else if (semitonesTo3 === 2) {
+      typeName = 'Sus2';
+      symbol = 'sus2';
+    } else if (semitonesTo3 === 5) {
+      typeName = 'Sus4';
+      symbol = 'sus4';
+    } else {
+      typeName = 'Sintético';
+      symbol = 'chord';
+    }
+
+    // Determinar tétrada (7ª)
+    let seventhSuffix = '';
+    if (semitonesTo7 === 11) seventhSuffix = 'maj7';
+    else if (semitonesTo7 === 10) seventhSuffix = '7';
+    else if (semitonesTo7 === 9) seventhSuffix = 'dim7';
+
+    return {
+      degreeLabel: mode.degrees[idx] || `Grado ${idx + 1}`,
+      rootNote,
+      triadName: `${rootNote}${symbol}`,
+      tetradName: `${rootNote}${symbol}${seventhSuffix}`,
+      triadNotes: `${note1} - ${note3} - ${note5}`,
+      tetradNotes: `${note1} - ${note3} - ${note5} - ${note7}`,
+      typeName
+    };
+  });
+
   return {
     family,
     mode,
     rootNote: state.currentRoot,
-    scaleNotes
+    scaleNotes,
+    harmonizedChords
   };
 }
 
@@ -397,6 +467,17 @@ function updateUI() {
   scaleNotesList.innerHTML = scaleData.scaleNotes.map((note, idx) => {
     const isRoot = idx === 0;
     return `<span class="chip ${isRoot ? 'chip-root' : ''}">${note}</span>`;
+  }).join('');
+
+  // RENDER DE ESCALA HARMONIZADA EN TARJETAS
+  scaleChordsContainer.innerHTML = scaleData.harmonizedChords.map(ch => {
+    return `
+      <div class="chord-degree-card">
+        <div class="chord-degree-num">${ch.degreeLabel}</div>
+        <div class="chord-name-main">${ch.triadName}</div>
+        <div class="chord-notes-span">${ch.triadNotes}</div>
+      </div>
+    `;
   }).join('');
 
   scaleDescription.textContent = scaleData.mode.desc;
