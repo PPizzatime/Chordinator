@@ -1,6 +1,7 @@
 /**
  * App.js - Guitar Scale & Mode Explorer
- * Complete bilingual (EN/ES) logic, transposed tables, fretboard nut fix, and wiki audio playback
+ * Complete bilingual (EN/ES) logic, transposed tables, fretboard nut fix,
+ * 3NPS/2NPS neck box diagrams, and Roman Numeral degree harmonizations.
  */
 
 const NOTES = ['C', 'C♯', 'D', 'D♯', 'E', 'F', 'F♯', 'G', 'G♯', 'A', 'A♯', 'B'];
@@ -15,7 +16,6 @@ function normalizeNote(n) {
   return ENHARMONICS[trimmed] || trimmed;
 }
 
-// Fixed note frequency calculation: A4 = 440Hz
 function getNoteFrequency(noteName, octave = 4) {
   const noteIndex = NOTES.indexOf(normalizeNote(noteName));
   if (noteIndex === -1) return 440;
@@ -64,8 +64,8 @@ const UI_TEXTS = {
     btnPlayScale: '▶ Play Scale Audio',
     btnPlayingScale: '🔊 Playing Scale...',
     lblSpeedTitle: 'Speed:',
-    lblStepFormulaTitle: 'Step & Interval Formula:',
-    lblDegreeFormulaTitle: 'Scale Degree Formula:',
+    lblStepFormulaTitle: 'Step Code (T/S):',
+    lblDegreeFormulaTitle: 'Numeric Step Sequence:',
     lblNotesListTitle: 'Notes in this Key:',
     lblChordsTitle: '🎼 Harmonized Scale Chords (Triads, Tetrads & Semitone Formulas):',
     lblDescTitle: 'Sonorial Timbre & Character:',
@@ -118,8 +118,8 @@ const UI_TEXTS = {
     btnPlayScale: '▶ Reproducir Escala',
     btnPlayingScale: '🔊 Reproduciendo...',
     lblSpeedTitle: 'Velocidad:',
-    lblStepFormulaTitle: 'Fórmula de Pasos e Intervalos:',
-    lblDegreeFormulaTitle: 'Fórmula por Grados:',
+    lblStepFormulaTitle: 'Código de Pasos (T/S):',
+    lblDegreeFormulaTitle: 'Secuencia Numérica de Pasos:',
     lblNotesListTitle: 'Notas en esta Tonalidad:',
     lblChordsTitle: '🎼 Escala Harmonizada (Acordes Tríadas, Tétradas e Intervalos):',
     lblDescTitle: 'Sonoridad y Carácter Tímbrico:',
@@ -135,7 +135,7 @@ const UI_TEXTS = {
   }
 };
 
-// SCALE FAMILIES DATA WITH EXPANDED ABOUT/HISTORY & INLINED TRANSFORMATIONS
+// SCALE FAMILIES DATA WITH EXPANDED ABOUT/HISTORY, TRANSFORMATIONS, & 3NPS/2NPS DIAGRAMS
 const SCALE_FAMILIES = {
   diatonic: {
     key: 'diatonic',
@@ -146,8 +146,19 @@ const SCALE_FAMILIES = {
       es: 'Acerca de, Orígenes e Historia: Codificada formalmente durante el Renacimiento y Barroco (J.S. Bach), la escala Diatónica evolucionó desde los modos gregorianos y la afinación pitagórica. Es el cimiento absoluto de la armonía tonal occidental. Hoy se utiliza en pop, rock, country, jazz, música clásica y folclor.'
     },
     transformation: {
-      en: { base: 'Diatonic Major Scale (Base)', arrow: '⬇ (Lower 3rd, 6th, and 7th degrees by 1 semitone)', res: 'Natural Minor Scale (Aeolian)' },
-      es: { base: 'Escala Diatónica Mayor (Base)', arrow: '⬇ (Baja un semitono el 3º, 6º y 7º grado)', res: 'Escala Menor Natural (Eólica)' }
+      en: { base: 'Natural Minor Scale (Aeolian)', arrow: '⬇ (Lower 3rd, 6th, and 7th degrees by 1 semitone)', res: 'Diatonic Major Scale (Base)' },
+      es: { base: 'Escala Menor Natural (Eólica)', arrow: '⬇ (Baja un semitono el 3º, 6º y 7º grado)', res: 'Escala Diatónica Mayor (Base)' }
+    },
+    patternDiagram: {
+      title: { en: '🎸 3-Note-Per-String (3NPS) Fretboard Navigation Box (Major / Diatonic)', es: '🎸 Diagrama de Navegación 3 Notas Por Cuerda (3NPS) - Familia Diatónica' },
+      strings: [
+        { name: 'e (1)', notes: [{ f: '12', r: true }, { f: '14' }, { f: '15' }] },
+        { name: 'B (2)', notes: [{ f: '12' }, { f: '13' }, { f: '15' }] },
+        { name: 'G (3)', notes: [{ f: '11' }, { f: '12' }, { f: '14' }] },
+        { name: 'D (4)', notes: [{ f: '12' }, { f: '14' }, { f: '15' }] },
+        { name: 'A (5)', notes: [{ f: '12' }, { f: '14' }, { f: '15' }] },
+        { name: 'E (6)', notes: [{ f: '12', r: true }, { f: '14' }, { f: '15' }] }
+      ]
     },
     chords: [
       { deg: 'I', triad: 'I (Major)', tetrad: 'Imaj7', formula: '1 - 3 - 5 - 7' },
@@ -180,6 +191,17 @@ const SCALE_FAMILIES = {
       en: { base: 'Natural Minor Scale', arrow: '⬇ (Raise 7th degree by 1 semitone for leading tone)', res: 'Harmonic Minor Scale' },
       es: { base: 'Escala Menor Natural', arrow: '⬇ (Eleva un semitono el 7º grado para la sensible)', res: 'Escala Menor Armónica' }
     },
+    patternDiagram: {
+      title: { en: '🎸 3-Note-Per-String (3NPS) Box (Harmonic Minor)', es: '🎸 Diagrama de Navegación 3 Notas Por Cuerda (3NPS) - Menor Armónica' },
+      strings: [
+        { name: 'e (1)', notes: [{ f: '5', r: true }, { f: '7' }, { f: '8' }] },
+        { name: 'B (2)', notes: [{ f: '5' }, { f: '6' }, { f: '9' }] },
+        { name: 'G (3)', notes: [{ f: '4' }, { f: '5' }, { f: '7' }] },
+        { name: 'D (4)', notes: [{ f: '6' }, { f: '7' }, { f: '9' }] },
+        { name: 'A (5)', notes: [{ f: '5' }, { f: '7' }, { f: '8' }] },
+        { name: 'E (6)', notes: [{ f: '5', r: true }, { f: '7' }, { f: '8' }] }
+      ]
+    },
     chords: [
       { deg: 'i', triad: 'i (Minor)', tetrad: 'im(maj7)', formula: '1 - ♭3 - 5 - 7' },
       { deg: 'ii°', triad: 'ii° (Dim)', tetrad: 'm7(♭5)', formula: '1 - ♭3 - ♭5 - ♭7' },
@@ -208,8 +230,19 @@ const SCALE_FAMILIES = {
       es: 'Acerca de, Orígenes e Historia: Los compositores clásicos elevaron tanto el 6º como el 7º grado al ascender para evitar el salto vocal brusco de la menor armónica. En el Jazz Moderno se toca igual al subir y bajar. Esencial para Allan Holdsworth, Pat Metheny, Guthrie Govan y Miles Davis.'
     },
     transformation: {
-      en: { base: 'Harmonic Minor Scale', arrow: '⬇ (Raise 6th degree by 1 semitone to smooth 3S jump)', res: 'Melodic Minor Scale (Jazz Minor)' },
-      es: { base: 'Escala Menor Armónica', arrow: '⬇ (Eleva un semitono el 6º grado para suavizar)', res: 'Escala Menor Melódica (Jazz Minor)' }
+      en: { base: 'Natural Minor Scale (Aeolian)', arrow: '⬇ (Raise BOTH 6th and 7th degrees by 1 semitone)', res: 'Melodic Minor Scale (Jazz Minor)' },
+      es: { base: 'Escala Menor Natural (Eólica)', arrow: '⬇ (Eleva TANTO el 6º como el 7º grado un semitono)', res: 'Escala Menor Melódica (Jazz Minor)' }
+    },
+    patternDiagram: {
+      title: { en: '🎸 3-Note-Per-String (3NPS) Box (Melodic Minor)', es: '🎸 Diagrama de Navegación 3 Notas Por Cuerda (3NPS) - Menor Melódica' },
+      strings: [
+        { name: 'e (1)', notes: [{ f: '5', r: true }, { f: '7' }, { f: '8' }] },
+        { name: 'B (2)', notes: [{ f: '5' }, { f: '7' }, { f: '8' }] },
+        { name: 'G (3)', notes: [{ f: '4' }, { f: '5' }, { f: '7' }] },
+        { name: 'D (4)', notes: [{ f: '5' }, { f: '7' }, { f: '9' }] },
+        { name: 'A (5)', notes: [{ f: '5' }, { f: '7' }, { f: '9' }] },
+        { name: 'E (6)', notes: [{ f: '5', r: true }, { f: '7' }, { f: '8' }] }
+      ]
     },
     chords: [
       { deg: 'i', triad: 'i (Minor)', tetrad: 'im(maj7)', formula: '1 - ♭3 - 5 - 7' },
@@ -242,6 +275,17 @@ const SCALE_FAMILIES = {
       en: { base: 'Diatonic Major Scale (Base)', arrow: '⬇ (Lower 6th degree only by 1 semitone)', res: 'Harmonic Major Scale' },
       es: { base: 'Escala Diatónica Mayor (Base)', arrow: '⬇ (Baja un semitono únicamente el 6º grado)', res: 'Escala Armónica Mayor' }
     },
+    patternDiagram: {
+      title: { en: '🎸 3-Note-Per-String (3NPS) Box (Harmonic Major)', es: '🎸 Diagrama de Navegación 3 Notas Por Cuerda (3NPS) - Armónica Mayor' },
+      strings: [
+        { name: 'e (1)', notes: [{ f: '8', r: true }, { f: '10' }, { f: '12' }] },
+        { name: 'B (2)', notes: [{ f: '8' }, { f: '9' }, { f: '12' }] },
+        { name: 'G (3)', notes: [{ f: '7' }, { f: '9' }, { f: '10' }] },
+        { name: 'D (4)', notes: [{ f: '9' }, { f: '10' }, { f: '12' }] },
+        { name: 'A (5)', notes: [{ f: '8' }, { f: '10' }, { f: '12' }] },
+        { name: 'E (6)', notes: [{ f: '8', r: true }, { f: '10' }, { f: '12' }] }
+      ]
+    },
     chords: [
       { deg: 'I', triad: 'I (Major)', tetrad: 'Imaj7', formula: '1 - 3 - 5 - 7' },
       { deg: 'ii°', triad: 'ii° (Dim)', tetrad: 'm7(♭5)', formula: '1 - ♭3 - ♭5 - ♭7' },
@@ -269,6 +313,21 @@ const SCALE_FAMILIES = {
       en: 'Origins & History: Ancient 5-note scales dating back over 50,000 years in prehistoric flutes, Chinese traditional music, African folk, and Celtic tunes. In the 20th century, African-American musicians added the passing "Blue Note" (♭5) creating the Blues Scale — the foundation for B.B. King, Jimi Hendrix, Stevie Ray Vaughan, and Eric Clapton.',
       es: 'Acerca de, Orígenes e Historia: Escalas ancestrales de 5 notas con más de 50,000 años de antigüedad presentes en flautas prehistóricas, música tradicional china y folclor africano. En el siglo XX, músicos afroamericanos añadieron la "Blue Note" (♭5) dando origen a la Escala de Blues, cimiento de B.B. King, Jimi Hendrix, Stevie Ray Vaughan y Eric Clapton.'
     },
+    transformation: {
+      en: { base: 'Natural Minor Scale (Aeolian)', arrow: '⬇ (Omit 2nd and ♭6th degrees to form 5-note box)', res: 'Minor Pentatonic Scale' },
+      es: { base: 'Escala Menor Natural (Eólica)', arrow: '⬇ (Omite el 2º y ♭6º grado para formar caja de 5 notas)', res: 'Escala Pentatónica Menor' }
+    },
+    patternDiagram: {
+      title: { en: '🎸 2-Note-Per-String (2NPS) Box #1 + Blue Note (A Minor Blues)', es: '🎸 Diagrama 2 Notas Por Cuerda (2NPS) Caja 1 + Nota de Blues (La Menor Blues)' },
+      strings: [
+        { name: 'e (1)', notes: [{ f: '5', r: true }, { f: '8' }] },
+        { name: 'B (2)', notes: [{ f: '5' }, { f: '8' }] },
+        { name: 'G (3)', notes: [{ f: '5' }, { f: '7' }, { f: '8', blue: true }] },
+        { name: 'D (4)', notes: [{ f: '5' }, { f: '7', r: true }] },
+        { name: 'A (5)', notes: [{ f: '5' }, { f: '6', blue: true }, { f: '7' }] },
+        { name: 'E (6)', notes: [{ f: '5', r: true }, { f: '8' }] }
+      ]
+    },
     fits: {
       en: [
         { title: '🔥 Minor Pentatonic Fits (1 - ♭3 - 4 - 5 - ♭7)', list: ['Aeolian (Natural Minor): 100% exact skeleton.', 'Dorian Mode: Fits perfectly, core Blues-Rock & Funk solo sound.', 'Phrygian Mode: Fits cleanly over minor triad base.'] },
@@ -279,9 +338,13 @@ const SCALE_FAMILIES = {
         { title: '☀️ Acoples de la Pentatónica Mayor (1 - 2 - 3 - 5 - 6)', list: ['Modo Jónico (Escala Mayor): Dulce, dulce para Country, Pop y Baladas.', 'Modo Mixolidio: Funciona excelente para Rock Sureño y Blues.', 'Modo Lidio: Encaja suavemente sin chocar con la ♯4.'] }
       ]
     },
+    relativeTheory: {
+      en: '💡 Relative Pentatonic Relationship: Just like C Major and A Minor share identical notes, C Major Pentatonic (C-D-E-G-A) and A Minor Pentatonic (A-C-D-E-G) share the exact same 5 notes! Playing A Minor Pentatonic over a C Major chord progression produces a sweet major pentatonic sound.',
+      es: '💡 Relación Pentatónica Relativa: Al igual que Do Mayor y La Menor comparten las mismas notas, ¡Do Mayor Pentatónica (Do-Re-Mi-Sol-La) y La Menor Pentatónica (La-Do-Re-Mi-Sol) comparten exactamente las mismas 5 notas! Tocar La Menor Pentatónica sobre una progresión en Do Mayor genera un sonido mayor dulce.'
+    },
     blueNoteDetail: {
-      en: '🎸 The "Blue Note" (♭5 / ♯4): Located exactly between the 4th and 5th degrees (3 semitones above the minor 3rd). It acts as a chromatic passing note, adding intense expressive grit and melancholy emotion when bent or slid into the 5th degree.',
-      es: '🎸 La "Nota de Blues" (♭5 / ♯4): Se ubica exactamente entre el 4º y 5º grado. Funciona como nota de paso cromática que añade una tensión expresiva desgarradora y rasgada al deslizarse o estirarse hacia la 5ª justa.'
+      en: '🎸 The "Blue Note" (♭5 / ♯4): Located between the 4th and 5th degrees. In Minor Pentatonic it is placed as ♭5 (e.g., Eb in A Minor). In Major Pentatonic it acts as ♭3 / ♯2 (e.g., Eb in C Major) as a chromatic sliding note into the major 3rd!',
+      es: '🎸 La "Nota de Blues" (♭5 / ♯4): Se ubica entre el 4º y 5º grado. En la Pentatónica Menor se coloca como ♭5 (ej. Mi♭ en La Menor). En la Pentatónica Mayor funciona como ♭3 / ♯2 (ej. Mi♭ en Do Mayor) para deslizarse hacia la 3ª mayor.'
     },
     modes: [
       { id: 'p_maj', name: { en: 'Major Pentatonic (5 notes)', es: 'Pentatónica Mayor (5 notas)' }, steps: [2, 2, 3, 2, 3], code: 'T-T-3S-T-3S', degrees: ['1', '2', '3', '5', '6'], genre: { en: 'Country, Pop, Folk, Rock', es: 'Country, Pop, Folclor, Rock' }, desc: { en: 'Consonant, sweet, country/rock sound. Fits Ionian & Mixolydian.', es: 'Consonante, universal, folclórica. Sin semitonos.' } },
@@ -297,11 +360,22 @@ const SCALE_FAMILIES = {
       en: 'Origins & History: Built on exact mathematical interval repetition (e.g., all whole tones or alternating half/whole steps). Because of their perfect mathematical symmetry, rotating these scales produces identical pitch patterns — meaning they DO NOT have distinct uniquely-named relative modes. Used heavily by Claude Debussy, Thelonious Monk, Igor Stravinsky, and horror/sci-fi film composers for tension and floating weightlessness.',
       es: 'Acerca de, Orígenes e Historia: Creadas mediante repetición matemática exacta de intervalos. Debido a su simetría matemática perfecta, rotar sus notas produce los mismos patrones intervalares, por lo que NO tienen modos relativos con nombres únicos. Usadas por Claude Debussy, Thelonious Monk, Igor Stravinsky y compositores de cine de terror y ciencia ficción.'
     },
+    patternDiagram: {
+      title: { en: '🎸 Symmetrical Fretboard Pattern (Whole Tone 6-Note Scale)', es: '🎸 Diagrama de Patrón Simétrico (Tonos Completos - 6 Notas)' },
+      strings: [
+        { name: 'e (1)', notes: [{ f: '0', r: true }, { f: '2' }, { f: '4' }, { f: '6' }, { f: '8' }, { f: '10' }] },
+        { name: 'B (2)', notes: [{ f: '1' }, { f: '3' }, { f: '5' }, { f: '7' }, { f: '9' }, { f: '11' }] },
+        { name: 'G (3)', notes: [{ f: '0', r: true }, { f: '2' }, { f: '4' }, { f: '6' }, { f: '8' }, { f: '10' }] },
+        { name: 'D (4)', notes: [{ f: '0' }, { f: '2' }, { f: '4' }, { f: '6' }, { f: '8' }, { f: '10' }] },
+        { name: 'A (5)', notes: [{ f: '0' }, { f: '2' }, { f: '4' }, { f: '6' }, { f: '8' }, { f: '10' }] },
+        { name: 'E (6)', notes: [{ f: '0', r: true }, { f: '2' }, { f: '4' }, { f: '6' }, { f: '8' }, { f: '10' }] }
+      ]
+    },
     modes: [
       { id: 'sym_wt', name: { en: 'Whole Tone (6 notes)', es: 'Escala de Tonos Completos (6 notas)' }, steps: [2, 2, 2, 2, 2, 2], code: 'T-T-T-T-T-T', degrees: ['1', '2', '3', '♯4', '♯5', '♭7'], genre: { en: 'Impressionism, Dream Sequences', es: 'Impresionismo, Sueños en Cine' }, desc: { en: 'Dreamy, weightless, floating sound (Debussy, Monk).', es: 'Suena flotante, mágica, a sueño o hipnosis.' } },
       { id: 'sym_dim_4', name: { en: 'Formula 3-3-3-3 (Dim7 Arp)', es: 'Fórmula 3-3-3-3 (Arpegio °7)' }, steps: [3, 3, 3, 3], code: '3S-3S-3S-3S', degrees: ['1', '♭3', '♭5', '♭♭7'], genre: { en: 'Suspense, Film Tension', es: 'Suspenso, Drama en Cine' }, desc: { en: 'Symmetrical 4-note minor 3rd arpeggio.', es: 'Muestra las 4 notas pilar del acorde disminuido 7º.' } },
       { id: 'sym_oct_ts', name: { en: 'Octatonic Diminished (Tone-Semitone)', es: 'Octatónica Disminuida (Tono-Semitono)' }, steps: [2, 1, 2, 1, 2, 1, 2, 1], code: 'T-S-T-S-T-S-T-S', degrees: ['1', '2', '♭3', '4', '♭5', '♭6', '6', '7'], genre: { en: 'Terror Movies, Modern Jazz', es: 'Cine de Terror, Jazz Moderno' }, desc: { en: 'Alternates Tone and Semitone. Suspense and terror movies.', es: 'Tensión en Jazz y películas de misterio/terror.' } },
-      { id: 'sym_double_harm', name: { en: 'Double Harmonic (Byzantine)', es: 'Doble Armónica (Bizantina)' }, steps: [1, 3, 1, 2, 1, 3, 1], code: 'S-3S-S-T-S-3S-S', degrees: ['1', '♭2', '3', '4', '5', '♭6', '7'], desc: { en: 'Two 3-semitone jumps. Deeply mystical Middle Eastern sound.', es: 'Doble salto de 3 semitonos. Profundamente mística.' } }
+      { id: 'sym_double_harm', name: { en: 'Double Harmonic (Byzantine)', es: 'Doble Armónica (Bizantina)' }, steps: [1, 3, 1, 2, 1, 3, 1], code: 'S-3S-S-T-S-3S-S', degrees: ['1', '♭2', '3', '4', '5', '♭6', '7'], genre: { en: 'Middle Eastern, Flamenco Major', es: 'Música del Medio Oriente, Flamenco' }, desc: { en: 'Two 3-semitone jumps. Deeply mystical Middle Eastern sound.', es: 'Doble salto de 3 semitonos. Profundamente mística.' } }
     ]
   }
 };
@@ -661,7 +735,7 @@ function applyLanguageToDOM() {
   renderWikiCards();
 }
 
-// RENDER WIKI ENCYCLOPEDIA CARDS WITH INLINED TRANSFORMATIONS & AUDIO BUTTON
+// RENDER WIKI ENCYCLOPEDIA CARDS WITH INLINED TRANSFORMATIONS, PATTERN DIAGRAMS, & AUDIO BUTTON
 function renderWikiCards() {
   const t = UI_TEXTS[state.lang] || UI_TEXTS.en;
   wikiGridContainer.innerHTML = '';
@@ -674,7 +748,7 @@ function renderWikiCards() {
     const fName = family.name[state.lang] || family.name.en;
     const fAbout = family.about ? (family.about[state.lang] || family.about.en) : '';
 
-    // INLINED TRANSFORMATION STEP IF AVAILABLE
+    // INLINED NARROW TRANSFORMATION CARDS
     let transHTML = '';
     if (family.transformation) {
       const tr = family.transformation[state.lang] || family.transformation.en;
@@ -685,6 +759,33 @@ function renderWikiCards() {
             <div class="trans-line-base">${tr.base}</div>
             <div class="trans-line-arrow">${tr.arrow}</div>
             <div class="trans-line-result">${tr.res}</div>
+          </div>
+        </div>
+      `;
+    }
+
+    // 3NPS or 2NPS PATTERN DIAGRAM
+    let patternHTML = '';
+    if (family.patternDiagram) {
+      const pd = family.patternDiagram;
+      const pdTitle = pd.title[state.lang] || pd.title.en;
+
+      patternHTML = `
+        <div class="pattern-diagram-box">
+          <h5>${pdTitle}</h5>
+          <div class="fretboard-mini-diagram">
+            ${pd.strings.map(st => `
+              <div class="mini-diagram-row">
+                <span class="mini-string-name">${st.name}</span>
+                <div class="mini-frets-line">
+                  <span class="mini-wire">|</span>
+                  ${st.notes.map(n => `
+                    <span class="mini-dot ${n.r ? 'dot-root' : (n.blue ? 'dot-blue' : '')}">${n.f}</span>
+                    <span class="mini-wire">|</span>
+                  `).join('')}
+                </div>
+              </div>
+            `).join('')}
           </div>
         </div>
       `;
@@ -718,6 +819,8 @@ function renderWikiCards() {
     if (family.fits) {
       const fitItems = family.fits[state.lang] || family.fits.en;
       const blueNote = family.blueNoteDetail ? (family.blueNoteDetail[state.lang] || family.blueNoteDetail.en) : '';
+      const relTheory = family.relativeTheory ? (family.relativeTheory[state.lang] || family.relativeTheory.en) : '';
+
       fitsHTML = `
         <div class="pentatonic-fits-grid">
           ${fitItems.map(fit => `
@@ -729,7 +832,8 @@ function renderWikiCards() {
             </div>
           `).join('')}
         </div>
-        ${blueNote ? `<div class="blue-note-box"><h5>${blueNote}</h5></div>` : ''}
+        ${relTheory ? `<div class="blue-note-box"><p>${relTheory}</p></div>` : ''}
+        ${blueNote ? `<div class="blue-note-box"><p>${blueNote}</p></div>` : ''}
       `;
     }
 
@@ -779,6 +883,7 @@ function renderWikiCards() {
         <p>${fAbout}</p>
       </div>
       ${transHTML}
+      ${patternHTML}
       ${chordsHTML}
       ${fitsHTML}
       ${tableHTML}
@@ -839,7 +944,7 @@ function renderTuningControls() {
   });
 }
 
-// CÁLCULO DE LA ESCALA Y HARMONIZACIÓN
+// CÁLCULO DE LA ESCALA Y HARMONIZACIÓN CON NOTACIÓN ROMANA (I, ii, iii, IV, V, vi, vii°)
 function getSelectedScaleData() {
   const family = SCALE_FAMILIES[state.currentFamilyKey] || SCALE_FAMILIES.diatonic;
   const mode = family.modes[state.currentModeIndex] || family.modes[0];
@@ -853,6 +958,12 @@ function getSelectedScaleData() {
     currIndex = (currIndex + mode.steps[i]) % 12;
     scaleNotes.push(NOTES[currIndex]);
   }
+
+  // STANDARD ROMAN NUMERAL DEGREE MAPPINGS FOR HARMONIZED PROGRESSIONS
+  const ROMAN_MAP_MAJOR = ['I', 'ii', 'iii', 'IV', 'V', 'vi', 'vii°'];
+  const ROMAN_MAP_MINOR = ['i', 'ii°', '♭III', 'iv', 'v', '♭VI', '♭VII'];
+  const ROMAN_MAP_HARM_MIN = ['i', 'ii°', '♭III+', 'iv', 'V', '♭VI', 'vii°'];
+  const ROMAN_MAP_MEL_MIN = ['i', 'ii', '♭III+', 'IV', 'V', 'vi°', 'vii°'];
 
   const harmonizedChords = scaleNotes.map((rootNote, idx) => {
     const len = scaleNotes.length;
@@ -890,8 +1001,20 @@ function getSelectedScaleData() {
     else if (semitonesTo7 === 10) seventhSuffix = '7';
     else if (semitonesTo7 === 9) seventhSuffix = 'dim7';
 
+    // DYNAMIC ROMAN NUMERAL DEGREE LABEL FOR HARMONIZED CHORDS
+    let romanLabel = '';
+    if (state.currentFamilyKey === 'diatonic') {
+      romanLabel = ROMAN_MAP_MAJOR[idx] || `Deg ${idx + 1}`;
+    } else if (state.currentFamilyKey === 'harmonic_minor') {
+      romanLabel = ROMAN_MAP_HARM_MIN[idx] || `Deg ${idx + 1}`;
+    } else if (state.currentFamilyKey === 'melodic_minor') {
+      romanLabel = ROMAN_MAP_MEL_MIN[idx] || `Deg ${idx + 1}`;
+    } else {
+      romanLabel = semitonesTo3 === 4 ? (ROMAN_MAP_MAJOR[idx] || `Deg ${idx + 1}`) : (ROMAN_MAP_MINOR[idx] || `Deg ${idx + 1}`);
+    }
+
     return {
-      degreeLabel: mode.degrees[idx] || `${state.lang === 'es' ? 'Grado' : 'Degree'} ${idx + 1}`,
+      degreeLabel: romanLabel,
       rootNote,
       triadName: `${rootNote}${symbol}`,
       tetradName: `${rootNote}${symbol}${seventhSuffix}`,
@@ -916,20 +1039,25 @@ function updateUI() {
   scaleDisplayTitle.textContent = `${scaleData.rootNote} - ${mName}`;
   scaleFamilyBadge.textContent = fName;
 
+  // STEP CODE (T/S)
   const stepsText = scaleData.mode.steps.map(s => (s === 1 ? 'S' : (s === 2 ? 'T' : `${s}S`))).join('-');
-  const stepsNumbers = scaleData.mode.steps.join('-');
-
   scaleStepFormulaText.textContent = stepsText;
+
+  // NUMERIC STEP SEQUENCE ONLY (REPLACING DUPLICATE SCALE DEGREE)
+  const stepsNumbers = scaleData.mode.steps.join('-');
   scaleStepFormulaNumbers.textContent = stepsNumbers;
 
+  // SCALE DEGREE FORMULA CHIPS
   scaleDegreeFormula.innerHTML = scaleData.mode.degrees.map((deg, idx) => `
     <span class="chip ${idx === 0 ? 'chip-root' : ''}">${deg}</span>
   `).join('');
 
+  // SCALE NOTES CHIPS
   scaleNotesList.innerHTML = scaleData.scaleNotes.map((note, idx) => `
     <span class="chip ${idx === 0 ? 'chip-root' : ''}">${note}</span>
   `).join('');
 
+  // HARMONIZED SCALE CHORDS WITH PROMINENT ROMAN NUMERALS
   scaleChordsContainer.innerHTML = scaleData.harmonizedChords.map(ch => `
     <div class="chord-degree-card">
       <div class="chord-degree-num">${ch.degreeLabel}</div>
@@ -954,13 +1082,11 @@ function renderFretboard() {
   const numbersRow = document.createElement('div');
   numbersRow.className = 'fret-numbers-row';
 
-  // Label for String Tuning Column
   const stringHeadCell = document.createElement('div');
   stringHeadCell.className = 'fret-number-cell';
   stringHeadCell.textContent = state.lang === 'es' ? 'Afin.' : 'Tuning';
   numbersRow.appendChild(stringHeadCell);
 
-  // Fret 0 (Open Strings) Header with Nut Border between Fret 0 and Fret 1
   const openFretHeadCell = document.createElement('div');
   openFretHeadCell.className = 'fret-number-cell fret-open-header';
   openFretHeadCell.textContent = '0 (Open)';
@@ -1151,7 +1277,6 @@ function renderRelativityMatrix() {
 
   const family = SCALE_FAMILIES[state.currentFamilyKey] || SCALE_FAMILIES.diatonic;
 
-  // HEADERS: "Mode / Root", "0 (Root)", "1", "2", "3", "4", "5", "6", "7"...
   const thMode = document.createElement('th');
   thMode.textContent = `${state.lang === 'es' ? 'Modo / Tónica' : 'Mode / Root'}`;
   matrixHeaderRow.appendChild(thMode);
@@ -1163,7 +1288,6 @@ function renderRelativityMatrix() {
     matrixHeaderRow.appendChild(th);
   });
 
-  // ROWS FOR EACH OF THE 12 CHROMATIC KEYS
   NOTES.forEach(root => {
     const tr = document.createElement('tr');
     const rootIndex = NOTES.indexOf(root);

@@ -292,12 +292,93 @@ body {
   display: flex;
   flex-direction: column;
   gap: 6px;
-
 }
 
 .blue-note-box h5 {
   color: #60a5fa;
   font-size: 0.98rem;
+}
+
+.blue-note-box p {
+  font-size: 0.9rem;
+  color: #d1d5db;
+  line-height: 1.5;
+}
+
+/* 3NPS / 2NPS FRETBOARD PATTERN DIAGRAMS */
+.pattern-diagram-box {
+  background-color: var(--panel-bg);
+  border: 1px solid var(--border-color);
+  border-radius: 10px;
+  padding: 16px;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.pattern-diagram-box h5 {
+  color: #a5b4fc;
+  font-size: 0.95rem;
+}
+
+.fretboard-mini-diagram {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  background-color: var(--wood-bg);
+  border: 2px solid #2d2620;
+  border-radius: 6px;
+  padding: 10px 14px;
+  font-family: var(--font-mono);
+  overflow-x: auto;
+}
+
+.mini-diagram-row {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 0.8rem;
+  color: #cbd5e1;
+}
+
+.mini-string-name {
+  width: 28px;
+  font-weight: 700;
+  color: #f59e0b;
+}
+
+.mini-frets-line {
+  display: flex;
+  gap: 6px;
+  align-items: center;
+}
+
+.mini-dot {
+  width: 24px;
+  height: 24px;
+  border-radius: 50%;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 0.7rem;
+  font-weight: 700;
+  background-color: var(--scale-note-bg);
+  color: #fff;
+}
+
+.mini-dot.dot-root {
+  background-color: var(--root-color);
+}
+
+.mini-dot.dot-blue {
+  background-color: #60a5fa;
+  box-shadow: 0 0 8px #60a5fa;
+  color: #0f1117;
+}
+
+.mini-wire {
+  color: var(--fret-wire);
+  font-weight: 300;
 }
 
 /* TRANSPOSED ALIGNED MODE TABLES FOR WIKI CARDS */
@@ -467,7 +548,7 @@ body {
   color: #34d399;
 }
 
-/* HARMONIZED CHORDS GRID (INTERACTIVE TOOL) */
+/* HARMONIZED CHORDS GRID (INTERACTIVE TOOL) WITH PROMINENT ROMAN NUMERALS */
 .chords-grid-container {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
@@ -487,10 +568,12 @@ body {
 }
 
 .chord-degree-num {
-  font-size: 0.75rem;
-  font-weight: 700;
-  color: var(--text-muted);
+  font-family: var(--font-mono);
+  font-size: 1rem; /* PROMINENT ROMAN NUMERAL FONT SIZE */
+  font-weight: 800;
+  color: #fbbf24;
   text-transform: uppercase;
+  letter-spacing: 0.5px;
 }
 
 .chord-name-main {
@@ -523,12 +606,12 @@ body {
   margin-top: 2px;
 }
 
-/* TRANSFORMATION 3-STEP VERTICAL */
+/* TRANSFORMATION CARDS (NARROWER ON PC & INTEGRATED IN WIKI) */
 .transformation-block {
   margin-top: 10px;
   display: flex;
   flex-direction: column;
-  gap: 12px;
+  gap: 10px;
   border-top: 1px solid var(--border-color);
   padding-top: 14px;
 }
@@ -542,11 +625,12 @@ body {
   background-color: var(--panel-bg);
   border: 1px solid var(--border-color);
   border-radius: 8px;
-  padding: 12px;
+  padding: 14px 18px;
   display: flex;
   flex-direction: column;
   gap: 6px;
   text-align: center;
+  max-width: 480px; /* NARROWER ON PC SCREEN AS REQUESTED */
 }
 
 .trans-line-base {
@@ -555,7 +639,7 @@ body {
   font-weight: 600;
   color: #93c5fd;
   background-color: rgba(59, 130, 246, 0.15);
-  padding: 6px;
+  padding: 6px 10px;
   border-radius: 4px;
 }
 
@@ -572,7 +656,7 @@ body {
   font-weight: 700;
   color: #34d399;
   background-color: rgba(16, 185, 129, 0.15);
-  padding: 6px;
+  padding: 6px 10px;
   border-radius: 4px;
 }
 
@@ -778,7 +862,7 @@ body {
   text-transform: uppercase;
 }
 
-/* FORMULA DIRECT TEXT DISPLAY (2 LINES WITHOUT SPACES IN HYPHENS) */
+/* FORMULA DIRECT TEXT DISPLAY */
 .formula-text-container {
   display: flex;
   flex-direction: column;
@@ -794,14 +878,6 @@ body {
   font-size: 1.05rem;
   font-weight: 700;
   color: #60a5fa;
-  letter-spacing: 0.5px;
-}
-
-.formula-line-numbers {
-  font-family: var(--font-mono);
-  font-size: 0.95rem;
-  font-weight: 600;
-  color: #f59e0b;
   letter-spacing: 0.5px;
 }
 
@@ -1209,8 +1285,8 @@ body {
   .pentatonic-fits-grid {
     grid-template-columns: 1fr;
   }
-  .transformation-3step-grid {
-    grid-template-columns: 1fr;
+  .trans-3step-card {
+    max-width: 100%;
   }
   .control-panel {
     grid-template-columns: 1fr;
