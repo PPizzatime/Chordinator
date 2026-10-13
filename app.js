@@ -1,6 +1,6 @@
 /**
  * App.js - Guitar Scale & Mode Explorer
- * Includes redesigned conventional guitar box diagrams with fret numbers on dots,
+ * Includes conventional guitar box diagrams with scale degree numbers on dots,
  * clean Modal Relativity Matrix, Roman Numeral chord harmonizations, and bilingual support.
  */
 
@@ -135,7 +135,7 @@ const UI_TEXTS = {
   }
 };
 
-// SCALE FAMILIES DATA WITH CONVENTIONAL GUITAR MINI FRETBOARDS
+// SCALE FAMILIES DATA WITH SCALE DEGREES ON PATTERN DIAGRAM DOTS
 const SCALE_FAMILIES = {
   diatonic: {
     key: 'diatonic',
@@ -153,12 +153,12 @@ const SCALE_FAMILIES = {
       title: { en: '🎸 Conventional 3-Note-Per-String (3NPS) Fretboard Grid (Major / Diatonic)', es: '🎸 Diagrama Convencional de Mástil 3 Notas Por Cuerda (3NPS) - Familia Diatónica' },
       frets: [12, 13, 14, 15],
       strings: [
-        { name: 'e', dots: [{ f: 12, r: true }, { f: 14 }, { f: 15 }] },
-        { name: 'B', dots: [{ f: 12 }, { f: 13 }, { f: 15 }] },
-        { name: 'G', dots: [{ f: 11 }, { f: 12 }, { f: 14 }] },
-        { name: 'D', dots: [{ f: 12 }, { f: 14 }, { f: 15 }] },
-        { name: 'A', dots: [{ f: 12 }, { f: 14 }, { f: 15 }] },
-        { name: 'E', dots: [{ f: 12, r: true }, { f: 14 }, { f: 15 }] }
+        { name: 'e', dots: [{ f: 12, r: true, d: '1' }, { f: 14, d: '2' }, { f: 15, d: '3' }] },
+        { name: 'B', dots: [{ f: 12, d: '5' }, { f: 13, d: '6' }, { f: 15, d: '7' }] },
+        { name: 'G', dots: [{ f: 11, d: '2' }, { f: 12, d: '3' }, { f: 14, d: '4' }] },
+        { name: 'D', dots: [{ f: 12, d: '6' }, { f: 14, d: '7' }, { f: 15, r: true, d: '1' }] },
+        { name: 'A', dots: [{ f: 12, d: '3' }, { f: 14, d: '4' }, { f: 15, d: '5' }] },
+        { name: 'E', dots: [{ f: 12, r: true, d: '1' }, { f: 14, d: '2' }, { f: 15, d: '3' }] }
       ]
     },
     chords: [
@@ -196,12 +196,12 @@ const SCALE_FAMILIES = {
       title: { en: '🎸 Conventional Fretboard Grid (A Harmonic Minor Box)', es: '🎸 Diagrama Convencional de Mástil - La Menor Armónica' },
       frets: [5, 6, 7, 8, 9],
       strings: [
-        { name: 'e', dots: [{ f: 5, r: true }, { f: 7 }, { f: 8 }] },
-        { name: 'B', dots: [{ f: 5 }, { f: 6 }, { f: 9 }] },
-        { name: 'G', dots: [{ f: 4 }, { f: 5 }, { f: 7 }] },
-        { name: 'D', dots: [{ f: 6 }, { f: 7 }, { f: 9 }] },
-        { name: 'A', dots: [{ f: 5 }, { f: 7 }, { f: 8 }] },
-        { name: 'E', dots: [{ f: 5, r: true }, { f: 7 }, { f: 8 }] }
+        { name: 'e', dots: [{ f: 5, r: true, d: '1' }, { f: 7, d: '2' }, { f: 8, d: '♭3' }] },
+        { name: 'B', dots: [{ f: 5, d: '5' }, { f: 6, d: '♭6' }, { f: 9, d: '7' }] },
+        { name: 'G', dots: [{ f: 4, d: '2' }, { f: 5, d: '♭3' }, { f: 7, d: '4' }] },
+        { name: 'D', dots: [{ f: 6, d: '♭6' }, { f: 7, r: true, d: '1' }, { f: 9, d: '2' }] },
+        { name: 'A', dots: [{ f: 5, d: '♭3' }, { f: 7, d: '4' }, { f: 8, d: '5' }] },
+        { name: 'E', dots: [{ f: 5, r: true, d: '1' }, { f: 7, d: '2' }, { f: 8, d: '♭3' }] }
       ]
     },
     chords: [
@@ -239,12 +239,12 @@ const SCALE_FAMILIES = {
       title: { en: '🎸 Conventional Fretboard Grid (A Melodic Minor Box)', es: '🎸 Diagrama Convencional de Mástil - La Menor Melódica' },
       frets: [5, 6, 7, 8, 9],
       strings: [
-        { name: 'e', dots: [{ f: 5, r: true }, { f: 7 }, { f: 8 }] },
-        { name: 'B', dots: [{ f: 5 }, { f: 7 }, { f: 9 }] },
-        { name: 'G', dots: [{ f: 4 }, { f: 5 }, { f: 7 }] },
-        { name: 'D', dots: [{ f: 5 }, { f: 7 }, { f: 9 }] },
-        { name: 'A', dots: [{ f: 5 }, { f: 7 }, { f: 9 }] },
-        { name: 'E', dots: [{ f: 5, r: true }, { f: 7 }, { f: 8 }] }
+        { name: 'e', dots: [{ f: 5, r: true, d: '1' }, { f: 7, d: '2' }, { f: 8, d: '♭3' }] },
+        { name: 'B', dots: [{ f: 5, d: '5' }, { f: 7, d: '6' }, { f: 9, d: '7' }] },
+        { name: 'G', dots: [{ f: 4, d: '2' }, { f: 5, d: '♭3' }, { f: 7, d: '4' }] },
+        { name: 'D', dots: [{ f: 5, d: '4' }, { f: 7, r: true, d: '1' }, { f: 9, d: '2' }] },
+        { name: 'A', dots: [{ f: 5, d: '♭3' }, { f: 7, d: '4' }, { f: 9, d: '5' }] },
+        { name: 'E', dots: [{ f: 5, r: true, d: '1' }, { f: 7, d: '2' }, { f: 8, d: '♭3' }] }
       ]
     },
     chords: [
@@ -282,12 +282,12 @@ const SCALE_FAMILIES = {
       title: { en: '🎸 Conventional Fretboard Grid (C Harmonic Major Box)', es: '🎸 Diagrama Convencional de Mástil - Do Armónica Mayor' },
       frets: [8, 9, 10, 11, 12],
       strings: [
-        { name: 'e', dots: [{ f: 8, r: true }, { f: 10 }, { f: 12 }] },
-        { name: 'B', dots: [{ f: 8 }, { f: 9 }, { f: 12 }] },
-        { name: 'G', dots: [{ f: 7 }, { f: 9 }, { f: 10 }] },
-        { name: 'D', dots: [{ f: 9 }, { f: 10 }, { f: 12 }] },
-        { name: 'A', dots: [{ f: 8 }, { f: 10 }, { f: 12 }] },
-        { name: 'E', dots: [{ f: 8, r: true }, { f: 10 }, { f: 12 }] }
+        { name: 'e', dots: [{ f: 8, r: true, d: '1' }, { f: 10, d: '2' }, { f: 12, d: '3' }] },
+        { name: 'B', dots: [{ f: 8, d: '5' }, { f: 9, d: '♭6' }, { f: 12, d: '7' }] },
+        { name: 'G', dots: [{ f: 7, d: '2' }, { f: 9, d: '3' }, { f: 10, d: '4' }] },
+        { name: 'D', dots: [{ f: 9, d: '6' }, { f: 10, r: true, d: '1' }, { f: 12, d: '2' }] },
+        { name: 'A', dots: [{ f: 8, d: '3' }, { f: 10, d: '4' }, { f: 12, d: '5' }] },
+        { name: 'E', dots: [{ f: 8, r: true, d: '1' }, { f: 10, d: '2' }, { f: 12, d: '3' }] }
       ]
     },
     chords: [
@@ -325,12 +325,12 @@ const SCALE_FAMILIES = {
       title: { en: '🎸 Conventional Fretboard Grid (A Minor Blues Box #1 + Blue Note)', es: '🎸 Diagrama Convencional de Mástil - La Menor Blues Caja 1' },
       frets: [5, 6, 7, 8],
       strings: [
-        { name: 'e', dots: [{ f: 5, r: true }, { f: 8 }] },
-        { name: 'B', dots: [{ f: 5 }, { f: 8 }] },
-        { name: 'G', dots: [{ f: 5 }, { f: 7 }, { f: 8, blue: true }] },
-        { name: 'D', dots: [{ f: 5 }, { f: 7, r: true }] },
-        { name: 'A', dots: [{ f: 5 }, { f: 6, blue: true }, { f: 7 }] },
-        { name: 'E', dots: [{ f: 5, r: true }, { f: 8 }] }
+        { name: 'e', dots: [{ f: 5, r: true, d: '1' }, { f: 8, d: '♭7' }] },
+        { name: 'B', dots: [{ f: 5, d: '4' }, { f: 8, d: '5' }] },
+        { name: 'G', dots: [{ f: 5, d: '♭3' }, { f: 7, d: '4' }, { f: 8, blue: true, d: '♭5' }] },
+        { name: 'D', dots: [{ f: 5, d: '♭7' }, { f: 7, r: true, d: '1' }] },
+        { name: 'A', dots: [{ f: 5, d: '4' }, { f: 6, blue: true, d: '♭5' }, { f: 7, d: '5' }] },
+        { name: 'E', dots: [{ f: 5, r: true, d: '1' }, { f: 8, d: '♭7' }] }
       ]
     },
     fits: {
@@ -369,12 +369,12 @@ const SCALE_FAMILIES = {
       title: { en: '🎸 Conventional Symmetrical Fretboard Grid (Whole Tone 6-Note Pattern)', es: '🎸 Diagrama Convencional de Mástil (Tonos Completos - Patrón Simétrico)' },
       frets: [1, 2, 3, 4, 5],
       strings: [
-        { name: 'e', dots: [{ f: 1 }, { f: 3 }, { f: 5 }] },
-        { name: 'B', dots: [{ f: 2 }, { f: 4 }] },
-        { name: 'G', dots: [{ f: 0, r: true }, { f: 2 }, { f: 4 }] },
-        { name: 'D', dots: [{ f: 0 }, { f: 2 }, { f: 4 }] },
-        { name: 'A', dots: [{ f: 0 }, { f: 2 }, { f: 4 }] },
-        { name: 'E', dots: [{ f: 1 }, { f: 3 }, { f: 5 }] }
+        { name: 'e', dots: [{ f: 1, d: '♭2' }, { f: 3, d: '3' }, { f: 5, d: '♯5' }] },
+        { name: 'B', dots: [{ f: 2, d: '2' }, { f: 4, d: '♯4' }] },
+        { name: 'G', dots: [{ f: 0, r: true, d: '1' }, { f: 2, d: '2' }, { f: 4, d: '♯4' }] },
+        { name: 'D', dots: [{ f: 0, d: '1' }, { f: 2, d: '2' }, { f: 4, d: '♯4' }] },
+        { name: 'A', dots: [{ f: 0, d: '1' }, { f: 2, d: '2' }, { f: 4, d: '♯4' }] },
+        { name: 'E', dots: [{ f: 1, d: '♭2' }, { f: 3, d: '3' }, { f: 5, d: '♯5' }] }
       ]
     },
     modes: [
@@ -741,7 +741,7 @@ function applyLanguageToDOM() {
   renderWikiCards();
 }
 
-// RENDER WIKI ENCYCLOPEDIA CARDS WITH CONVENTIONAL GUITAR MINI FRETBOARD GRID (FRET NUMBERS ON DOTS)
+// RENDER WIKI ENCYCLOPEDIA CARDS WITH CONVENTIONAL GUITAR MINI FRETBOARD GRID (SCALE DEGREES ON DOTS)
 function renderWikiCards() {
   const t = UI_TEXTS[state.lang] || UI_TEXTS.en;
   wikiGridContainer.innerHTML = '';
@@ -770,7 +770,7 @@ function renderWikiCards() {
       `;
     }
 
-    // CONVENTIONAL GUITAR FRETBOARD GRID COMPONENT WITH FRET NUMBERS ON DOTS
+    // CONVENTIONAL GUITAR FRETBOARD GRID COMPONENT WITH SCALE DEGREE NUMBERS ON DOTS
     let patternHTML = '';
     if (family.patternDiagram) {
       const pd = family.patternDiagram;
@@ -794,7 +794,7 @@ function renderWikiCards() {
                       <div class="mini-fret-slot">
                         ${dot ? `
                           <div class="mini-note-badge ${dot.r ? 'badge-root' : (dot.blue ? 'badge-blue' : 'badge-scale')}">
-                            ${dot.f}
+                            ${dot.d || (dot.r ? '1' : '•')}
                           </div>
                         ` : ''}
                       </div>
