@@ -1,7 +1,7 @@
 /**
  * App.js - Guitar Scale & Mode Explorer
- * Includes redesigned conventional guitar box diagrams, clean Modal Relativity Matrix,
- * Roman Numeral chord harmonizations, and bilingual support.
+ * Includes redesigned conventional guitar box diagrams with fret numbers on dots,
+ * clean Modal Relativity Matrix, Roman Numeral chord harmonizations, and bilingual support.
  */
 
 const NOTES = ['C', 'C♯', 'D', 'D♯', 'E', 'F', 'F♯', 'G', 'G♯', 'A', 'A♯', 'B'];
@@ -135,7 +135,7 @@ const UI_TEXTS = {
   }
 };
 
-// SCALE FAMILIES DATA WITH EXPANDED ABOUT/HISTORY, TRANSFORMATIONS, & CONVENTIONAL GUITAR MINI FRETBOARDS
+// SCALE FAMILIES DATA WITH CONVENTIONAL GUITAR MINI FRETBOARDS
 const SCALE_FAMILIES = {
   diatonic: {
     key: 'diatonic',
@@ -741,7 +741,7 @@ function applyLanguageToDOM() {
   renderWikiCards();
 }
 
-// RENDER WIKI ENCYCLOPEDIA CARDS WITH CONVENTIONAL GUITAR MINI FRETBOARD GRID
+// RENDER WIKI ENCYCLOPEDIA CARDS WITH CONVENTIONAL GUITAR MINI FRETBOARD GRID (FRET NUMBERS ON DOTS)
 function renderWikiCards() {
   const t = UI_TEXTS[state.lang] || UI_TEXTS.en;
   wikiGridContainer.innerHTML = '';
@@ -770,7 +770,7 @@ function renderWikiCards() {
       `;
     }
 
-    // CONVENTIONAL GUITAR FRETBOARD GRID COMPONENT
+    // CONVENTIONAL GUITAR FRETBOARD GRID COMPONENT WITH FRET NUMBERS ON DOTS
     let patternHTML = '';
     if (family.patternDiagram) {
       const pd = family.patternDiagram;
@@ -794,7 +794,7 @@ function renderWikiCards() {
                       <div class="mini-fret-slot">
                         ${dot ? `
                           <div class="mini-note-badge ${dot.r ? 'badge-root' : (dot.blue ? 'badge-blue' : 'badge-scale')}">
-                            ${dot.r ? '1' : (dot.blue ? '♭5' : '•')}
+                            ${dot.f}
                           </div>
                         ` : ''}
                       </div>
@@ -1285,7 +1285,6 @@ function renderRelativityMatrix() {
   const family = SCALE_FAMILIES[state.currentFamilyKey] || SCALE_FAMILIES.diatonic;
   const currentRootIdx = NOTES.indexOf(normalizeNote(state.currentRoot));
 
-  // HEADERS: Mode Name | Degree | Notes in Mode | Parent Scale
   const headers = state.lang === 'es' ? [
     'Modo Relativo', 'Grado', 'Notas Reales en el Modo', 'Escala Madre / Raíz'
   ] : [
@@ -1298,7 +1297,6 @@ function renderRelativityMatrix() {
     matrixHeaderRow.appendChild(th);
   });
 
-  // Calculate parent scale notes for current selected root & family
   const parentRoot = state.currentRoot;
 
   family.modes.forEach((mode, mIdx) => {
@@ -1312,7 +1310,6 @@ function renderRelativityMatrix() {
     const modeRootIdx = (currentRootIdx + semitoneOffset) % 12;
     const modeRootNote = NOTES[modeRootIdx];
 
-    // Compute mode notes
     const modeNotes = [modeRootNote];
     let curr = modeRootIdx;
     for (let s = 0; s < mode.steps.length - 1; s++) {
@@ -1323,28 +1320,24 @@ function renderRelativityMatrix() {
     const mName = typeof mode.name === 'object' ? (mode.name[state.lang] || mode.name.en) : mode.name;
     const familyName = typeof family.name === 'object' ? (family.name[state.lang] || family.name.en) : family.name;
 
-    // Col 1: Mode Name
     const tdName = document.createElement('td');
     tdName.style.fontWeight = '700';
     tdName.style.color = '#60a5fa';
     tdName.textContent = `${modeRootNote} ${mName.split('.')[1] || mName}`;
     tr.appendChild(tdName);
 
-    // Col 2: Mode Degree
     const tdDeg = document.createElement('td');
     tdDeg.style.fontFamily = 'var(--font-mono)';
     tdDeg.style.color = '#fbbf24';
     tdDeg.textContent = `${state.lang === 'es' ? 'Modo' : 'Mode'} ${mIdx + 1}`;
     tr.appendChild(tdDeg);
 
-    // Col 3: Notes in Mode
     const tdNotes = document.createElement('td');
     tdNotes.style.fontFamily = 'var(--font-mono)';
     tdNotes.style.color = '#f3f4f6';
     tdNotes.textContent = modeNotes.join(' - ');
     tr.appendChild(tdNotes);
 
-    // Col 4: Parent Scale
     const tdParent = document.createElement('td');
     tdParent.style.color = '#a5b4fc';
     tdParent.textContent = `${parentRoot} ${familyName}`;
