@@ -1,7 +1,7 @@
 /**
  * App.js - Guitar Scale & Mode Explorer
- * Complete bilingual (EN/ES) logic, transposed tables, fretboard nut fix,
- * 3NPS/2NPS neck box diagrams, and Roman Numeral degree harmonizations.
+ * Includes redesigned conventional guitar box diagrams, clean Modal Relativity Matrix,
+ * Roman Numeral chord harmonizations, and bilingual support.
  */
 
 const NOTES = ['C', 'C♯', 'D', 'D♯', 'E', 'F', 'F♯', 'G', 'G♯', 'A', 'A♯', 'B'];
@@ -69,8 +69,8 @@ const UI_TEXTS = {
     lblNotesListTitle: 'Notes in this Key:',
     lblChordsTitle: '🎼 Harmonized Scale Chords (Triads, Tetrads & Semitone Formulas):',
     lblDescTitle: 'Sonorial Timbre & Character:',
-    matrixTitle: '🗺️ Transposed Modal Relativity Matrix of Selected Scale Family',
-    matrixSubtitle: 'This matrix demonstrates modal relativity: Every mode in a horizontal row shares the exact same set of pitch notes, changing only the root note (tonal center). For example, C Major, D Dorian, E Phrygian, F Lydian, G Mixolydian, A Aeolian, and B Locrian all contain the exact same notes (C, D, E, F, G, A, B)!',
+    matrixTitle: '🗺️ Modal Relativity Table of Selected Scale Family',
+    matrixSubtitle: 'This table shows all relative modes that share the exact same 7 pitch notes. Rotating the starting root note creates each mode without changing any notes!',
     footerCopy: 'Guitar Scale & Mode Explorer — Educational tool created by an independent musician & software engineer.',
     tableHeaderMode: 'Mode Name',
     tableHeaderCode: 'Tone/Semitone Code',
@@ -123,8 +123,8 @@ const UI_TEXTS = {
     lblNotesListTitle: 'Notas en esta Tonalidad:',
     lblChordsTitle: '🎼 Escala Harmonizada (Acordes Tríadas, Tétradas e Intervalos):',
     lblDescTitle: 'Sonoridad y Carácter Tímbrico:',
-    matrixTitle: '🗺️ Matriz Transpuesta de Relatividad Modal de la Familia Seleccionada',
-    matrixSubtitle: 'Esta matriz demuestra la relatividad modal: Todos los modos en una misma fila horizontal comparten exactamente el mismo conjunto de notas musicales. Por ejemplo, Do Mayor (Jónico), Re Dórico, Mi Frigio, Fa Lidio, Sol Mixolidio, La Eólico y Si Locrio contienen exactamente las mismas notas (Do, Re, Mi, Fa, Sol, La, Si). ¡Solo cambia la nota raíz (centro tonal)!',
+    matrixTitle: '🗺️ Tabla Práctica de Relatividad Modal',
+    matrixSubtitle: 'Esta tabla muestra todos los modos relativos que comparten exactamente las mismas 7 notas reales. ¡Rotar la nota raíz de inicio crea cada modo sin alterar ninguna nota!',
     footerCopy: 'Wiki & Explorador de Escalas — Proyecto educativo independiente creado por un músico e ingeniero de software.',
     tableHeaderMode: 'Modo',
     tableHeaderCode: 'Código Tono/Semitono',
@@ -135,7 +135,7 @@ const UI_TEXTS = {
   }
 };
 
-// SCALE FAMILIES DATA WITH EXPANDED ABOUT/HISTORY, TRANSFORMATIONS, & 3NPS/2NPS DIAGRAMS
+// SCALE FAMILIES DATA WITH EXPANDED ABOUT/HISTORY, TRANSFORMATIONS, & CONVENTIONAL GUITAR MINI FRETBOARDS
 const SCALE_FAMILIES = {
   diatonic: {
     key: 'diatonic',
@@ -150,14 +150,15 @@ const SCALE_FAMILIES = {
       es: { base: 'Escala Menor Natural (Eólica)', arrow: '⬇ (Baja un semitono el 3º, 6º y 7º grado)', res: 'Escala Diatónica Mayor (Base)' }
     },
     patternDiagram: {
-      title: { en: '🎸 3-Note-Per-String (3NPS) Fretboard Navigation Box (Major / Diatonic)', es: '🎸 Diagrama de Navegación 3 Notas Por Cuerda (3NPS) - Familia Diatónica' },
+      title: { en: '🎸 Conventional 3-Note-Per-String (3NPS) Fretboard Grid (Major / Diatonic)', es: '🎸 Diagrama Convencional de Mástil 3 Notas Por Cuerda (3NPS) - Familia Diatónica' },
+      frets: [12, 13, 14, 15],
       strings: [
-        { name: 'e (1)', notes: [{ f: '12', r: true }, { f: '14' }, { f: '15' }] },
-        { name: 'B (2)', notes: [{ f: '12' }, { f: '13' }, { f: '15' }] },
-        { name: 'G (3)', notes: [{ f: '11' }, { f: '12' }, { f: '14' }] },
-        { name: 'D (4)', notes: [{ f: '12' }, { f: '14' }, { f: '15' }] },
-        { name: 'A (5)', notes: [{ f: '12' }, { f: '14' }, { f: '15' }] },
-        { name: 'E (6)', notes: [{ f: '12', r: true }, { f: '14' }, { f: '15' }] }
+        { name: 'e', dots: [{ f: 12, r: true }, { f: 14 }, { f: 15 }] },
+        { name: 'B', dots: [{ f: 12 }, { f: 13 }, { f: 15 }] },
+        { name: 'G', dots: [{ f: 11 }, { f: 12 }, { f: 14 }] },
+        { name: 'D', dots: [{ f: 12 }, { f: 14 }, { f: 15 }] },
+        { name: 'A', dots: [{ f: 12 }, { f: 14 }, { f: 15 }] },
+        { name: 'E', dots: [{ f: 12, r: true }, { f: 14 }, { f: 15 }] }
       ]
     },
     chords: [
@@ -192,14 +193,15 @@ const SCALE_FAMILIES = {
       es: { base: 'Escala Menor Natural', arrow: '⬇ (Eleva un semitono el 7º grado para la sensible)', res: 'Escala Menor Armónica' }
     },
     patternDiagram: {
-      title: { en: '🎸 3-Note-Per-String (3NPS) Box (Harmonic Minor)', es: '🎸 Diagrama de Navegación 3 Notas Por Cuerda (3NPS) - Menor Armónica' },
+      title: { en: '🎸 Conventional Fretboard Grid (A Harmonic Minor Box)', es: '🎸 Diagrama Convencional de Mástil - La Menor Armónica' },
+      frets: [5, 6, 7, 8, 9],
       strings: [
-        { name: 'e (1)', notes: [{ f: '5', r: true }, { f: '7' }, { f: '8' }] },
-        { name: 'B (2)', notes: [{ f: '5' }, { f: '6' }, { f: '9' }] },
-        { name: 'G (3)', notes: [{ f: '4' }, { f: '5' }, { f: '7' }] },
-        { name: 'D (4)', notes: [{ f: '6' }, { f: '7' }, { f: '9' }] },
-        { name: 'A (5)', notes: [{ f: '5' }, { f: '7' }, { f: '8' }] },
-        { name: 'E (6)', notes: [{ f: '5', r: true }, { f: '7' }, { f: '8' }] }
+        { name: 'e', dots: [{ f: 5, r: true }, { f: 7 }, { f: 8 }] },
+        { name: 'B', dots: [{ f: 5 }, { f: 6 }, { f: 9 }] },
+        { name: 'G', dots: [{ f: 4 }, { f: 5 }, { f: 7 }] },
+        { name: 'D', dots: [{ f: 6 }, { f: 7 }, { f: 9 }] },
+        { name: 'A', dots: [{ f: 5 }, { f: 7 }, { f: 8 }] },
+        { name: 'E', dots: [{ f: 5, r: true }, { f: 7 }, { f: 8 }] }
       ]
     },
     chords: [
@@ -234,14 +236,15 @@ const SCALE_FAMILIES = {
       es: { base: 'Escala Menor Natural (Eólica)', arrow: '⬇ (Eleva TANTO el 6º como el 7º grado un semitono)', res: 'Escala Menor Melódica (Jazz Minor)' }
     },
     patternDiagram: {
-      title: { en: '🎸 3-Note-Per-String (3NPS) Box (Melodic Minor)', es: '🎸 Diagrama de Navegación 3 Notas Por Cuerda (3NPS) - Menor Melódica' },
+      title: { en: '🎸 Conventional Fretboard Grid (A Melodic Minor Box)', es: '🎸 Diagrama Convencional de Mástil - La Menor Melódica' },
+      frets: [5, 6, 7, 8, 9],
       strings: [
-        { name: 'e (1)', notes: [{ f: '5', r: true }, { f: '7' }, { f: '8' }] },
-        { name: 'B (2)', notes: [{ f: '5' }, { f: '7' }, { f: '8' }] },
-        { name: 'G (3)', notes: [{ f: '4' }, { f: '5' }, { f: '7' }] },
-        { name: 'D (4)', notes: [{ f: '5' }, { f: '7' }, { f: '9' }] },
-        { name: 'A (5)', notes: [{ f: '5' }, { f: '7' }, { f: '9' }] },
-        { name: 'E (6)', notes: [{ f: '5', r: true }, { f: '7' }, { f: '8' }] }
+        { name: 'e', dots: [{ f: 5, r: true }, { f: 7 }, { f: 8 }] },
+        { name: 'B', dots: [{ f: 5 }, { f: 7 }, { f: 9 }] },
+        { name: 'G', dots: [{ f: 4 }, { f: 5 }, { f: 7 }] },
+        { name: 'D', dots: [{ f: 5 }, { f: 7 }, { f: 9 }] },
+        { name: 'A', dots: [{ f: 5 }, { f: 7 }, { f: 9 }] },
+        { name: 'E', dots: [{ f: 5, r: true }, { f: 7 }, { f: 8 }] }
       ]
     },
     chords: [
@@ -276,14 +279,15 @@ const SCALE_FAMILIES = {
       es: { base: 'Escala Diatónica Mayor (Base)', arrow: '⬇ (Baja un semitono únicamente el 6º grado)', res: 'Escala Armónica Mayor' }
     },
     patternDiagram: {
-      title: { en: '🎸 3-Note-Per-String (3NPS) Box (Harmonic Major)', es: '🎸 Diagrama de Navegación 3 Notas Por Cuerda (3NPS) - Armónica Mayor' },
+      title: { en: '🎸 Conventional Fretboard Grid (C Harmonic Major Box)', es: '🎸 Diagrama Convencional de Mástil - Do Armónica Mayor' },
+      frets: [8, 9, 10, 11, 12],
       strings: [
-        { name: 'e (1)', notes: [{ f: '8', r: true }, { f: '10' }, { f: '12' }] },
-        { name: 'B (2)', notes: [{ f: '8' }, { f: '9' }, { f: '12' }] },
-        { name: 'G (3)', notes: [{ f: '7' }, { f: '9' }, { f: '10' }] },
-        { name: 'D (4)', notes: [{ f: '9' }, { f: '10' }, { f: '12' }] },
-        { name: 'A (5)', notes: [{ f: '8' }, { f: '10' }, { f: '12' }] },
-        { name: 'E (6)', notes: [{ f: '8', r: true }, { f: '10' }, { f: '12' }] }
+        { name: 'e', dots: [{ f: 8, r: true }, { f: 10 }, { f: 12 }] },
+        { name: 'B', dots: [{ f: 8 }, { f: 9 }, { f: 12 }] },
+        { name: 'G', dots: [{ f: 7 }, { f: 9 }, { f: 10 }] },
+        { name: 'D', dots: [{ f: 9 }, { f: 10 }, { f: 12 }] },
+        { name: 'A', dots: [{ f: 8 }, { f: 10 }, { f: 12 }] },
+        { name: 'E', dots: [{ f: 8, r: true }, { f: 10 }, { f: 12 }] }
       ]
     },
     chords: [
@@ -318,14 +322,15 @@ const SCALE_FAMILIES = {
       es: { base: 'Escala Menor Natural (Eólica)', arrow: '⬇ (Omite el 2º y ♭6º grado para formar caja de 5 notas)', res: 'Escala Pentatónica Menor' }
     },
     patternDiagram: {
-      title: { en: '🎸 2-Note-Per-String (2NPS) Box #1 + Blue Note (A Minor Blues)', es: '🎸 Diagrama 2 Notas Por Cuerda (2NPS) Caja 1 + Nota de Blues (La Menor Blues)' },
+      title: { en: '🎸 Conventional Fretboard Grid (A Minor Blues Box #1 + Blue Note)', es: '🎸 Diagrama Convencional de Mástil - La Menor Blues Caja 1' },
+      frets: [5, 6, 7, 8],
       strings: [
-        { name: 'e (1)', notes: [{ f: '5', r: true }, { f: '8' }] },
-        { name: 'B (2)', notes: [{ f: '5' }, { f: '8' }] },
-        { name: 'G (3)', notes: [{ f: '5' }, { f: '7' }, { f: '8', blue: true }] },
-        { name: 'D (4)', notes: [{ f: '5' }, { f: '7', r: true }] },
-        { name: 'A (5)', notes: [{ f: '5' }, { f: '6', blue: true }, { f: '7' }] },
-        { name: 'E (6)', notes: [{ f: '5', r: true }, { f: '8' }] }
+        { name: 'e', dots: [{ f: 5, r: true }, { f: 8 }] },
+        { name: 'B', dots: [{ f: 5 }, { f: 8 }] },
+        { name: 'G', dots: [{ f: 5 }, { f: 7 }, { f: 8, blue: true }] },
+        { name: 'D', dots: [{ f: 5 }, { f: 7, r: true }] },
+        { name: 'A', dots: [{ f: 5 }, { f: 6, blue: true }, { f: 7 }] },
+        { name: 'E', dots: [{ f: 5, r: true }, { f: 8 }] }
       ]
     },
     fits: {
@@ -361,14 +366,15 @@ const SCALE_FAMILIES = {
       es: 'Acerca de, Orígenes e Historia: Creadas mediante repetición matemática exacta de intervalos. Debido a su simetría matemática perfecta, rotar sus notas produce los mismos patrones intervalares, por lo que NO tienen modos relativos con nombres únicos. Usadas por Claude Debussy, Thelonious Monk, Igor Stravinsky y compositores de cine de terror y ciencia ficción.'
     },
     patternDiagram: {
-      title: { en: '🎸 Symmetrical Fretboard Pattern (Whole Tone 6-Note Scale)', es: '🎸 Diagrama de Patrón Simétrico (Tonos Completos - 6 Notas)' },
+      title: { en: '🎸 Conventional Symmetrical Fretboard Grid (Whole Tone 6-Note Pattern)', es: '🎸 Diagrama Convencional de Mástil (Tonos Completos - Patrón Simétrico)' },
+      frets: [1, 2, 3, 4, 5],
       strings: [
-        { name: 'e (1)', notes: [{ f: '0', r: true }, { f: '2' }, { f: '4' }, { f: '6' }, { f: '8' }, { f: '10' }] },
-        { name: 'B (2)', notes: [{ f: '1' }, { f: '3' }, { f: '5' }, { f: '7' }, { f: '9' }, { f: '11' }] },
-        { name: 'G (3)', notes: [{ f: '0', r: true }, { f: '2' }, { f: '4' }, { f: '6' }, { f: '8' }, { f: '10' }] },
-        { name: 'D (4)', notes: [{ f: '0' }, { f: '2' }, { f: '4' }, { f: '6' }, { f: '8' }, { f: '10' }] },
-        { name: 'A (5)', notes: [{ f: '0' }, { f: '2' }, { f: '4' }, { f: '6' }, { f: '8' }, { f: '10' }] },
-        { name: 'E (6)', notes: [{ f: '0', r: true }, { f: '2' }, { f: '4' }, { f: '6' }, { f: '8' }, { f: '10' }] }
+        { name: 'e', dots: [{ f: 1 }, { f: 3 }, { f: 5 }] },
+        { name: 'B', dots: [{ f: 2 }, { f: 4 }] },
+        { name: 'G', dots: [{ f: 0, r: true }, { f: 2 }, { f: 4 }] },
+        { name: 'D', dots: [{ f: 0 }, { f: 2 }, { f: 4 }] },
+        { name: 'A', dots: [{ f: 0 }, { f: 2 }, { f: 4 }] },
+        { name: 'E', dots: [{ f: 1 }, { f: 3 }, { f: 5 }] }
       ]
     },
     modes: [
@@ -735,7 +741,7 @@ function applyLanguageToDOM() {
   renderWikiCards();
 }
 
-// RENDER WIKI ENCYCLOPEDIA CARDS WITH INLINED TRANSFORMATIONS, PATTERN DIAGRAMS, & AUDIO BUTTON
+// RENDER WIKI ENCYCLOPEDIA CARDS WITH CONVENTIONAL GUITAR MINI FRETBOARD GRID
 function renderWikiCards() {
   const t = UI_TEXTS[state.lang] || UI_TEXTS.en;
   wikiGridContainer.innerHTML = '';
@@ -748,7 +754,7 @@ function renderWikiCards() {
     const fName = family.name[state.lang] || family.name.en;
     const fAbout = family.about ? (family.about[state.lang] || family.about.en) : '';
 
-    // INLINED NARROW TRANSFORMATION CARDS
+    // INLINED TRANSFORMATION CARDS
     let transHTML = '';
     if (family.transformation) {
       const tr = family.transformation[state.lang] || family.transformation.en;
@@ -764,7 +770,7 @@ function renderWikiCards() {
       `;
     }
 
-    // 3NPS or 2NPS PATTERN DIAGRAM
+    // CONVENTIONAL GUITAR FRETBOARD GRID COMPONENT
     let patternHTML = '';
     if (family.patternDiagram) {
       const pd = family.patternDiagram;
@@ -773,19 +779,30 @@ function renderWikiCards() {
       patternHTML = `
         <div class="pattern-diagram-box">
           <h5>${pdTitle}</h5>
-          <div class="fretboard-mini-diagram">
-            ${pd.strings.map(st => `
-              <div class="mini-diagram-row">
-                <span class="mini-string-name">${st.name}</span>
-                <div class="mini-frets-line">
-                  <span class="mini-wire">|</span>
-                  ${st.notes.map(n => `
-                    <span class="mini-dot ${n.r ? 'dot-root' : (n.blue ? 'dot-blue' : '')}">${n.f}</span>
-                    <span class="mini-wire">|</span>
-                  `).join('')}
-                </div>
+          <div class="mini-fretboard-grid-wrapper">
+            <div class="mini-fretboard-grid">
+              <div class="mini-header-row">
+                <div class="mini-header-str">${state.lang === 'es' ? 'Cuerda' : 'String'}</div>
+                ${pd.frets.map(f => `<div class="mini-header-fret">${state.lang === 'es' ? 'Traste' : 'Fret'} ${f}</div>`).join('')}
               </div>
-            `).join('')}
+              ${pd.strings.map(st => `
+                <div class="mini-grid-string-row">
+                  <div class="mini-string-label">${st.name}</div>
+                  ${pd.frets.map(fretNum => {
+                    const dot = st.dots.find(d => d.f === fretNum);
+                    return `
+                      <div class="mini-fret-slot">
+                        ${dot ? `
+                          <div class="mini-note-badge ${dot.r ? 'badge-root' : (dot.blue ? 'badge-blue' : 'badge-scale')}">
+                            ${dot.r ? '1' : (dot.blue ? '♭5' : '•')}
+                          </div>
+                        ` : ''}
+                      </div>
+                    `;
+                  }).join('')}
+                </div>
+              `).join('')}
+            </div>
           </div>
         </div>
       `;
@@ -889,7 +906,6 @@ function renderWikiCards() {
       ${tableHTML}
     `;
 
-    // Event listener for Play Scale in Wiki Card
     const playBtn = card.querySelector('.btn-play-family-wiki');
     if (playBtn) {
       playBtn.addEventListener('click', () => {
@@ -959,7 +975,6 @@ function getSelectedScaleData() {
     scaleNotes.push(NOTES[currIndex]);
   }
 
-  // STANDARD ROMAN NUMERAL DEGREE MAPPINGS FOR HARMONIZED PROGRESSIONS
   const ROMAN_MAP_MAJOR = ['I', 'ii', 'iii', 'IV', 'V', 'vi', 'vii°'];
   const ROMAN_MAP_MINOR = ['i', 'ii°', '♭III', 'iv', 'v', '♭VI', '♭VII'];
   const ROMAN_MAP_HARM_MIN = ['i', 'ii°', '♭III+', 'iv', 'V', '♭VI', 'vii°'];
@@ -1001,7 +1016,6 @@ function getSelectedScaleData() {
     else if (semitonesTo7 === 10) seventhSuffix = '7';
     else if (semitonesTo7 === 9) seventhSuffix = 'dim7';
 
-    // DYNAMIC ROMAN NUMERAL DEGREE LABEL FOR HARMONIZED CHORDS
     let romanLabel = '';
     if (state.currentFamilyKey === 'diatonic') {
       romanLabel = ROMAN_MAP_MAJOR[idx] || `Deg ${idx + 1}`;
@@ -1039,25 +1053,20 @@ function updateUI() {
   scaleDisplayTitle.textContent = `${scaleData.rootNote} - ${mName}`;
   scaleFamilyBadge.textContent = fName;
 
-  // STEP CODE (T/S)
   const stepsText = scaleData.mode.steps.map(s => (s === 1 ? 'S' : (s === 2 ? 'T' : `${s}S`))).join('-');
   scaleStepFormulaText.textContent = stepsText;
 
-  // NUMERIC STEP SEQUENCE ONLY (REPLACING DUPLICATE SCALE DEGREE)
   const stepsNumbers = scaleData.mode.steps.join('-');
   scaleStepFormulaNumbers.textContent = stepsNumbers;
 
-  // SCALE DEGREE FORMULA CHIPS
   scaleDegreeFormula.innerHTML = scaleData.mode.degrees.map((deg, idx) => `
     <span class="chip ${idx === 0 ? 'chip-root' : ''}">${deg}</span>
   `).join('');
 
-  // SCALE NOTES CHIPS
   scaleNotesList.innerHTML = scaleData.scaleNotes.map((note, idx) => `
     <span class="chip ${idx === 0 ? 'chip-root' : ''}">${note}</span>
   `).join('');
 
-  // HARMONIZED SCALE CHORDS WITH PROMINENT ROMAN NUMERALS
   scaleChordsContainer.innerHTML = scaleData.harmonizedChords.map(ch => `
     <div class="chord-degree-card">
       <div class="chord-degree-num">${ch.degreeLabel}</div>
@@ -1118,7 +1127,6 @@ function renderFretboard() {
 
     const openNoteIndex = NOTES.indexOf(normalizeNote(stringConfig.note));
 
-    // FRET 0: OPEN STRING CELL (TEXT LABEL WITHOUT CIRCLE BADGE BEHIND IT)
     const openCell = document.createElement('div');
     openCell.className = 'fret-note-cell fret-open-cell';
 
@@ -1149,7 +1157,6 @@ function renderFretboard() {
     });
     row.appendChild(openCell);
 
-    // FRETS 1 TO 24 (AFTER THE PHYSICAL BONE NUT)
     for (let fret = 1; fret <= 24; fret++) {
       const fretCell = document.createElement('div');
       fretCell.className = 'fret-note-cell';
@@ -1270,53 +1277,82 @@ function playScaleAudio() {
   });
 }
 
-// TRANSPOSED MODAL RELATIVITY MATRIX
+// REDESIGNED PRACTICAL MODAL RELATIVITY TABLE
 function renderRelativityMatrix() {
   matrixHeaderRow.innerHTML = '';
   matrixBodyRows.innerHTML = '';
 
   const family = SCALE_FAMILIES[state.currentFamilyKey] || SCALE_FAMILIES.diatonic;
+  const currentRootIdx = NOTES.indexOf(normalizeNote(state.currentRoot));
 
-  const thMode = document.createElement('th');
-  thMode.textContent = `${state.lang === 'es' ? 'Modo / Tónica' : 'Mode / Root'}`;
-  matrixHeaderRow.appendChild(thMode);
+  // HEADERS: Mode Name | Degree | Notes in Mode | Parent Scale
+  const headers = state.lang === 'es' ? [
+    'Modo Relativo', 'Grado', 'Notas Reales en el Modo', 'Escala Madre / Raíz'
+  ] : [
+    'Relative Mode', 'Degree', 'Notes in this Mode', 'Parent / Mother Scale'
+  ];
 
-  family.modes.forEach((mode, mIdx) => {
+  headers.forEach(h => {
     const th = document.createElement('th');
-    const mName = typeof mode.name === 'object' ? (mode.name[state.lang] || mode.name.en) : mode.name;
-    th.textContent = mIdx === 0 ? `0 (${state.lang === 'es' ? 'Raíz' : 'Root'})` : `${mIdx} (${mName.split('.')[1] || mName})`;
+    th.textContent = h;
     matrixHeaderRow.appendChild(th);
   });
 
-  NOTES.forEach(root => {
+  // Calculate parent scale notes for current selected root & family
+  const parentRoot = state.currentRoot;
+
+  family.modes.forEach((mode, mIdx) => {
     const tr = document.createElement('tr');
-    const rootIndex = NOTES.indexOf(root);
 
-    const tdKey = document.createElement('td');
-    tdKey.style.fontWeight = '700';
-    tdKey.style.color = '#a5b4fc';
-    tdKey.textContent = `${root} ${state.lang === 'es' ? 'Tonalidad' : 'Key'}`;
-    tr.appendChild(tdKey);
+    let semitoneOffset = 0;
+    for (let i = 0; i < mIdx; i++) {
+      semitoneOffset += family.rootFormulaSteps[i];
+    }
 
-    family.modes.forEach((mode, mIdx) => {
-      const td = document.createElement('td');
+    const modeRootIdx = (currentRootIdx + semitoneOffset) % 12;
+    const modeRootNote = NOTES[modeRootIdx];
 
-      let semitoneOffset = 0;
-      for (let i = 0; i < mIdx; i++) {
-        semitoneOffset += family.rootFormulaSteps[i];
-      }
+    // Compute mode notes
+    const modeNotes = [modeRootNote];
+    let curr = modeRootIdx;
+    for (let s = 0; s < mode.steps.length - 1; s++) {
+      curr = (curr + mode.steps[s]) % 12;
+      modeNotes.push(NOTES[curr]);
+    }
 
-      const relativeNoteIndex = (rootIndex + semitoneOffset) % 12;
-      const relativeNote = NOTES[relativeNoteIndex];
+    const mName = typeof mode.name === 'object' ? (mode.name[state.lang] || mode.name.en) : mode.name;
+    const familyName = typeof family.name === 'object' ? (family.name[state.lang] || family.name.en) : family.name;
 
-      td.textContent = relativeNote;
+    // Col 1: Mode Name
+    const tdName = document.createElement('td');
+    tdName.style.fontWeight = '700';
+    tdName.style.color = '#60a5fa';
+    tdName.textContent = `${modeRootNote} ${mName.split('.')[1] || mName}`;
+    tr.appendChild(tdName);
 
-      if (root === state.currentRoot) {
-        td.classList.add('highlight-root');
-      }
+    // Col 2: Mode Degree
+    const tdDeg = document.createElement('td');
+    tdDeg.style.fontFamily = 'var(--font-mono)';
+    tdDeg.style.color = '#fbbf24';
+    tdDeg.textContent = `${state.lang === 'es' ? 'Modo' : 'Mode'} ${mIdx + 1}`;
+    tr.appendChild(tdDeg);
 
-      tr.appendChild(td);
-    });
+    // Col 3: Notes in Mode
+    const tdNotes = document.createElement('td');
+    tdNotes.style.fontFamily = 'var(--font-mono)';
+    tdNotes.style.color = '#f3f4f6';
+    tdNotes.textContent = modeNotes.join(' - ');
+    tr.appendChild(tdNotes);
+
+    // Col 4: Parent Scale
+    const tdParent = document.createElement('td');
+    tdParent.style.color = '#a5b4fc';
+    tdParent.textContent = `${parentRoot} ${familyName}`;
+    tr.appendChild(tdParent);
+
+    if (mIdx === state.currentModeIndex) {
+      tr.classList.add('highlight-root');
+    }
 
     matrixBodyRows.appendChild(tr);
   });

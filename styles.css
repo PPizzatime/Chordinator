@@ -305,7 +305,7 @@ body {
   line-height: 1.5;
 }
 
-/* 3NPS / 2NPS FRETBOARD PATTERN DIAGRAMS */
+/* CONVENTIONAL REALISTIC GUITAR MINI FRETBOARD GRID COMPONENT */
 .pattern-diagram-box {
   background-color: var(--panel-bg);
   border: 1px solid var(--border-color);
@@ -318,67 +318,136 @@ body {
 
 .pattern-diagram-box h5 {
   color: #a5b4fc;
-  font-size: 0.95rem;
+  font-size: 0.98rem;
+  font-weight: 700;
 }
 
-.fretboard-mini-diagram {
+.mini-fretboard-grid-wrapper {
+  overflow-x: auto;
+  padding-bottom: 6px;
+}
+
+.mini-fretboard-grid {
   display: flex;
   flex-direction: column;
-  gap: 4px;
-  background-color: var(--wood-bg);
-  border: 2px solid #2d2620;
+  background: var(--wood-bg);
+  border: 3px solid #2d2620;
   border-radius: 6px;
-  padding: 10px 14px;
+  min-width: 520px;
+  max-width: 850px;
+  user-select: none;
+}
+
+.mini-header-row {
+  display: flex;
+  background-color: #12100e;
+  border-bottom: 2px solid #332b23;
   font-family: var(--font-mono);
-  overflow-x: auto;
+  font-size: 0.75rem;
+  color: var(--text-muted);
 }
 
-.mini-diagram-row {
-  display: flex;
-  align-items: center;
-  gap: 8px;
-  font-size: 0.8rem;
-  color: #cbd5e1;
-}
-
-.mini-string-name {
-  width: 28px;
+.mini-header-str {
+  width: 45px;
+  padding: 6px 0;
+  text-align: center;
+  background-color: #0d0c0a;
+  color: #a5b4fc;
   font-weight: 700;
-  color: #f59e0b;
+  border-right: 2px solid #2e3446;
 }
 
-.mini-frets-line {
+.mini-header-fret {
+  flex: 1;
+  text-align: center;
+  padding: 6px 0;
+  border-right: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+.mini-header-fret:last-child {
+  border-right: none;
+}
+
+.mini-grid-string-row {
   display: flex;
-  gap: 6px;
+  position: relative;
+  height: 32px;
   align-items: center;
 }
 
-.mini-dot {
-  width: 24px;
-  height: 24px;
-  border-radius: 50%;
-  display: inline-flex;
+.mini-grid-string-row::before {
+  content: '';
+  position: absolute;
+  left: 45px;
+  right: 0;
+  top: 50%;
+  height: 2px;
+  background: linear-gradient(180deg, #cbd5e1, #64748b);
+  z-index: 1;
+  box-shadow: 0 1px 2px rgba(0,0,0,0.5);
+}
+
+.mini-string-label {
+  width: 45px;
+  height: 100%;
+  background-color: #12100e;
+  color: #f59e0b;
+  font-family: var(--font-mono);
+  font-weight: 700;
+  font-size: 0.8rem;
+  display: flex;
   align-items: center;
   justify-content: center;
-  font-size: 0.7rem;
-  font-weight: 700;
+  border-right: 2px solid #2e3446;
+  z-index: 2;
+}
+
+.mini-fret-slot {
+  flex: 1;
+  height: 100%;
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-right: 2px solid var(--fret-wire);
+  z-index: 2;
+}
+
+.mini-fret-slot:last-child {
+  border-right: none;
+}
+
+.mini-note-badge {
+  width: 22px;
+  height: 22px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 0.68rem;
+  font-weight: 800;
+  font-family: var(--font-mono);
+  box-shadow: 0 2px 4px rgba(0,0,0,0.6);
+  z-index: 3;
+}
+
+.mini-note-badge.badge-scale {
   background-color: var(--scale-note-bg);
-  color: #fff;
+  color: #ffffff;
+  border: 1px solid #93c5fd;
 }
 
-.mini-dot.dot-root {
+.mini-note-badge.badge-root {
   background-color: var(--root-color);
+  color: #ffffff;
+  border: 2px solid #fca5a5;
 }
 
-.mini-dot.dot-blue {
+.mini-note-badge.badge-blue {
   background-color: #60a5fa;
-  box-shadow: 0 0 8px #60a5fa;
   color: #0f1117;
-}
-
-.mini-wire {
-  color: var(--fret-wire);
-  font-weight: 300;
+  border: 2px solid #93c5fd;
+  box-shadow: 0 0 8px #60a5fa;
 }
 
 /* TRANSPOSED ALIGNED MODE TABLES FOR WIKI CARDS */
@@ -569,7 +638,7 @@ body {
 
 .chord-degree-num {
   font-family: var(--font-mono);
-  font-size: 1rem; /* PROMINENT ROMAN NUMERAL FONT SIZE */
+  font-size: 1rem;
   font-weight: 800;
   color: #fbbf24;
   text-transform: uppercase;
@@ -606,7 +675,7 @@ body {
   margin-top: 2px;
 }
 
-/* TRANSFORMATION CARDS (NARROWER ON PC & INTEGRATED IN WIKI) */
+/* TRANSFORMATION CARDS */
 .transformation-block {
   margin-top: 10px;
   display: flex;
@@ -630,7 +699,7 @@ body {
   flex-direction: column;
   gap: 6px;
   text-align: center;
-  max-width: 480px; /* NARROWER ON PC SCREEN AS REQUESTED */
+  max-width: 480px;
 }
 
 .trans-line-base {
@@ -981,7 +1050,7 @@ body {
 .fret-number-cell.fret-open-header {
   color: #60a5fa;
   font-weight: 700;
-  border-right: 6px solid #e5e7eb; /* THE PHYSICAL GUITAR NUT BORDER BETWEEN FRET 0 AND FRET 1 */
+  border-right: 6px solid #e5e7eb;
 }
 
 .fret-number-cell.has-marker {
@@ -1034,10 +1103,9 @@ body {
   cursor: pointer;
 }
 
-/* FRET 0 (OPEN STRING AREA) - NUT BETWEEN FRET 0 AND FRET 1 */
 .fret-note-cell.fret-open-cell {
   background-color: rgba(255, 255, 255, 0.03);
-  border-right: 6px solid #e5e7eb; /* PHYSICAL BONE NUT BETWEEN FRET 0 AND FRET 1 */
+  border-right: 6px solid #e5e7eb;
 }
 
 .fret-note-cell.fret-open-cell:hover {
