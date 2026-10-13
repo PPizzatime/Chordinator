@@ -229,6 +229,23 @@ body {
   gap: 10px;
 }
 
+.wiki-notes-seq-box {
+  background-color: rgba(99, 102, 241, 0.12);
+  border: 1px solid rgba(99, 102, 241, 0.3);
+  padding: 10px 14px;
+  border-radius: 8px;
+  font-family: var(--font-mono);
+  font-size: 0.92rem;
+  color: #c7d2fe;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.wiki-notes-seq-box strong {
+  color: #fbbf24;
+}
+
 .wiki-meta {
   font-family: var(--font-mono);
   font-size: 0.88rem;
@@ -617,11 +634,11 @@ body {
   color: #34d399;
 }
 
-/* HARMONIZED CHORDS GRID (INTERACTIVE TOOL) WITH PROMINENT ROMAN NUMERALS */
+/* HARMONIZED CHORDS GRID (INTERACTIVE TOOL) WITH DUAL TRIAD + TETRAD ROWS */
 .chords-grid-container {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
-  gap: 12px;
+  grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+  gap: 14px;
   width: 100%;
 }
 
@@ -629,20 +646,41 @@ body {
   background-color: var(--panel-bg);
   border: 1px solid var(--border-color);
   border-radius: 8px;
-  padding: 12px;
+  padding: 14px 12px;
   display: flex;
   flex-direction: column;
-  gap: 4px;
+  gap: 6px;
   text-align: center;
 }
 
 .chord-degree-num {
   font-family: var(--font-mono);
-  font-size: 1rem;
+  font-size: 1.05rem;
   font-weight: 800;
   color: #fbbf24;
-  text-transform: uppercase;
   letter-spacing: 0.5px;
+}
+
+.chord-triad-block, .chord-tetrad-block {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  background-color: rgba(31, 35, 48, 0.6);
+  padding: 6px;
+  border-radius: 6px;
+  border: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+.chord-tetrad-block {
+  border-color: rgba(99, 102, 241, 0.25);
+  background-color: rgba(99, 102, 241, 0.08);
+}
+
+.chord-type-label {
+  font-size: 0.68rem;
+  font-weight: 700;
+  color: #9ca3af;
+  text-transform: uppercase;
 }
 
 .chord-name-main {
@@ -650,6 +688,13 @@ body {
   font-size: 1.15rem;
   font-weight: 700;
   color: #f3f4f6;
+}
+
+.chord-name-tetrad {
+  font-family: var(--font-mono);
+  font-size: 1.05rem;
+  font-weight: 700;
+  color: #a5b4fc;
 }
 
 .chord-notes-span {
@@ -666,7 +711,7 @@ body {
 
 .chord-semitones-span {
   font-family: var(--font-mono);
-  font-size: 0.75rem;
+  font-size: 0.72rem;
   font-weight: 600;
   color: #fbbf24;
   background-color: rgba(245, 158, 11, 0.12);
@@ -1344,7 +1389,7 @@ body {
     padding: 12px;
   }
   .chords-grid-container {
-    grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+    grid-template-columns: repeat(auto-fit, minmax(130px, 1fr));
     gap: 8px;
   }
   .chord-degree-card {
@@ -1379,6 +1424,6 @@ body {
     font-size: 1.15rem;
   }
   .chords-grid-container {
-    grid-template-columns: repeat(2, 1fr);
+    grid-template-columns: 1fr 1fr;
   }
 }

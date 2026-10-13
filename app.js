@@ -1,6 +1,7 @@
 /**
  * App.js - Guitar Scale & Mode Explorer
  * Wiki card layout order: 1) Modes Table, 2) Harmonized Triads in C Key, 3) Fretboard Diagram.
+ * Interactive Tool Harmonization displays DUAL rows: Triads AND Tetrads (7th chords) with interval formulas.
  */
 
 const NOTES = ['C', 'C♯', 'D', 'D♯', 'E', 'F', 'F♯', 'G', 'G♯', 'A', 'A♯', 'B'];
@@ -64,7 +65,7 @@ const UI_TEXTS = {
     btnPlayingScale: '🔊 Playing Scale...',
     lblSpeedTitle: 'Speed:',
     lblStepFormulaTitle: 'Step Code (T/S):',
-    lblDegreeFormulaTitle: 'Numeric Step Sequence:',
+    lblDegreeFormulaTitle: 'Scale Degree Formula:',
     lblNotesListTitle: 'Notes in this Key:',
     lblChordsTitle: '🎼 Harmonized Scale Chords (Triads, Tetrads & Semitone Formulas):',
     lblDescTitle: 'Sonorial Timbre & Character:',
@@ -118,7 +119,7 @@ const UI_TEXTS = {
     btnPlayingScale: '🔊 Reproduciendo...',
     lblSpeedTitle: 'Velocidad:',
     lblStepFormulaTitle: 'Código de Pasos (T/S):',
-    lblDegreeFormulaTitle: 'Secuencia Numérica de Pasos:',
+    lblDegreeFormulaTitle: 'Fórmula por Grados:',
     lblNotesListTitle: 'Notas en esta Tonalidad:',
     lblChordsTitle: '🎼 Escala Harmonizada (Acordes Tríadas, Tétradas e Intervalos):',
     lblDescTitle: 'Sonoridad y Carácter Tímbrico:',
@@ -134,11 +135,15 @@ const UI_TEXTS = {
   }
 };
 
-// SCALE FAMILIES DATA WITH EXCLUSIVE CONCRETE C-ROOT HARMONIZED TRIADS
+// SCALE FAMILIES DATA WITH EXCLUSIVE CONCRETE C-ROOT HARMONIZED TRIADS AND C SCALE NOTE SEQUENCE (LETTERS + SOLFEGE)
 const SCALE_FAMILIES = {
   diatonic: {
     key: 'diatonic',
     name: { en: 'Diatonic Family (C Major Scale)', es: 'Familia Diatónica (Escala de Do Mayor)' },
+    cNoteSequence: {
+      en: 'Notes in C Major: C - D - E - F - G - A - B (Do - Re - Mi - Fa - Sol - La - Si)',
+      es: 'Notas en Do Mayor: C - D - E - F - G - A - B (Do - Re - Mi - Fa - Sol - La - Si)'
+    },
     rootFormulaSteps: [2, 2, 1, 2, 2, 2, 1],
     about: {
       en: 'Origins & History: Codified during the Renaissance and Baroque eras (J.S. Bach, Rameau), the Diatonic scale grew from ancient Greek Pythagorean tuning and medieval Church Modes. It established the bedrock of Western tonal harmony. Today it is used across virtually every genre including Pop, Rock, Country, Jazz, Classical, and Folk.',
@@ -173,7 +178,7 @@ const SCALE_FAMILIES = {
       { id: 'ionian', name: { en: '1. Ionian (Major)', es: '1. Jónico (Escala Mayor)' }, steps: [2, 2, 1, 2, 2, 2, 1], code: 'T-T-S-T-T-T-S', degrees: ['1', '2', '3', '4', '5', '6', '7'], genre: { en: 'Pop, Classical, Country', es: 'Pop, Clásica, Country' }, desc: { en: 'Bright, stable, clear, and resolutive. Foundation of pop & classical music.', es: 'Alegre, estable, claro, resolutivo. Base de la armonía clásica y pop.' } },
       { id: 'dorian', name: { en: '2. Dorian', es: '2. Dórico' }, steps: [2, 1, 2, 2, 2, 1, 2], code: 'T-S-T-T-T-S-T', degrees: ['1', '2', '♭3', '4', '5', '6', '♭7'], genre: { en: 'Funk, Jazz, Blues, Rock', es: 'Funk, Jazz, Blues, Rock' }, desc: { en: 'Sophisticated minor with a bright major 6th. Key for Jazz, Funk & Rock (Billie Jean).', es: 'Menor elegante, sofisticado, melancólico con toque brillante por la 6ª mayor (Billie Jean).' } },
       { id: 'phrygian', name: { en: '3. Phrygian', es: '3. Frigio' }, steps: [1, 2, 2, 2, 1, 2, 2], code: 'S-T-T-T-S-T-T', degrees: ['1', '♭2', '♭3', '4', '5', '♭6', '♭7'], genre: { en: 'Flamenco, Heavy Metal, Thrash', es: 'Flamenco, Metal Pesado, Thrash' }, desc: { en: 'Dark, tense, Spanish/Flamenco flavor with a flat 2nd degree (Metallica).', es: 'Oscuro, tenso, místico, con sabor flamenco, español o metal pesado por la ♭2.' } },
-      { id: 'lydian', name: { en: '4. Lydian', es: '4. Lidio' }, steps: [2, 2, 2, 1, 2, 2, 1], code: 'T-T-T-S-T-T-S', degrees: ['1', '2', '3', '♯4', '5', '6', '7'], genre: { en: 'Film Scoring, Sci-Fi, Prog Rock', es: 'Cine, Sci-Fi, Rock Progresivo' }, desc: { en: 'Dreamy, ethereal, futuristic with an augmented 4th (Sci-Fi film scores, Disney).', es: 'Mágico, espacial, de ensueño, extremadamente brillante y futurista por la ♯4.' } },
+      { id: 'lydian', name: { en: '4. Lydian', es: '4. Lidio' }, steps: [2, 2, 2, 1, 2, 2, 1], code: 'T-T-T-S-T-T-S', degrees: ['1', '2', '3', '♯4', '5', '6', '7'], genre: { en: 'Film Scoring, Sci-Fi, Prog Rock', es: 'Cine, Sci-Fi, Rock Progresivo' }, desc: { en: 'Dreamy, ethereal, futuristic with an augmented 4th (Sci-Fi film scores, Disney).', es: 'Mágico, espacial, de坑sueño, extremadamente brillante y futurista por la ♯4.' } },
       { id: 'mixolydian', name: { en: '5. Mixolydian', es: '5. Mixolidio' }, steps: [2, 2, 1, 2, 2, 1, 2], code: 'T-T-S-T-T-S-T', degrees: ['1', '2', '3', '4', '5', '6', '♭7'], genre: { en: 'Classic Rock, Blues, Southern Rock', es: 'Rock Clásico, Blues, Rock Sureño' }, desc: { en: 'Bluesy, festive major sound with a flat 7th. Backbone of Classic Rock & Blues.', es: 'Festivo, blusero, rockero. Es una escala mayor desenfadada por la ♭7.' } },
       { id: 'aeolian', name: { en: '6. Aeolian (Natural Minor)', es: '6. Eólico (Escala Menor Natural)' }, steps: [2, 1, 2, 2, 1, 2, 2], code: 'T-S-T-T-S-T-T', degrees: ['1', '2', '♭3', '4', '5', '♭6', '♭7'], genre: { en: 'Rock, Metal, Pop Ballads', es: 'Rock, Metal, Baladas Pop' }, desc: { en: 'Sad, emotional, dramatic minor key foundation for ballads and rock anthems.', es: 'Triste, dramático, emotivo, serio. Base de baladas, rock y canciones épicas.' } },
       { id: 'locrian', name: { en: '7. Locrian', es: '7. Locrio' }, steps: [1, 2, 2, 1, 2, 2, 2], code: 'S-T-T-S-T-T-T', degrees: ['1', '♭2', '♭3', '4', '♭5', '♭6', '♭7'], genre: { en: 'Death Metal, Fusion, Avant-Garde', es: 'Death Metal, Fusión, Vanguardia' }, desc: { en: 'Unstable, highly dissonant, lacks a perfect 5th (Extreme Metal, Avant-garde Jazz).', es: 'Extremadamente tenso e inestable. Carece de quinta justa (Metal Extremo).' } }
@@ -182,6 +187,10 @@ const SCALE_FAMILIES = {
   harmonic_minor: {
     key: 'harmonic_minor',
     name: { en: 'Harmonic Minor Family (C Harmonic Minor)', es: 'Familia Menor Armónica (Do Menor Armónica)' },
+    cNoteSequence: {
+      en: 'Notes in C Harmonic Minor: C - D - E♭ - F - G - A♭ - B (Do - Re - Mi♭ - Fa - Sol - La♭ - Si)',
+      es: 'Notas en Do Menor Armónica: C - D - E♭ - F - G - A♭ - B (Do - Re - Mi♭ - Fa - Sol - La♭ - Si)'
+    },
     rootFormulaSteps: [2, 1, 2, 2, 1, 3, 1],
     about: {
       en: 'Origins & History: Developed in European Classical music to create a strong dominant major chord (V7) resolving to a minor tonic (i). Famous in Middle Eastern traditions, Klezmer, Flamenco, and popularized in modern guitar by Neoclassical shredders (Yngwie Malmsteen, Randy Rhoads).',
@@ -225,6 +234,10 @@ const SCALE_FAMILIES = {
   melodic_minor: {
     key: 'melodic_minor',
     name: { en: 'Melodic Minor Family (C Melodic Minor)', es: 'Familia Menor Melódica (Do Menor Melódica)' },
+    cNoteSequence: {
+      en: 'Notes in C Melodic Minor: C - D - E♭ - F - G - A - B (Do - Re - Mi♭ - Fa - Sol - La - Si)',
+      es: 'Notas en Do Menor Melódica: C - D - E♭ - F - G - A - B (Do - Re - Mi♭ - Fa - Sol - La - Si)'
+    },
     rootFormulaSteps: [2, 1, 2, 2, 2, 2, 1],
     about: {
       en: 'Origins & History: Classical composers raised both 6th and 7th degrees when ascending to avoid the vocal 3-semitone gap of Harmonic Minor. In Modern Jazz, it is played ascending in both directions. Essential for Allan Holdsworth, Pat Metheny, Guthrie Govan, and Miles Davis.',
@@ -268,6 +281,10 @@ const SCALE_FAMILIES = {
   harmonic_major: {
     key: 'harmonic_major',
     name: { en: 'Harmonic Major Family (C Harmonic Major)', es: 'Familia Armónica Mayor (Do Armónica Mayor)' },
+    cNoteSequence: {
+      en: 'Notes in C Harmonic Major: C - D - E - F - G - A♭ - B (Do - Re - Mi - Fa - Sol - La♭ - Si)',
+      es: 'Notas en Do Armónica Mayor: C - D - E - F - G - A♭ - B (Do - Re - Mi - Fa - Sol - La♭ - Si)'
+    },
     rootFormulaSteps: [2, 2, 1, 2, 1, 3, 1],
     about: {
       en: 'Origins & History: A major scale with a flattened 6th degree (♭6). Popularized in 19th-century Romantic orchestral music (Rimsky-Korsakov) to inject deep exotic minor subdominant colors (iv minor chord in major key) into bright major progressions.',
@@ -311,6 +328,10 @@ const SCALE_FAMILIES = {
   pentatonic_and_blues: {
     key: 'pentatonic_and_blues',
     name: { en: 'Pentatonics & Blues Family', es: 'Pentatónicas y Escala de Blues' },
+    cNoteSequence: {
+      en: 'Notes in C Minor Blues: C - E♭ - F - G♭ - G - B♭ (Do - Mi♭ - Fa - Sol♭ - Sol - Si♭)',
+      es: 'Notas en Do Menor Blues: C - E♭ - F - G♭ - G - B♭ (Do - Mi♭ - Fa - Sol♭ - Sol - Si♭)'
+    },
     rootFormulaSteps: [3, 2, 2, 3, 2],
     about: {
       en: 'Origins & History: Ancient 5-note scales dating back over 50,000 years in prehistoric flutes, Chinese traditional music, African folk, and Celtic tunes. In the 20th century, African-American musicians added the passing "Blue Note" (♭5) creating the Blues Scale — the foundation for B.B. King, Jimi Hendrix, Stevie Ray Vaughan, and Eric Clapton.',
@@ -359,6 +380,10 @@ const SCALE_FAMILIES = {
   symmetric: {
     key: 'symmetric',
     name: { en: 'Symmetric & Synthetic Scales', es: 'Escalas Simétricas / Sintéticas' },
+    cNoteSequence: {
+      en: 'Notes in C Whole Tone: C - D - E - F♯ - G♯ - A♯ (Do - Re - Mi - Fa♯ - Sol♯ - La♯)',
+      es: 'Notas en Do Tonos Completos: C - D - E - F♯ - G♯ - A♯ (Do - Re - Mi - Fa♯ - Sol♯ - La♯)'
+    },
     rootFormulaSteps: [2, 2, 2, 2, 2, 2],
     about: {
       en: 'Origins & History: Built on exact mathematical interval repetition (e.g., all whole tones or alternating half/whole steps). Because of their perfect mathematical symmetry, rotating these scales produces identical pitch patterns — meaning they DO NOT have distinct uniquely-named relative modes. Used heavily by Claude Debussy, Thelonious Monk, Igor Stravinsky, and horror/sci-fi film composers for tension and floating weightlessness.',
@@ -753,6 +778,7 @@ function renderWikiCards() {
 
     const fName = family.name[state.lang] || family.name.en;
     const fAbout = family.about ? (family.about[state.lang] || family.about.en) : '';
+    const cSeq = family.cNoteSequence ? (family.cNoteSequence[state.lang] || family.cNoteSequence.en) : '';
 
     // INLINED TRANSFORMATION CARDS
     let transHTML = '';
@@ -896,6 +922,7 @@ function renderWikiCards() {
           <button class="btn btn-sm btn-primary btn-play-family-wiki" data-family="${fKey}">▶ ${state.lang === 'es' ? 'Escuchar (C)' : 'Play Scale (C)'}</button>
         </h3>
       </div>
+      ${cSeq ? `<div class="wiki-notes-seq-box"><p><strong>🎼 ${state.lang === 'es' ? 'Secuencia de Notas (Do / C):' : 'C Key Note Sequence:'}</strong> ${cSeq}</p></div>` : ''}
       <div class="wiki-section-detail">
         <h4>💡 ${state.lang === 'es' ? 'Acerca de, Orígenes e Historia:' : 'About, History & Context:'}</h4>
         <p>${fAbout}</p>
@@ -961,7 +988,7 @@ function renderTuningControls() {
   });
 }
 
-// CÁLCULO DE LA ESCALA Y HARMONIZACIÓN CON NOTACIÓN ROMANA (I, ii, iii, IV, V, vi, vii°)
+// CÁLCULO DE LA ESCALA Y HARMONIZACIÓN CON DUAL ROW (TRÍADAS + TÉTRADAS 7ª) Y NOTACIÓN ROMANA
 function getSelectedScaleData() {
   const family = SCALE_FAMILIES[state.currentFamilyKey] || SCALE_FAMILIES.diatonic;
   const mode = family.modes[state.currentModeIndex] || family.modes[0];
@@ -1068,12 +1095,22 @@ function updateUI() {
     <span class="chip ${idx === 0 ? 'chip-root' : ''}">${note}</span>
   `).join('');
 
+  // RENDER DUAL ROW HARMONIZATION (TRIADS ROW + TETRADS 7th ROW) IN INTERACTIVE TOOL
   scaleChordsContainer.innerHTML = scaleData.harmonizedChords.map(ch => `
     <div class="chord-degree-card">
       <div class="chord-degree-num">${ch.degreeLabel}</div>
-      <div class="chord-name-main">${ch.triadName}</div>
-      <div class="chord-notes-span">${ch.triadNotes}</div>
-      <div class="chord-intervals-span">(${ch.triadIntervals})</div>
+      <div class="chord-triad-block">
+        <span class="chord-type-label">${state.lang === 'es' ? 'Tríada' : 'Triad'}</span>
+        <div class="chord-name-main">${ch.triadName}</div>
+        <div class="chord-notes-span">${ch.triadNotes}</div>
+        <div class="chord-intervals-span">(${ch.triadIntervals})</div>
+      </div>
+      <div class="chord-tetrad-block">
+        <span class="chord-type-label">${state.lang === 'es' ? 'Tétrada (7ª)' : 'Tetrad (7th)'}</span>
+        <div class="chord-name-tetrad">${ch.tetradName}</div>
+        <div class="chord-notes-span">${ch.tetradNotes}</div>
+        <div class="chord-intervals-span">(${ch.tetradIntervals})</div>
+      </div>
       <div class="chord-semitones-span">${ch.semitoneFormula}</div>
     </div>
   `).join('');
