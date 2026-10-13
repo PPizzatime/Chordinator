@@ -1,6 +1,6 @@
 /**
  * App.js - Guitar Scale & Mode Explorer
- * Wiki card layout order: 1) Modes Table, 2) Harmonized Chords, 3) Fretboard Diagram.
+ * Wiki card layout order: 1) Modes Table, 2) Harmonized Triads in C Key, 3) Fretboard Diagram.
  */
 
 const NOTES = ['C', 'C♯', 'D', 'D♯', 'E', 'F', 'F♯', 'G', 'G♯', 'A', 'A♯', 'B'];
@@ -134,11 +134,11 @@ const UI_TEXTS = {
   }
 };
 
-// SCALE FAMILIES DATA WITH SCALE DEGREES ON PATTERN DIAGRAM DOTS
+// SCALE FAMILIES DATA WITH EXCLUSIVE CONCRETE C-ROOT HARMONIZED TRIADS
 const SCALE_FAMILIES = {
   diatonic: {
     key: 'diatonic',
-    name: { en: 'Diatonic Family (Major Scale)', es: 'Familia Diatónica (Escala Mayor)' },
+    name: { en: 'Diatonic Family (C Major Scale)', es: 'Familia Diatónica (Escala de Do Mayor)' },
     rootFormulaSteps: [2, 2, 1, 2, 2, 2, 1],
     about: {
       en: 'Origins & History: Codified during the Renaissance and Baroque eras (J.S. Bach, Rameau), the Diatonic scale grew from ancient Greek Pythagorean tuning and medieval Church Modes. It established the bedrock of Western tonal harmony. Today it is used across virtually every genre including Pop, Rock, Country, Jazz, Classical, and Folk.',
@@ -149,7 +149,7 @@ const SCALE_FAMILIES = {
       es: { base: 'Escala Menor Natural (Eólica)', arrow: '⬇ (Baja un semitono el 3º, 6º y 7º grado)', res: 'Escala Diatónica Mayor (Base)' }
     },
     patternDiagram: {
-      title: { en: '🎸 Conventional 3-Note-Per-String (3NPS) Fretboard Grid (Major / Diatonic)', es: '🎸 Diagrama Convencional de Mástil 3 Notas Por Cuerda (3NPS) - Familia Diatónica' },
+      title: { en: '🎸 Conventional 3-Note-Per-String (3NPS) Fretboard Grid (C Major / Diatonic)', es: '🎸 Diagrama Convencional de Mástil 3 Notas Por Cuerda (3NPS) - Do Mayor' },
       frets: [12, 13, 14, 15],
       strings: [
         { name: 'e', dots: [{ f: 12, r: true, d: '1' }, { f: 14, d: '2' }, { f: 15, d: '3' }] },
@@ -160,14 +160,14 @@ const SCALE_FAMILIES = {
         { name: 'E', dots: [{ f: 12, r: true, d: '1' }, { f: 14, d: '2' }, { f: 15, d: '3' }] }
       ]
     },
-    chords: [
-      { deg: 'I', triad: 'I (Major)', tetrad: 'Imaj7', formula: '1 - 3 - 5 - 7' },
-      { deg: 'ii', triad: 'ii (Minor)', tetrad: 'ii7', formula: '1 - ♭3 - 5 - ♭7' },
-      { deg: 'iii', triad: 'iii (Minor)', tetrad: 'iii7', formula: '1 - ♭3 - 5 - ♭7' },
-      { deg: 'IV', triad: 'IV (Major)', tetrad: 'IVmaj7', formula: '1 - 3 - 5 - 7' },
-      { deg: 'V', triad: 'V (Major)', tetrad: 'V7 (Dom)', formula: '1 - 3 - 5 - ♭7' },
-      { deg: 'vi', triad: 'vi (Minor)', tetrad: 'vi7', formula: '1 - ♭3 - 5 - ♭7' },
-      { deg: 'vii°', triad: 'vii° (Dim)', tetrad: 'm7(♭5)', formula: '1 - ♭3 - ♭5 - ♭7' }
+    triadsC: [
+      { deg: 'I', chord: 'C (Do Maj)', notes: 'C - E - G', formula: '1 - 3 - 5' },
+      { deg: 'ii', chord: 'Dm (Re m)', notes: 'D - F - A', formula: '1 - ♭3 - 5' },
+      { deg: 'iii', chord: 'Em (Mi m)', notes: 'E - G - B', formula: '1 - ♭3 - 5' },
+      { deg: 'IV', chord: 'F (Fa Maj)', notes: 'F - A - C', formula: '1 - 3 - 5' },
+      { deg: 'V', chord: 'G (Sol Maj)', notes: 'G - B - D', formula: '1 - 3 - 5' },
+      { deg: 'vi', chord: 'Am (La m)', notes: 'A - C - E', formula: '1 - ♭3 - 5' },
+      { deg: 'vii°', chord: 'Bdim (Si °)', notes: 'B - D - F', formula: '1 - ♭3 - ♭5' }
     ],
     modes: [
       { id: 'ionian', name: { en: '1. Ionian (Major)', es: '1. Jónico (Escala Mayor)' }, steps: [2, 2, 1, 2, 2, 2, 1], code: 'T-T-S-T-T-T-S', degrees: ['1', '2', '3', '4', '5', '6', '7'], genre: { en: 'Pop, Classical, Country', es: 'Pop, Clásica, Country' }, desc: { en: 'Bright, stable, clear, and resolutive. Foundation of pop & classical music.', es: 'Alegre, estable, claro, resolutivo. Base de la armonía clásica y pop.' } },
@@ -181,7 +181,7 @@ const SCALE_FAMILIES = {
   },
   harmonic_minor: {
     key: 'harmonic_minor',
-    name: { en: 'Harmonic Minor Family', es: 'Familia Menor Armónica' },
+    name: { en: 'Harmonic Minor Family (C Harmonic Minor)', es: 'Familia Menor Armónica (Do Menor Armónica)' },
     rootFormulaSteps: [2, 1, 2, 2, 1, 3, 1],
     about: {
       en: 'Origins & History: Developed in European Classical music to create a strong dominant major chord (V7) resolving to a minor tonic (i). Famous in Middle Eastern traditions, Klezmer, Flamenco, and popularized in modern guitar by Neoclassical shredders (Yngwie Malmsteen, Randy Rhoads).',
@@ -192,25 +192,25 @@ const SCALE_FAMILIES = {
       es: { base: 'Escala Menor Natural', arrow: '⬇ (Eleva un semitono el 7º grado para la sensible)', res: 'Escala Menor Armónica' }
     },
     patternDiagram: {
-      title: { en: '🎸 Conventional Fretboard Grid (A Harmonic Minor Box)', es: '🎸 Diagrama Convencional de Mástil - La Menor Armónica' },
-      frets: [5, 6, 7, 8, 9],
+      title: { en: '🎸 Conventional Fretboard Grid (C Harmonic Minor Box)', es: '🎸 Diagrama Convencional de Mástil - Do Menor Armónica' },
+      frets: [8, 9, 10, 11, 12],
       strings: [
-        { name: 'e', dots: [{ f: 5, r: true, d: '1' }, { f: 7, d: '2' }, { f: 8, d: '♭3' }] },
-        { name: 'B', dots: [{ f: 5, d: '5' }, { f: 6, d: '♭6' }, { f: 9, d: '7' }] },
-        { name: 'G', dots: [{ f: 4, d: '2' }, { f: 5, d: '♭3' }, { f: 7, d: '4' }] },
-        { name: 'D', dots: [{ f: 6, d: '♭6' }, { f: 7, r: true, d: '1' }, { f: 9, d: '2' }] },
-        { name: 'A', dots: [{ f: 5, d: '♭3' }, { f: 7, d: '4' }, { f: 8, d: '5' }] },
-        { name: 'E', dots: [{ f: 5, r: true, d: '1' }, { f: 7, d: '2' }, { f: 8, d: '♭3' }] }
+        { name: 'e', dots: [{ f: 8, r: true, d: '1' }, { f: 10, d: '2' }, { f: 11, d: '♭3' }] },
+        { name: 'B', dots: [{ f: 8, d: '5' }, { f: 9, d: '♭6' }, { f: 12, d: '7' }] },
+        { name: 'G', dots: [{ f: 7, d: '2' }, { f: 8, d: '♭3' }, { f: 10, d: '4' }] },
+        { name: 'D', dots: [{ f: 9, d: '♭6' }, { f: 10, r: true, d: '1' }, { f: 12, d: '2' }] },
+        { name: 'A', dots: [{ f: 8, d: '♭3' }, { f: 10, d: '4' }, { f: 11, d: '5' }] },
+        { name: 'E', dots: [{ f: 8, r: true, d: '1' }, { f: 10, d: '2' }, { f: 11, d: '♭3' }] }
       ]
     },
-    chords: [
-      { deg: 'i', triad: 'i (Minor)', tetrad: 'im(maj7)', formula: '1 - ♭3 - 5 - 7' },
-      { deg: 'ii°', triad: 'ii° (Dim)', tetrad: 'm7(♭5)', formula: '1 - ♭3 - ♭5 - ♭7' },
-      { deg: '♭III+', triad: '♭III+ (Aug)', tetrad: '♭IIImaj7(♯5)', formula: '1 - 3 - ♯5 - 7' },
-      { deg: 'iv', triad: 'iv (Minor)', tetrad: 'iv7', formula: '1 - ♭3 - 5 - ♭7' },
-      { deg: 'V', triad: 'V (Major)', tetrad: 'V7 (Dom)', formula: '1 - 3 - 5 - ♭7' },
-      { deg: '♭VI', triad: '♭VI (Major)', tetrad: '♭VImaj7', formula: '1 - 3 - 5 - 7' },
-      { deg: 'vii°', triad: 'vii° (Dim)', tetrad: 'vii°7', formula: '1 - ♭3 - ♭5 - ♭♭7' }
+    triadsC: [
+      { deg: 'i', chord: 'Cm (Do m)', notes: 'C - E♭ - G', formula: '1 - ♭3 - 5' },
+      { deg: 'ii°', chord: 'Ddim (Re °)', notes: 'D - F - A♭', formula: '1 - ♭3 - ♭5' },
+      { deg: '♭III+', chord: 'E♭aug (Mi♭ +)', notes: 'E♭ - G - B', formula: '1 - 3 - ♯5' },
+      { deg: 'iv', chord: 'Fm (Fa m)', notes: 'F - A♭ - C', formula: '1 - ♭3 - 5' },
+      { deg: 'V', chord: 'G (Sol Maj)', notes: 'G - B - D', formula: '1 - 3 - 5' },
+      { deg: '♭VI', chord: 'A♭ (La♭ Maj)', notes: 'A♭ - C - E♭', formula: '1 - 3 - 5' },
+      { deg: 'vii°', chord: 'Bdim (Si °)', notes: 'B - D - F', formula: '1 - ♭3 - ♭5' }
     ],
     modes: [
       { id: 'hm_1', name: { en: '1. Harmonic Minor', es: '1. Menor Armónica' }, steps: [2, 1, 2, 2, 1, 3, 1], code: 'T-S-T-T-S-3S-S', degrees: ['1', '2', '♭3', '4', '5', '♭6', '7'], genre: { en: 'Neoclassical Metal, Classical, Film', es: 'Metal Neoclásico, Clásica, Cine' }, desc: { en: 'Dramatic, exotic, neoclassical, dark (Yngwie Malmsteen).', es: 'Dramática, exótica, neoclásica y oscura. Salto de 3 semitonos.' } },
@@ -224,7 +224,7 @@ const SCALE_FAMILIES = {
   },
   melodic_minor: {
     key: 'melodic_minor',
-    name: { en: 'Melodic Minor Family (Jazz Minor)', es: 'Familia Menor Melódica (Jazz Minor)' },
+    name: { en: 'Melodic Minor Family (C Melodic Minor)', es: 'Familia Menor Melódica (Do Menor Melódica)' },
     rootFormulaSteps: [2, 1, 2, 2, 2, 2, 1],
     about: {
       en: 'Origins & History: Classical composers raised both 6th and 7th degrees when ascending to avoid the vocal 3-semitone gap of Harmonic Minor. In Modern Jazz, it is played ascending in both directions. Essential for Allan Holdsworth, Pat Metheny, Guthrie Govan, and Miles Davis.',
@@ -235,25 +235,25 @@ const SCALE_FAMILIES = {
       es: { base: 'Escala Menor Natural (Eólica)', arrow: '⬇ (Eleva TANTO el 6º como el 7º grado un semitono)', res: 'Escala Menor Melódica (Jazz Minor)' }
     },
     patternDiagram: {
-      title: { en: '🎸 Conventional Fretboard Grid (A Melodic Minor Box)', es: '🎸 Diagrama Convencional de Mástil - La Menor Melódica' },
-      frets: [5, 6, 7, 8, 9],
+      title: { en: '🎸 Conventional Fretboard Grid (C Melodic Minor Box)', es: '🎸 Diagrama Convencional de Mástil - Do Menor Melódica' },
+      frets: [8, 9, 10, 11, 12],
       strings: [
-        { name: 'e', dots: [{ f: 5, r: true, d: '1' }, { f: 7, d: '2' }, { f: 8, d: '♭3' }] },
-        { name: 'B', dots: [{ f: 5, d: '5' }, { f: 7, d: '6' }, { f: 9, d: '7' }] },
-        { name: 'G', dots: [{ f: 4, d: '2' }, { f: 5, d: '♭3' }, { f: 7, d: '4' }] },
-        { name: 'D', dots: [{ f: 5, d: '4' }, { f: 7, r: true, d: '1' }, { f: 9, d: '2' }] },
-        { name: 'A', dots: [{ f: 5, d: '♭3' }, { f: 7, d: '4' }, { f: 9, d: '5' }] },
-        { name: 'E', dots: [{ f: 5, r: true, d: '1' }, { f: 7, d: '2' }, { f: 8, d: '♭3' }] }
+        { name: 'e', dots: [{ f: 8, r: true, d: '1' }, { f: 10, d: '2' }, { f: 11, d: '♭3' }] },
+        { name: 'B', dots: [{ f: 8, d: '5' }, { f: 10, d: '6' }, { f: 12, d: '7' }] },
+        { name: 'G', dots: [{ f: 7, d: '2' }, { f: 8, d: '♭3' }, { f: 10, d: '4' }] },
+        { name: 'D', dots: [{ f: 8, d: '4' }, { f: 10, r: true, d: '1' }, { f: 12, d: '2' }] },
+        { name: 'A', dots: [{ f: 8, d: '♭3' }, { f: 10, d: '4' }, { f: 12, d: '5' }] },
+        { name: 'E', dots: [{ f: 8, r: true, d: '1' }, { f: 10, d: '2' }, { f: 11, d: '♭3' }] }
       ]
     },
-    chords: [
-      { deg: 'i', triad: 'i (Minor)', tetrad: 'im(maj7)', formula: '1 - ♭3 - 5 - 7' },
-      { deg: 'ii', triad: 'ii (Minor)', tetrad: 'ii7(♭9)', formula: '1 - ♭3 - 5 - ♭7' },
-      { deg: '♭III+', triad: '♭III+ (Aug)', tetrad: '♭IIImaj7(♯5)', formula: '1 - 3 - ♯5 - 7' },
-      { deg: 'IV', triad: 'IV (Major)', tetrad: 'IV7 (Lyd Dom)', formula: '1 - 3 - 5 - ♭7' },
-      { deg: 'V', triad: 'V (Major)', tetrad: 'V7(♭13)', formula: '1 - 3 - 5 - ♭7' },
-      { deg: 'vi°', triad: 'vi° (Dim)', tetrad: 'm7(♭5)', formula: '1 - ♭3 - ♭5 - ♭7' },
-      { deg: 'vii°', triad: 'vii° (Dim)', tetrad: 'm7(♭5)alt', formula: '1 - ♭3 - ♭5 - ♭7' }
+    triadsC: [
+      { deg: 'i', chord: 'Cm (Do m)', notes: 'C - E♭ - G', formula: '1 - ♭3 - 5' },
+      { deg: 'ii', chord: 'Dm (Re m)', notes: 'D - F - A', formula: '1 - ♭3 - 5' },
+      { deg: '♭III+', chord: 'E♭aug (Mi♭ +)', notes: 'E♭ - G - B', formula: '1 - 3 - ♯5' },
+      { deg: 'IV', chord: 'F (Fa Maj)', notes: 'F - A - C', formula: '1 - 3 - 5' },
+      { deg: 'V', chord: 'G (Sol Maj)', notes: 'G - B - D', formula: '1 - 3 - 5' },
+      { deg: 'vi°', chord: 'Adim (La °)', notes: 'A - C - E♭', formula: '1 - ♭3 - ♭5' },
+      { deg: 'vii°', chord: 'Bdim (Si °)', notes: 'B - D - F', formula: '1 - ♭3 - ♭5' }
     ],
     modes: [
       { id: 'mm_1', name: { en: '1. Melodic Minor', es: '1. Menor Melódica' }, steps: [2, 1, 2, 2, 2, 2, 1], code: 'T-S-T-T-T-T-S', degrees: ['1', '2', '♭3', '4', '5', '6', '7'], genre: { en: 'Jazz, Modern Fusion', es: 'Jazz, Fusión Moderna' }, desc: { en: 'Sophisticated, elegant minor for m(maj7) chords.', es: 'Híbrida, elegante, sofisticada, clave en Jazz.' } },
@@ -267,7 +267,7 @@ const SCALE_FAMILIES = {
   },
   harmonic_major: {
     key: 'harmonic_major',
-    name: { en: 'Harmonic Major Family', es: 'Familia Armónica Mayor' },
+    name: { en: 'Harmonic Major Family (C Harmonic Major)', es: 'Familia Armónica Mayor (Do Armónica Mayor)' },
     rootFormulaSteps: [2, 2, 1, 2, 1, 3, 1],
     about: {
       en: 'Origins & History: A major scale with a flattened 6th degree (♭6). Popularized in 19th-century Romantic orchestral music (Rimsky-Korsakov) to inject deep exotic minor subdominant colors (iv minor chord in major key) into bright major progressions.',
@@ -289,14 +289,14 @@ const SCALE_FAMILIES = {
         { name: 'E', dots: [{ f: 8, r: true, d: '1' }, { f: 10, d: '2' }, { f: 12, d: '3' }] }
       ]
     },
-    chords: [
-      { deg: 'I', triad: 'I (Major)', tetrad: 'Imaj7', formula: '1 - 3 - 5 - 7' },
-      { deg: 'ii°', triad: 'ii° (Dim)', tetrad: 'm7(♭5)', formula: '1 - ♭3 - ♭5 - ♭7' },
-      { deg: 'iii', triad: 'iii (Minor)', tetrad: 'iii7(♭9)', formula: '1 - ♭3 - 5 - ♭7' },
-      { deg: 'iv', triad: 'iv (Minor)', tetrad: 'ivm(maj7)', formula: '1 - ♭3 - 5 - 7' },
-      { deg: 'V', triad: 'V (Major)', tetrad: 'V7(♭9)', formula: '1 - 3 - 5 - ♭7' },
-      { deg: '♭VI+', triad: '♭VI+ (Aug)', tetrad: '♭VImaj7(♯5)', formula: '1 - 3 - ♯5 - 7' },
-      { deg: 'vii°', triad: 'vii° (Dim)', tetrad: 'vii°7', formula: '1 - ♭3 - ♭5 - ♭♭7' }
+    triadsC: [
+      { deg: 'I', chord: 'C (Do Maj)', notes: 'C - E - G', formula: '1 - 3 - 5' },
+      { deg: 'ii°', chord: 'Ddim (Re °)', notes: 'D - F - A♭', formula: '1 - ♭3 - ♭5' },
+      { deg: 'iii', chord: 'Em (Mi m)', notes: 'E - G - B', formula: '1 - ♭3 - 5' },
+      { deg: 'iv', chord: 'Fm (Fa m)', notes: 'F - A♭ - C', formula: '1 - ♭3 - 5' },
+      { deg: 'V', chord: 'G (Sol Maj)', notes: 'G - B - D', formula: '1 - 3 - 5' },
+      { deg: '♭VI+', chord: 'A♭aug (La♭ +)', notes: 'A♭ - C - E', formula: '1 - 3 - ♯5' },
+      { deg: 'vii°', chord: 'Bdim (Si °)', notes: 'B - D - F', formula: '1 - ♭3 - ♭5' }
     ],
     modes: [
       { id: 'hmaj_1', name: { en: '1. Harmonic Major', es: '1. Armónica Mayor' }, steps: [2, 2, 1, 2, 1, 3, 1], code: 'T-T-S-T-S-3S-S', degrees: ['1', '2', '3', '4', '5', '♭6', '7'], genre: { en: 'Romantic, Film Scoring', es: 'Romántica, Cine' }, desc: { en: 'Exotic, romantic, cinematic major key color.', es: 'Exótica, romántica, apasionada.' } },
@@ -741,7 +741,7 @@ function applyLanguageToDOM() {
 }
 
 // RENDER WIKI ENCYCLOPEDIA CARDS IN EXACT ORDER:
-// 1) Modes Table, 2) Harmonized Chords, 3) Fretboard Grid
+// 1) Modes Table, 2) Harmonized Triads in C Key, 3) Fretboard Grid
 function renderWikiCards() {
   const t = UI_TEXTS[state.lang] || UI_TEXTS.en;
   wikiGridContainer.innerHTML = '';
@@ -770,7 +770,7 @@ function renderWikiCards() {
       `;
     }
 
-    // 1) TRANSPOSED MODES TABLE (FIRST ITEM AFTER ABOUT & TRANSFORMATION)
+    // 1) TRANSPOSED MODES TABLE
     const tableHTML = `
       <div class="wiki-modes-table-container">
         <table class="wiki-modes-table">
@@ -804,22 +804,22 @@ function renderWikiCards() {
       </div>
     `;
 
-    // 2) HARMONIZED DEGREE CHORDS (SECOND ITEM)
+    // 2) HARMONIZED TRIADS IN C KEY (EXCLUSIVE TRIADS, NO TETRADS)
     let chordsHTML = '';
-    if (family.chords) {
+    if (family.triadsC) {
       chordsHTML = `
         <div class="wiki-chords-box">
           <div class="wiki-chords-header">
-            <span>🎼 ${state.lang === 'es' ? 'Acordes Harmonizados (Desliza ➔)' : 'Harmonized Degree Chords (Scroll ➔)'}</span>
+            <span>🎼 ${state.lang === 'es' ? 'Tríadas Harmonizadas en Do (Desliza ➔)' : 'Harmonized Triads in C Key (Scroll ➔)'}</span>
             <span class="scroll-hint">${t.scrollHint}</span>
           </div>
           <div class="wiki-chords-scroll">
-            ${family.chords.map(ch => `
+            ${family.triadsC.map(ch => `
               <div class="chord-slab">
                 <span class="c-deg">${ch.deg}</span>
-                <span class="c-triad">${ch.triad}</span>
-                <span class="c-tetrad">${ch.tetrad}</span>
-                <span class="c-formula">${ch.formula}</span>
+                <span class="c-triad">${ch.chord}</span>
+                <span class="c-tetrad">${ch.notes}</span>
+                <span class="c-formula">(${ch.formula})</span>
               </div>
             `).join('')}
           </div>
@@ -850,7 +850,7 @@ function renderWikiCards() {
       `;
     }
 
-    // 3) CONVENTIONAL GUITAR FRETBOARD GRID COMPONENT (THIRD ITEM)
+    // 3) CONVENTIONAL GUITAR FRETBOARD GRID COMPONENT WITH SCALE DEGREES ON DOTS
     let patternHTML = '';
     if (family.patternDiagram) {
       const pd = family.patternDiagram;
@@ -888,7 +888,7 @@ function renderWikiCards() {
       `;
     }
 
-    // ORDERING: 1) Modes Table, 2) Harmonized Chords, 3) Fretboard Pattern
+    // ORDERING: 1) Modes Table, 2) Harmonized Triads in C, 3) Fretboard Pattern
     card.innerHTML = `
       <div class="wiki-card-title-row">
         <h3>
