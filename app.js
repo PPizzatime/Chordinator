@@ -1,7 +1,6 @@
 /**
  * App.js - Guitar Scale & Mode Explorer
- * Includes conventional guitar box diagrams with scale degree numbers on dots,
- * clean Modal Relativity Matrix, Roman Numeral chord harmonizations, and bilingual support.
+ * Wiki card layout order: 1) Modes Table, 2) Harmonized Chords, 3) Fretboard Diagram.
  */
 
 const NOTES = ['C', 'C♯', 'D', 'D♯', 'E', 'F', 'F♯', 'G', 'G♯', 'A', 'A♯', 'B'];
@@ -741,7 +740,8 @@ function applyLanguageToDOM() {
   renderWikiCards();
 }
 
-// RENDER WIKI ENCYCLOPEDIA CARDS WITH CONVENTIONAL GUITAR MINI FRETBOARD GRID (SCALE DEGREES ON DOTS)
+// RENDER WIKI ENCYCLOPEDIA CARDS IN EXACT ORDER:
+// 1) Modes Table, 2) Harmonized Chords, 3) Fretboard Grid
 function renderWikiCards() {
   const t = UI_TEXTS[state.lang] || UI_TEXTS.en;
   wikiGridContainer.innerHTML = '';
@@ -770,7 +770,87 @@ function renderWikiCards() {
       `;
     }
 
-    // CONVENTIONAL GUITAR FRETBOARD GRID COMPONENT WITH SCALE DEGREE NUMBERS ON DOTS
+    // 1) TRANSPOSED MODES TABLE (FIRST ITEM AFTER ABOUT & TRANSFORMATION)
+    const tableHTML = `
+      <div class="wiki-modes-table-container">
+        <table class="wiki-modes-table">
+          <thead>
+            <tr>
+              <th>${t.tableHeaderMode}</th>
+              <th>${t.tableHeaderCode}</th>
+              <th>${t.tableHeaderSteps}</th>
+              <th>${t.tableHeaderGenre}</th>
+              <th>${t.tableHeaderDesc}</th>
+            </tr>
+          </thead>
+          <tbody>
+            ${family.modes.map(m => {
+              const mName = typeof m.name === 'object' ? (m.name[state.lang] || m.name.en) : m.name;
+              const mGenre = m.genre ? (m.genre[state.lang] || m.genre.en) : '-';
+              const mDesc = typeof m.desc === 'object' ? (m.desc[state.lang] || m.desc.en) : m.desc;
+              const mSteps = m.steps.join('-');
+              return `
+                <tr>
+                  <td class="col-mode-name">${mName}</td>
+                  <td class="col-code">${m.code || ''}</td>
+                  <td class="col-steps">${mSteps}</td>
+                  <td class="col-genre">${mGenre}</td>
+                  <td class="col-desc">${mDesc}</td>
+                </tr>
+              `;
+            }).join('')}
+          </tbody>
+        </table>
+      </div>
+    `;
+
+    // 2) HARMONIZED DEGREE CHORDS (SECOND ITEM)
+    let chordsHTML = '';
+    if (family.chords) {
+      chordsHTML = `
+        <div class="wiki-chords-box">
+          <div class="wiki-chords-header">
+            <span>🎼 ${state.lang === 'es' ? 'Acordes Harmonizados (Desliza ➔)' : 'Harmonized Degree Chords (Scroll ➔)'}</span>
+            <span class="scroll-hint">${t.scrollHint}</span>
+          </div>
+          <div class="wiki-chords-scroll">
+            ${family.chords.map(ch => `
+              <div class="chord-slab">
+                <span class="c-deg">${ch.deg}</span>
+                <span class="c-triad">${ch.triad}</span>
+                <span class="c-tetrad">${ch.tetrad}</span>
+                <span class="c-formula">${ch.formula}</span>
+              </div>
+            `).join('')}
+          </div>
+        </div>
+      `;
+    }
+
+    // PENTATONIC MODAL FITS & BLUE NOTE
+    let fitsHTML = '';
+    if (family.fits) {
+      const fitItems = family.fits[state.lang] || family.fits.en;
+      const blueNote = family.blueNoteDetail ? (family.blueNoteDetail[state.lang] || family.blueNoteDetail.en) : '';
+      const relTheory = family.relativeTheory ? (family.relativeTheory[state.lang] || family.relativeTheory.en) : '';
+
+      fitsHTML = `
+        <div class="pentatonic-fits-grid">
+          ${fitItems.map(fit => `
+            <div class="fit-box">
+              <h5>${fit.title}</h5>
+              <ul>
+                ${fit.list.map(li => `<li>${li}</li>`).join('')}
+              </ul>
+            </div>
+          `).join('')}
+        </div>
+        ${relTheory ? `<div class="blue-note-box"><p>${relTheory}</p></div>` : ''}
+        ${blueNote ? `<div class="blue-note-box"><p>${blueNote}</p></div>` : ''}
+      `;
+    }
+
+    // 3) CONVENTIONAL GUITAR FRETBOARD GRID COMPONENT (THIRD ITEM)
     let patternHTML = '';
     if (family.patternDiagram) {
       const pd = family.patternDiagram;
@@ -808,86 +888,7 @@ function renderWikiCards() {
       `;
     }
 
-    // CHORDS SLABS
-    let chordsHTML = '';
-    if (family.chords) {
-      chordsHTML = `
-        <div class="wiki-chords-box">
-          <div class="wiki-chords-header">
-            <span>🎼 ${state.lang === 'es' ? 'Acordes Harmonizados (Desliza ➔)' : 'Harmonized Degree Chords (Scroll ➔)'}</span>
-            <span class="scroll-hint">${t.scrollHint}</span>
-          </div>
-          <div class="wiki-chords-scroll">
-            ${family.chords.map(ch => `
-              <div class="chord-slab">
-                <span class="c-deg">${ch.deg}</span>
-                <span class="c-triad">${ch.triad}</span>
-                <span class="c-tetrad">${ch.tetrad}</span>
-                <span class="c-formula">${ch.formula}</span>
-              </div>
-            `).join('')}
-          </div>
-        </div>
-      `;
-    }
-
-    // PENTATONIC MODAL FITS & BLUE NOTE MINI SECTION
-    let fitsHTML = '';
-    if (family.fits) {
-      const fitItems = family.fits[state.lang] || family.fits.en;
-      const blueNote = family.blueNoteDetail ? (family.blueNoteDetail[state.lang] || family.blueNoteDetail.en) : '';
-      const relTheory = family.relativeTheory ? (family.relativeTheory[state.lang] || family.relativeTheory.en) : '';
-
-      fitsHTML = `
-        <div class="pentatonic-fits-grid">
-          ${fitItems.map(fit => `
-            <div class="fit-box">
-              <h5>${fit.title}</h5>
-              <ul>
-                ${fit.list.map(li => `<li>${li}</li>`).join('')}
-              </ul>
-            </div>
-          `).join('')}
-        </div>
-        ${relTheory ? `<div class="blue-note-box"><p>${relTheory}</p></div>` : ''}
-        ${blueNote ? `<div class="blue-note-box"><p>${blueNote}</p></div>` : ''}
-      `;
-    }
-
-    // TRANSPOSED MODES TABLE WITH GENRE COLUMN
-    const tableHTML = `
-      <div class="wiki-modes-table-container">
-        <table class="wiki-modes-table">
-          <thead>
-            <tr>
-              <th>${t.tableHeaderMode}</th>
-              <th>${t.tableHeaderCode}</th>
-              <th>${t.tableHeaderSteps}</th>
-              <th>${t.tableHeaderGenre}</th>
-              <th>${t.tableHeaderDesc}</th>
-            </tr>
-          </thead>
-          <tbody>
-            ${family.modes.map(m => {
-              const mName = typeof m.name === 'object' ? (m.name[state.lang] || m.name.en) : m.name;
-              const mGenre = m.genre ? (m.genre[state.lang] || m.genre.en) : '-';
-              const mDesc = typeof m.desc === 'object' ? (m.desc[state.lang] || m.desc.en) : m.desc;
-              const mSteps = m.steps.join('-');
-              return `
-                <tr>
-                  <td class="col-mode-name">${mName}</td>
-                  <td class="col-code">${m.code || ''}</td>
-                  <td class="col-steps">${mSteps}</td>
-                  <td class="col-genre">${mGenre}</td>
-                  <td class="col-desc">${mDesc}</td>
-                </tr>
-              `;
-            }).join('')}
-          </tbody>
-        </table>
-      </div>
-    `;
-
+    // ORDERING: 1) Modes Table, 2) Harmonized Chords, 3) Fretboard Pattern
     card.innerHTML = `
       <div class="wiki-card-title-row">
         <h3>
@@ -900,10 +901,10 @@ function renderWikiCards() {
         <p>${fAbout}</p>
       </div>
       ${transHTML}
-      ${patternHTML}
+      ${tableHTML}
       ${chordsHTML}
       ${fitsHTML}
-      ${tableHTML}
+      ${patternHTML}
     `;
 
     const playBtn = card.querySelector('.btn-play-family-wiki');
